@@ -1,0 +1,123 @@
+{% extends 'template.html' %}
+{% block content %}
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success fade in">
+      {{ message }}
+    </div>
+{% endfor %}
+
+<div class="row" style="margin-top: 18px;">
+     <div class="col-xs-6 col-sm-2">
+        <h4>Dashboard</h4>
+     </div>
+     <div class="col-xs-6 col-sm-6">
+     <button style="background-color:#60A839; color: #ffffff;" class="btn btn" type="button" data-toggle="collapse" data-target="#post"><i class="glyphicon glyphicon-edit" ></i> New Post</button>
+         <div id="post" class="collapse">
+           <div class="panel panel-default">
+             <div class="dropdown">
+                <form action="{{ url_for('add_post') }}" class="form-horizontal" role="form" method="post" name="add">
+
+                <div class="panel-body">
+                    <div class="form-group">
+                       <textarea class="foo form-control input-default" rows="6" id="body" name="body" placeholder="post body"></textarea>
+                           <label style="float: right;"> {{ form.hidden_tag() }}
+                           {% for error in form.body.errors %}
+                                    {{ error }}
+                            {% endfor %}</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Post" class="btn btn-default" style="background-color:#60A839; color: #ffffff; font-weight: bolder; float: right; margin-right: 10px;">
+                    </div>
+                 </div>
+                </form>
+             </div>
+           </div>
+         </div>
+
+          {% set var = "lol" %}
+          {% for item in posts %}
+           {% if item.description !="" %}
+           <div class="panel panel-default">
+               <div class="panel-heading" style="margin-top: -10px;">
+                  <div class="dropdown" style="float:right; margin-top: 20px;">
+                    <a href="#" data-toggle="dropdown" >
+                      <span class="glyphicon glyphicon-wrench"></span></a>
+                        <ul  class="dropdown-menu dropdown-menu-bottom">
+                              <li><a href="#" id="{{ item.id }}"><span class="glyphicon glyphicon-pencil"> edit</span></a></li>
+                              <li><a href="{{ url_for('post_delete', id = item.id) }}"><span class="glyphicon glyphicon-remove-sign"> delete</span></a> </li>
+                              <li><a href="#" id="myBtn55"><span class="glyphicon glyphicon-lock"> Lock</span></a></li>
+                        </ul >
+                  </div>
+
+                   <!--for edit option-->
+                    <div class="modal fade" id="modal{{ item.id }}" role="dialog">
+                    <div class="modal-dialog">
+
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header" style="padding:35px 50px;">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body" style="padding:40px 50px;">
+                          <form action="{{ url_for('post_update', id = item.id) }}" class="form-horizontal" role="form" method="post">
+
+                                    <div class="form-group">
+                                       <textarea  class="foo form-control input-default" rows="8" resize="none" name="body">{{ item.description }}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                        <button type="submit" class="btn btn-success btn-default pull-right"><span class="glyphicon glyphicon-ok"></span> Done Editing</button>
+                                    </div>
+                        </form>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+
+<script>
+$(document).ready(function(){
+    $("#{{ item.id }}").click(function(){
+        $("#modal{{ item.id }}").modal();
+    });
+});
+</script>
+
+                   <a href=""><h1 style="float: left;"><span class="glyphicon glyphicon-user"></span></h1></a>
+                    <div id="user" style="float: left; margin-top: 10px;margin-left: 9px;">
+                       <a href="" style="color:#60A839;"><h4>{{ session['name'] }}</h4></a>
+
+                       <h6 style="color: #808080;">{{ interval(time,item.date_time) }}</h6>
+                   </div>
+               </div>
+
+                   <textarea style="background-color: #ffffff; border:solid 0px #ffffff; outline:0px;" id="body{{ item.id }}" class="foo form-control input-default" readonly="readonly" name="body" >{{ item.description }}</textarea>
+                   <script>$("#body{{ item.id }}").autosize()</script>
+
+           </div>
+           {% endif %}
+           {% else %}
+               <div class="panel panel-default">
+                   <div class="panel-heading"><h5> you  haven't publish any post yet</h5></div>
+                       <div class="panel-body"></div>
+               </div>
+        {% endfor %}
+     </div>
+    <div class="clearfix visible-xs"></div>
+
+    <div class="col-xs-6 col-sm-2" style="background-color:#fbb450;">
+       Advertisement
+    </div>
+    <!-- Add clearfix for only the required viewport -->
+    <div class="clearfix visible-xs"></div>
+
+    <div class="col-xs-6 col-sm-2">
+        <div class="msg" style="background-color:lightgray; position: fixed; width: 20%; text-align: center;">
+            messaging
+        </div>
+    </div>
+</div>
+
+{% endblock %}
