@@ -9,7 +9,7 @@ import textwrap
 from datetime import datetime, timedelta
 app = Flask(__name__)
 app.secret_key='hirok'
-
+app.permanent_session_lifetime = timedelta(days=10)
 
 #def connect_db():
  #   return sqlite3.connect(app.config['DATABASE'])
