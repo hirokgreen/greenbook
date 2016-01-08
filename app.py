@@ -1,16 +1,15 @@
-from flask import Flask, render_template, request, redirect, flash, session, url_for
+from flask import Flask, render_template, request, redirect, flash, session, url_for, Session, Response, make_response
 from functools import wraps
 from pass_hash import Hssh
 from form import LoginForm, Signupform, Addpost
 from sqlalchemy import *
 from models import *
+import  Cookie
 import textwrap
 #from db_create import *
 from datetime import datetime, timedelta
 app = Flask(__name__)
 app.secret_key='hirok'
-app.permanent_session_lifetime = timedelta(days=10)
-
 #def connect_db():
  #   return sqlite3.connect(app.config['DATABASE'])
 
@@ -24,6 +23,8 @@ def welcome():
 def login_required(test):
     @wraps(test)
     def wrap(*args, **kwargs):
+        if request.cookies.get('cookie_name') is not None:
+           flash('cookie success')
         if 'logged_in' in session:
             return test(*args, **kwargs)
         else:
@@ -101,6 +102,8 @@ def utility_processor():
 
             return  mon + ' '+str(t2.day) + ', '+ str(t2.year)
     return dict(interval=interval)
+
+
 
 
 @app.route("/add_post",methods=['GET', 'POST'])
@@ -191,6 +194,10 @@ def log():
            if name != None:
              if obj.chkpassword(password) is True:
                  session['logged_in'] = True
+                 if request.form.get("remember")=='1':
+                    rsp = Response()
+                    rsp.set_cookie('cookie_name',value=name)
+
                  session['name'] = name
                  author = 'green'+str(id)
                  session['auth'] = author
@@ -206,9 +213,6 @@ def log():
 
     return render_template('log.html', form=form)
 
-@app.route("/form")
-def get():
-    return render_template('form.html')
 
 if __name__ == "__main__":
     app.run()
