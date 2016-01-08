@@ -41,7 +41,13 @@ def hello():
     rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
     return render_template('hello.html', posts = rs,id =id,form=form,time=time)
-
+@app.route("/chat")
+@login_required
+def chat():
+    id = session['auth']
+    table = Table('users', metadata, autoload=True)
+    us = select([table.c.id,table.c.uname],table.c.uname!=session['name']).execute()
+    return render_template('chat.html',user=us)
 
 @app.context_processor
 def utility_processor():

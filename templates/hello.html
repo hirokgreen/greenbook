@@ -114,9 +114,13 @@ $(document).ready(function(){
     <div class="clearfix visible-xs"></div>
 
     <div class="col-xs-6 col-sm-2">
-        <div class="msg" style="background-color:lightgray; position: fixed; width: 20%; text-align: center;">
-            messaging
-        </div>
+    <iframe style="position: fixed; height: 100%;border-radius: 15px;" width="260" src="{{ url_for('chat') }}"></iframe>
+    <form class="form-inline" role="search">
+                <div class="input-group" style="float: right;bottom: 0;position: fixed;">
+                       <input type="text" class="form-control input-sm" name="query" id="msgquery" placeholder="Search friend" style="margin-top: 0px; border-radius: 15px;border: 2px solid #73AD21;padding: 10px;width: 250px;height: 30px;  ">
+
+                </div>
+    </form>
     </div>
 </div>
 
