@@ -29,7 +29,7 @@ def login_required(test):
             return test(*args, **kwargs)
         else:
             flash('you need to login first')
-            return redirect('log')
+            return redirect('')
     return wrap    
 
 @app.route("/hello")

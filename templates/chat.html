@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/main.css" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/autosize.js/1.18.4/jquery.autosize.min.js"></script>
+</head>
+<body style="background-color: #F2F2F2;">
+<div class="msg" style="position: fixed; width: 100%; height: auto; text-align: left;">
+<style>
+#chat a:hover{color: #f89406;}
+</style>
+            <div class="list-group" id="chat">
+                {% for u in user %}
+                   <a style="font-size: 13px; background-color:#F2F2F2;" href="#" class="list-group-item"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{ u.uname }}<img src="/static/image/online.png" width="8" height="8" style="float: right; margin-top: 5px;"></a>
+                {% endfor %}
+            </div>
+
+</div>
+</body>
+</html>
