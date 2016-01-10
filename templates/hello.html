@@ -19,11 +19,18 @@
 
                 <div class="panel-body">
                     <div class="form-group">
-                       <textarea class="foo form-control input-default" rows="6" id="body" name="body" placeholder="post body"></textarea>
+                       <textarea class="foo form-control input-default" rows="6" id="body" name="body" placeholder="Say Somethings....." style="width: 520px;"></textarea>
                            <label style="float: right;"> {{ form.hidden_tag() }}
                            {% for error in form.body.errors %}
                                     {{ error }}
                             {% endfor %}</label>
+                    </div>
+                    <div class="alert-block" style="border: 1px solid #b3b3b3; border-radius:5px; margin-top: -21px; margin-left: -15px; width:520px;height: auto;">
+                      <h4>
+                        <a style="margin-left: 20px;" data-toggle="tooltip" data-placement="bottom" title="upload photo" href="#"><i class="fa fa-camera"></i></a>
+                        <a style="margin-left: 20px;" data-toggle="tooltip" data-placement="bottom" title="what are you doing/ feeling" href="#"><i class="fa fa-smile-o"></i></a>
+                        <a style="margin-left: 20px;" data-toggle="tooltip" data-placement="bottom" title="check in" href="#"><i class="fa fa-map-marker"></i></a>
+                      </h4>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Post" class="btn btn-default" style="background-color:#60A839; color: #ffffff; font-weight: bolder; float: right; margin-right: 10px;">
@@ -44,7 +51,7 @@
                       <span class="glyphicon glyphicon-wrench"></span></a>
                         <ul  class="dropdown-menu dropdown-menu-bottom">
                               <li><a href="#" id="{{ item.id }}"><span class="glyphicon glyphicon-pencil"> edit</span></a></li>
-                              <li><a href="{{ url_for('post_delete', id = item.id) }}"><span class="glyphicon glyphicon-remove-sign"> delete</span></a> </li>
+                              <li><a href="{{ url_for('post_delete', id = item.id) }}"><span class="glyphicon glyphicon-trash"> delete</span></a> </li>
                               <li><a href="#" id="myBtn55"><span class="glyphicon glyphicon-lock"> Lock</span></a></li>
                         </ul >
                   </div>
@@ -62,7 +69,7 @@
                           <form action="{{ url_for('post_update', id = item.id) }}" class="form-horizontal" role="form" method="post">
 
                                     <div class="form-group">
-                                       <textarea  class="foo form-control input-default" rows="8" resize="none" name="body">{{ item.description }}</textarea>
+                                       <textarea  class="foo form-control input-default" rows="8" resize="none" name="body" style="width: 520px;">{{ item.description }}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
@@ -92,9 +99,27 @@ $(document).ready(function(){
                        <h6 style="color: #808080;">{{ interval(time,item.date_time) }}</h6>
                    </div>
                </div>
-
-                   <textarea style="background-color: #ffffff; border:solid 0px #ffffff; outline:0px;" id="body{{ item.id }}" class="foo form-control input-default" readonly="readonly" name="body" >{{ item.description }}</textarea>
+                <textarea style="background-color: #ffffff; display: none;" id="body{{ item.id }}" hidden class="foo form-control input-default" readonly="readonly" name="body" style="width: 520px;">{{ url(item.description) }}</textarea>
                    <script>$("#body{{ item.id }}").autosize()</script>
+                <div class="panel-body">
+                 <div class="alert-block"  id="linkified{{ item.id }}" style="background-color: #ffffff; float: left; width: 520px;height:auto;"></div>
+                </div>
+                <script>
+                    $(window).load(function(){
+                        setTimeout(function () {
+                            var text =$('#body{{ item.id }}').val();
+                            var t=text.replace(/\r?\n/g,'<br/>');
+                            $('#linkified{{ item.id }}').html(t);
+                            $('#linkified{{ item.id }}').linkify({
+                                tagName: 'a',
+                                target: '_blank',
+                                newLine: '\n'
+
+                            });
+                        }, 100);
+                        $('#linkified').css('padding', '10px');
+                    });
+                </script>
 
            </div>
            {% endif %}

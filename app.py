@@ -8,6 +8,9 @@ import  Cookie
 import textwrap
 #from db_create import *
 from datetime import datetime, timedelta
+import re
+import urllib
+from bs4 import *
 app = Flask(__name__)
 app.secret_key='hirok'
 #def connect_db():
@@ -32,7 +35,7 @@ def login_required(test):
             return redirect('')
     return wrap    
 
-@app.route("/hello")
+@app.route("/hello/")
 @login_required
 def hello():
     form = Addpost()
@@ -40,7 +43,7 @@ def hello():
     table = Table(id, metadata, autoload=True)
     rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
-    return render_template('hello.html', posts = rs,id =id,form=form,time=time)
+    return render_template('hello.html', posts = rs,form=form,time=time)
 @app.route("/chat")
 @login_required
 def chat():
@@ -109,7 +112,14 @@ def utility_processor():
             return  mon + ' '+str(t2.day) + ', '+ str(t2.year)
     return dict(interval=interval)
 
+@app.context_processor
+def utility_processor():
+    def url(s):
+        r = re.compile(r"(http[s]://[^ ]+)")
+        rm = r.sub(r'<a href="\1">\1</a>', s)
 
+        return rm
+    return dict(url=url)
 
 
 @app.route("/add_post",methods=['GET', 'POST'])
@@ -139,7 +149,7 @@ def post_update(id):
     return redirect('hello')
 
 
-@app.route("/about")
+@app.route("/about/")
 def about():
     return render_template('about.html')
 
@@ -151,7 +161,7 @@ def logout():
     flash('You are logged out')
     return redirect('log')
 
-@app.route("/register",methods=['GET', 'POST'])
+@app.route("/register/",methods=['GET', 'POST'])
 def register():
      form = Signupform()
      if request.method == 'POST':
@@ -184,7 +194,7 @@ def register():
      return render_template('register.html', form=form)
 
 
-@app.route("/log",methods=['GET', 'POST'])
+@app.route("/log/",methods=['GET', 'POST'])
 def log():
     form = LoginForm()
     name = None
@@ -207,8 +217,8 @@ def log():
                  session['name'] = name
                  author = 'green'+str(id)
                  session['auth'] = author
-                 flash('you are successfully logged in as '+ name)
-                 return  redirect(url_for('hello',member = author))    #send id to the 'hello'
+                 flash('you are successfully logged in as '+ author)
+                 return  redirect(url_for('hello'))    #send id to the 'hello'
              else:
                  flash('username or password is incorrect')
                  return render_template('log.html',form=form)
@@ -219,6 +229,18 @@ def log():
 
     return render_template('log.html', form=form)
 
+@app.route("/hello/<fid>/")
+@login_required
+def frnd_posts(fid):
+    id = fid.replace("green", "")
+    frnd = Table('users', metadata, autoload=True)
+    fr = select([frnd.c.uname],frnd.c.id==id).execute()
+    for item in fr:
+        fs = item.uname
+    table = Table(fid, metadata, autoload=True)
+    rs = table.select().order_by(table.c.id.desc()).execute()
+    time = datetime.now()
+    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs)
 
 if __name__ == "__main__":
     app.run()

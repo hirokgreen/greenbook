@@ -41,8 +41,13 @@
 
         {% if session['logged_in'] == True %}
             <ul class="nav navbar-nav navbar-right" id="drop-nav" style="margin-right: 5px;">
-              <li><a style="color: #ffffff;" href="/logout" data-toggle="tooltip" data-placement="bottom" title="logout"><span class="glyphicon glyphicon-user"></span> {{ session['name'] }}</a>
-
+              <li class="dropdown"><a style="color: #ffffff;" href="#" class="dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" data-placement="bottom" title="logout"><span class="glyphicon glyphicon-user"></span> {{ session['name'] }}</a>
+               <ul class="dropdown-menu">
+                   <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Profile</a></li>
+                   <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                   <li class="divider"></li>
+                   <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+               </ul>
               </li>
             </ul>
        {% endif %}
