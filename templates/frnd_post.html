@@ -1,10 +1,10 @@
 {% extends 'template.html' %}
 {% block content %}
-{% for message in get_flashed_messages() %}
-    <div class="alert alert-success fade in">
-      {{ message }}
-    </div>
-{% endfor %}
+
+<script>
+document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenbook';
+</script>
+
 
 <div class="row" style="margin-top: 18px;">
      <div class="col-xs-6 col-sm-2">
@@ -51,8 +51,17 @@
            {% endif %}
            {% else %}
                <div class="panel panel-default">
-                   <div class="panel-heading"><h5> you  haven't publish any post yet</h5></div>
-                       <div class="panel-body"></div>
+                   <div class="panel-heading"><h4><center><b>Sorry, this page isn't available !!</b></center></h4></div>
+                       <div class="panel-body"><center><img class="img-responsive" src="/static/image/sorry.png"/></center></div>
+                       <center><h6><a href="" onclick="goBack()">Go back to the previous page</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                   <a href="/hello" >Go to News Feed </a>
+                       </h6></center>
+                         <script>
+                         function goBack() {
+                             window.history.back();
+                         }
+                         </script>
+
                </div>
         {% endfor %}
      </div>

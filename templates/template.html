@@ -12,6 +12,59 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/autosize.js/1.18.4/jquery.autosize.min.js"></script>
+<script>
+function showHint(str) {
+    if (str.length == 0) {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "/search/"+str, true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var myArr = JSON.parse(xmlhttp.responseText);
+                myFunction(myArr);
+
+            }
+        };
+
+
+
+    }
+}
+function myFunction(arr) {
+    var out = "";
+    var i;
+    if (arr.length==0)
+    {
+        return;
+    }
+
+    for(i = 1; i < arr.length; i++) {
+        if(arr[i].display=='see more')
+        {
+            out += '<a href="' + arr[i].url + '">' +'<span class="glyphicon glyphicon-search"></span>'+' '+
+                    arr[i].display + '</a><br>';
+        }
+        else
+        {
+            out += '<a href="' + arr[i].url + '">' +'<span class="glyphicon glyphicon-user"></span>'+' '+
+                    arr[i].display + '</a><br>';
+        }
+    }
+
+
+    document.getElementById("txtHint").innerHTML = out;
+}
+</script>
+    <style>
+        #txtHint a{color: #60A839;
+            text-decoration: none;
+            margin-left: 20px;
+            line-height: 2; }
+    </style>
 </head>
 <body style = "background-color: #F2F2F2;">
 <header>
@@ -60,16 +113,16 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-left">
-           <li><form class="form-inline" role="search">
-                <div class="input-group">
-                       <input type="text" class="form-control input-sm" name="query" id="query" placeholder="Search Here" style="margin-top: 8px; border-radius: 15px;border: 2px solid #73AD21;padding: 10px;width: 400px;height: 30px; ">
-
-                </div>
-                </form>
+           <li>
+               <form class="form-inline">
+                     <div class="input-group">
+                       <input type="text" onkeyup="showHint(this.value)" class="form-control input-sm" placeholder="Search Here" style="margin-top: 8px; border-radius: 15px;border: 2px solid #73AD21;padding: 10px;width: 400px;height: 30px; ">
+                     </div>
+               </form>
+               <div style="border-radius: 10px; text-decoration:none;position: absolute;background-color:#ffffff;width: 400px;" id="txtHint">
+               </div>
            </li>
           </ul>
-
-
 
     </div>
 
@@ -85,7 +138,7 @@
 
 
 <div class="navbar-static-bottom row-fluid">
-  <center></center>
+
 
 </div>
 

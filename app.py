@@ -4,13 +4,11 @@ from pass_hash import Hssh
 from form import LoginForm, Signupform, Addpost
 from sqlalchemy import *
 from models import *
+import json
 import  Cookie
 import textwrap
-#from db_create import *
 from datetime import datetime, timedelta
 import re
-import urllib
-from bs4 import *
 app = Flask(__name__)
 app.secret_key='hirok'
 #def connect_db():
@@ -43,7 +41,24 @@ def hello():
     table = Table(id, metadata, autoload=True)
     rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
+    print '<h2>Hello Word! This is my first CGI program</h2>'
     return render_template('hello.html', posts = rs,form=form,time=time)
+
+@app.route("/search/<q>",methods=['GET', 'POST','REQUEST'])
+@login_required
+def search(q):
+    s = q
+    jsn = [{ "url":"" , "display":"" }]
+    table = Table('users', metadata, autoload=True)
+    rs = select([table.c.id,table.c.uname],table.c.uname.like('%'+s+'%')).execute()
+    for item in rs:
+        id = '/hello/green'+str(item.id)+'/'
+        jsn.append({"url":id,"display":item.uname})
+    jsn.append({"url":"#","display":"see more"})
+    text = json.dumps(jsn)
+
+    return  text
+
 @app.route("/chat")
 @login_required
 def chat():
@@ -108,8 +123,14 @@ def utility_processor():
                 mon = 'November'
             if t2.month==12:
                 mon = 'December'
+            if h2<=12:
+                h2 = h2
+                type = 'am'
+            if h2>12:
+                h2 = h2-12
+                type = 'pm'
 
-            return  mon + ' '+str(t2.day) + ', '+ str(t2.year)
+            return  mon + ' '+str(t2.day) + ', '+ str(t2.year)+' at '+str(h2)+':'+str(m2)+type
     return dict(interval=interval)
 
 @app.context_processor
@@ -218,7 +239,7 @@ def log():
                  author = 'green'+str(id)
                  session['auth'] = author
                  flash('you are successfully logged in as '+ author)
-                 return  redirect(url_for('hello'))    #send id to the 'hello'
+                 return  redirect(url_for('hello'))
              else:
                  flash('username or password is incorrect')
                  return render_template('log.html',form=form)
@@ -230,15 +251,22 @@ def log():
     return render_template('log.html', form=form)
 
 @app.route("/hello/<fid>/")
+@app.route("/hello/<fid>/<pid>")
 @login_required
-def frnd_posts(fid):
+def frnd_specefic_posts(fid,pid='Anonymous'):
+    if fid==session['auth']:
+        return redirect('hello')
+
     id = fid.replace("green", "")
     frnd = Table('users', metadata, autoload=True)
     fr = select([frnd.c.uname],frnd.c.id==id).execute()
     for item in fr:
         fs = item.uname
     table = Table(fid, metadata, autoload=True)
-    rs = table.select().order_by(table.c.id.desc()).execute()
+    if pid!='Anonymous':
+        rs = table.select(table.c.id==pid).execute()
+    else:
+        rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
     return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs)
 
