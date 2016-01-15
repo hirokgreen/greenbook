@@ -7,7 +7,7 @@ class LoginForm(Form):
     PUBLIC_KEY = '6Ld90hMTAAAAAHMuWMHuxFV6OQJp224JtCgoXoyB'
     SECRET_KEY = '6Ld90hMTAAAAAG8MptdY7u9hnZYACLY4Jhz5n3nZ'
 
-    username = TextField("username",  [validators.Required("Please enter your name."),Length(min=4,max=20)])
+    username = TextField("username",  [validators.Required("Please enter your name.")])
     password = PasswordField("Password", [validators.Required("Please enter password.")])
 
 

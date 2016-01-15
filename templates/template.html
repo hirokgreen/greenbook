@@ -41,29 +41,36 @@ function myFunction(arr) {
     {
         return;
     }
-
+    out += '<ul>';
     for(i = 1; i < arr.length; i++) {
         if(arr[i].display=='see more')
         {
-            out += '<a href="' + arr[i].url + '">' +'<span class="glyphicon glyphicon-search"></span>'+' '+
-                    arr[i].display + '</a><br>';
+            out += '<li><a href="' + arr[i].url + '">' +'<span class="glyphicon glyphicon-search"></span>'+' '+
+                    arr[i].display + '</a></li>';
         }
         else
         {
-            out += '<a href="' + arr[i].url + '">' +'<span class="glyphicon glyphicon-user"></span>'+' '+
-                    arr[i].display + '</a><br>';
+            out += '<li><a href="' + arr[i].url + '">' +'<span class="glyphicon glyphicon-user"></span>'+' '+
+                    arr[i].display + '</a></li>';
         }
     }
+    out+= '</ul';
 
 
     document.getElementById("txtHint").innerHTML = out;
 }
 </script>
     <style>
-        #txtHint a{color: #60A839;
+        #txtHint ul li a{color: #60A839;
             text-decoration: none;
-            margin-left: 20px;
-            line-height: 2; }
+            height: 50px;
+            display:block;
+            font-size: 13pt;
+            padding:5px;
+            }
+        #txtHint ul li{float:none;background-color: #ffffff;text-align: left;}
+        #txtHint ul li a:hover{background-color:#bfbfbf;}
+        #txtHint ul{list-style: none; margin-left: -20px; }
     </style>
 </head>
 <body style = "background-color: #F2F2F2;">
@@ -71,11 +78,13 @@ function myFunction(arr) {
  <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#60A839; border-color:#60A839;">
 
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <button type="button" class="navbar-toggle"  style="float:left; border: 1px;" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+
+
       <a style="color: #ffffff; font-size: 24px; font-weight: bolder;" class="navbar-brand" href="/"><span style="font-size: 49px; font-weight: bolder; font-family:'Buxton Sketch';">G</span>reenbook</a>
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse" id="myNavbar">
@@ -116,10 +125,10 @@ function myFunction(arr) {
            <li>
                <form class="form-inline">
                      <div class="input-group">
-                       <input type="text" onkeyup="showHint(this.value)" class="form-control input-sm" placeholder="Search Here" style="margin-top: 8px; border-radius: 15px;border: 2px solid #73AD21;padding: 10px;width: 400px;height: 30px; ">
+                       <input type="text" onkeyup="showHint(this.value)" class="form-control input-sm" placeholder="Search Here" style="margin-top: 8px;margin-left:15px;border-radius: 7px;border: 1px solid #73AD21;font-size:14px;padding: 5px;max-width:400px;min-width:300px;height: 30px; ">
                      </div>
                </form>
-               <div style="border-radius: 10px; text-decoration:none;position: absolute;background-color:#ffffff;width: 400px;" id="txtHint">
+               <div style="margin-top:-15px;  position: absolute;width: 320px;" id="txtHint">
                </div>
            </li>
           </ul>

@@ -231,10 +231,8 @@ def log():
            if name != None:
              if obj.chkpassword(password) is True:
                  session['logged_in'] = True
-                 if request.form.get("remember")=='1':
-                    rsp = Response()
-                    rsp.set_cookie('cookie_name',value=name)
-
+                 #if request.form.get("remember")=='1':
+                    #cookie session
                  session['name'] = name
                  author = 'green'+str(id)
                  session['auth'] = author

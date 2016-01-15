@@ -20,8 +20,14 @@
                 {% for u in user %}
                    <a style="font-size: 13px; background-color:#F2F2F2;" href="#" class="list-group-item"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{ u.uname }}<img src="/static/image/online.png" width="8" height="8" style="float: right; margin-top: 5px;"></a>
                 {% endfor %}
-            </div>
 
+            </div>
+            <form class="form-inline">
+                <div class="input-group" style="float: right;bottom: 0;position: fixed;">
+                       <input type="text" class="form-control input-sm" name="query" id="msgquery" placeholder="Search friend" style="margin-top: 0px; border-radius: 15px;border: 2px solid #73AD21;padding: 10px;width: 250px;height: 30px;  ">
+
+                </div>
+            </form>
 </div>
 </body>
 </html>
