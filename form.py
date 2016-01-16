@@ -22,4 +22,4 @@ class Signupform(Form):
     address = TextAreaField("address", [validators.Required("Please enter your address.")])
 
 class Addpost(Form):
-    body = TextAreaField("body", [validators.Required("body must not empty")])
+    body = TextAreaField("body", [validators.Required("post must not empty")])

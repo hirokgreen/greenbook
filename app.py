@@ -152,8 +152,11 @@ def add_post():
             post = Table(session['auth'], metadata, autoload=True)
             post.insert().execute({'description':form.body.data,'date_time':datetime.now()})
             return redirect('hello')
+        else:
+           flash('post not added....please say something')
+           return redirect('hello')
 
-    return render_template('hello.html',form = form)
+    return redirect('hello')
 
 @app.route("/post_delete/<int:id>")
 @login_required
