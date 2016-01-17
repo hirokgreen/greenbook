@@ -67,6 +67,24 @@ def chat():
     us = select([table.c.id,table.c.uname],table.c.uname!=session['name']).execute()
     return render_template('chat.html',user=us)
 
+@app.route("/like")
+@app.route("/like/<post_id>")
+@app.route("/like/<post>")
+@login_required
+def like(post='Anonymous',post_id='Anonymous'):
+    if post!='Anonymous':
+        if post=='like':
+            user='you'
+            type='like'
+        else:
+            user=""
+            type='dislike'
+    else:
+        user=post_id
+        type=''
+    id = session['auth']
+    return render_template('like.html',user=user,type=type)
+
 @app.context_processor
 def utility_processor():
     def interval(t1, t2):

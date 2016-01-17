@@ -29,25 +29,25 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenboo
                 <textarea style="background-color: #ffffff; display: none;" id="body{{ item.id }}" hidden class="foo form-control input-default" readonly="readonly" name="body" style="width: 100%;">{{ url(item.description) }}</textarea>
                 <script>$("#body{{ item.id }}").autosize()</script>
 
-                 <div class="alert-block"  id="linkified{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
+                 <div class="alert-block"  id="post{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
+                <iframe style=" margin-left:-5px; margin-top:15px;width: 100%;height: 45px;" frameborder="0" src="{{ url_for('like') }}"></iframe>
                 </div>
                 <script>
                     $(window).load(function(){
                         setTimeout(function () {
                             var text =$('#body{{ item.id }}').val();
                             var t=text.replace(/\r?\n/g,'<br/>');
-                            $('#linkified{{ item.id }}').html(t);
-                            $('#linkified{{ item.id }}').linkify({
+                            $('#post{{ item.id }}').html(t);
+                            $('#post{{ item.id }}').linkify({
                                 tagName: 'a',
                                 target: '_blank',
                                 newLine: '\n'
 
                             });
                         }, 100);
-                        $('#linkified').css('padding', '10px');
+                        $('#post').css('padding', '10px');
                     });
                 </script>
-
            </div>
            {% endif %}
            {% else %}

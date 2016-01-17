@@ -17,6 +17,8 @@ class PostTable():
                     Column('description', String(10000)),
                     Column('date_time', DateTime,default=datetime.now(),nullable=false)
                       )
+        #like = Table(tablename+'like'),metadata,
+         #           Column('id',)
 
         return table
 
