@@ -28,7 +28,8 @@
         <div class="col-sm-2">
           <input type="password" name="password" class="form-control input-sm" id="pass" placeholder="Enter password">
         </div>
-        <label class="control-label col-sm-offset- col-sm-2" style="color: #ff0000; text-align: left;font-weight: normal;font-size: 12px;">{{ form.hidden_tag() }}
+        <label class="control-label col-sm-offset- col-sm-2" style="color: #ff0000; text-align: left;font-weight: normal;font-size: 12px;">
+            {{ form.hidden_tag() }}
             {% for error in form.password.errors %}
              {{ error }}
             {% endfor %}

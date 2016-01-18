@@ -44,6 +44,32 @@ def hello():
     print '<h2>Hello Word! This is my first CGI program</h2>'
     return render_template('hello.html', posts = rs,form=form,time=time)
 
+@app.route("/add_post",methods=['GET', 'POST'])
+@login_required
+def add_post():
+    if request.method == 'POST':
+        try:
+            post = Table(session['auth'], metadata, autoload=True)
+            post.insert().execute({'description':request.form['body'],'date_time':datetime.now()})
+        except:
+            flash('something goes wrong....')
+    return redirect('hello')
+
+@app.route("/post_delete/<int:id>")
+@login_required
+def post_delete(id):
+    table = Table(session['auth'], metadata, autoload=True)
+    table.delete(table.c.id == id).execute()
+    return redirect('hello')
+
+@app.route("/post_update/<int:id>", methods=['GET', 'POST'])
+@login_required
+def post_update(id):
+    if request.form['body']!="":
+        table = Table(session['auth'], metadata, autoload=True)
+        table.update(table.c.id == id , values=({'description':request.form['body']}) ).execute()
+    return redirect('hello')
+
 @app.route("/search/<q>",methods=['GET', 'POST','REQUEST'])
 @login_required
 def search(q):
@@ -67,23 +93,43 @@ def chat():
     us = select([table.c.id,table.c.uname],table.c.uname!=session['name']).execute()
     return render_template('chat.html',user=us)
 
-@app.route("/like")
-@app.route("/like/<post_id>")
-@app.route("/like/<post>")
+@app.route("/like_add/<post_id>/")
 @login_required
-def like(post='Anonymous',post_id='Anonymous'):
-    if post!='Anonymous':
-        if post=='like':
-            user='you'
-            type='like'
-        else:
-            user=""
-            type='dislike'
-    else:
-        user=post_id
-        type=''
-    id = session['auth']
-    return render_template('like.html',user=user,type=type)
+def like_add(post_id):
+    like = Table('like', metadata, autoload=True)
+    like.insert().execute({'post_id':post_id,'user_id':session['auth']})
+    return redirect(url_for('like',post_id=post_id))
+
+@app.route("/like_delete/<post_id>/")
+@login_required
+def like_delete(post_id):
+    like = Table('like', metadata, autoload=True)
+    s = select([like.c.id]).where(like.c.post_id==post_id).where(like.c.user_id==session['auth']).execute()
+    for row in s:
+        like.delete(like.c.id==row[0]).execute()
+    return redirect(url_for('like',post_id=post_id))
+
+@app.route("/like/<post_id>/")
+@login_required
+def like(post_id):
+    table = Table('like', metadata, autoload=True)
+    liker = Table('users', metadata, autoload=True)
+    rs = select([table.c.user_id],table.c.post_id==post_id).order_by(table.c.id.desc()).execute()
+    r = []
+    type = 'unliked'
+    you = ''
+    for i in rs:
+        if i[0]==session['auth']:
+            type = 'like'
+        id = int(i[0].replace("green", ""))
+        name = select([liker.c.uname],liker.c.id==id).execute()
+        for n in name:
+            r.append(n[0])
+    if type=="like":
+        r.remove(str(session['name']))
+        you='you'
+
+    return render_template('like.html',user=r,type=type,post_id=post_id,you=you)
 
 @app.context_processor
 def utility_processor():
@@ -161,34 +207,7 @@ def utility_processor():
     return dict(url=url)
 
 
-@app.route("/add_post",methods=['GET', 'POST'])
-@login_required
-def add_post():
-    form = Addpost()
-    if request.method == 'POST':
-        if form.validate_on_submit():
-            post = Table(session['auth'], metadata, autoload=True)
-            post.insert().execute({'description':form.body.data,'date_time':datetime.now()})
-            return redirect('hello')
-        else:
-           flash('post not added....please say something')
-           return redirect('hello')
 
-    return redirect('hello')
-
-@app.route("/post_delete/<int:id>")
-@login_required
-def post_delete(id):
-    table = Table(session['auth'], metadata, autoload=True)
-    table.delete(table.c.id == id).execute()
-    return redirect('hello')
-
-@app.route("/post_update/<int:id>", methods=['GET', 'POST'])
-@login_required
-def post_update(id):
-    table = Table(session['auth'], metadata, autoload=True)
-    table.update(table.c.id == id , values=({'description':request.form['body']}) ).execute()
-    return redirect('hello')
 
 
 @app.route("/about/")
@@ -287,7 +306,7 @@ def frnd_specefic_posts(fid,pid='Anonymous'):
     else:
         rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
-    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs)
+    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs,fid=fid)
 
 if __name__ == "__main__":
     app.run()

@@ -30,7 +30,10 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenboo
                 <script>$("#body{{ item.id }}").autosize()</script>
 
                  <div class="alert-block"  id="post{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
-                <iframe style=" margin-left:-5px; margin-top:15px;width: 100%;height: 45px;" frameborder="0" src="{{ url_for('like') }}"></iframe>
+
+                    <div id="line" style="width: 100%;margin-top:15px; height: 1px; float:left;margin-left:-5px;background-color: #999999;"></div>
+
+                <iframe style=" margin-left:-5px; margin-top:15px;width: 100%;height: 45px;" frameborder="0" src="{{ url_for('like',post_id = fid+'_'+ item.id|string ) }}"></iframe>
                 </div>
                 <script>
                     $(window).load(function(){
@@ -55,7 +58,7 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenboo
                    <div class="panel-heading"><h4><center><b>Sorry, this page isn't available !!</b></center></h4></div>
                        <div class="panel-body"><center><img class="img-responsive" src="/static/image/sorry.png"/></center></div>
                        <center><h6><a href="" onclick="goBack()">Go back to the previous page</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                   <a href="/hello" >Go to News Feed </a>
+                                   <a href="{{ url_for('hello') }}" >Go to News Feed </a>
                        </h6></center>
                          <script>
                          function goBack() {

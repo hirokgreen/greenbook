@@ -43,7 +43,19 @@ class User():
 
         return table
 
+class Like():
+    def __init__(self):
+        self.tablename = 'like'
 
+
+    def liketable(self):
+        table = Table(self.tablename, metadata,
+                    Column('id', Integer, primary_key=True),
+                    Column('post_id', String(50), nullable=False),
+                    Column('user_id', String(20), nullable=False),
+                      )
+
+        return table
 
 
     #def insert_post_table(self):
