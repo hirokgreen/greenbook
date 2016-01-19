@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        #like a:hover{color: #f89406;}
+        #like a{color: #0C4B33;padding: 5px;}
+    </style>
+    <script language="javascript">
+    function playIt()
+     {
+        document.getElementById("embed").innerHTML="<audio controls autoplay hidden><source src='/static/like.mp3' type='audio/mpeg'></audio>";
+            return true;
+     }
+</script>
+</head>
+<body>
+
+    <div id="like">
+        {% if type=='unliked' %}
+        <a href="{{ url_for('like_add',post_id=post_id) }}" onclick="playIt()"><i class="fa fa-heart-o">&nbsp;Like</i></a>
+        {% endif %}
+        {% if type=='like' %}
+        <a href="{{ url_for('like_delete',post_id=post_id) }}"><i class="fa fa-heart">&nbsp;Like</i></a>
+         {% endif %}
+        <a href="#"><i class="fa fa-comments-o">&nbsp;Comment</i></a><br>
+        {{ you }}
+       {% for item in user %}
+                  {% if you=='you'%}
+                   ,
+                  {% endif %}
+                  <a href="#">{{ item }}</a>
+       {% endfor %}
+        and <a href="#"> 12 other </a> like this
+
+    </div>
+<div id="embed"></div>
+
+</body>
+</html>
