@@ -103,7 +103,7 @@
                    </div>
                  </div>
                  <div class="alert-block"  id="post{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
-                    <div id="line" style="width: 100%;margin-top:15px; height: 1px; float:left;margin-left:-5px;background-color: #999999;"></div>
+                    <div id="line" style="width: 100%;margin-top:15px; height: 1px; float:left;margin-left:-5px;background-color: #d9d9d9;"></div>
                     <iframe style="width: 100%;height: 60px;" frameborder="0" src="{{ url_for('like',post_id = session['auth']+'_'+ item.id|string ) }}"></iframe>
                     <iframe style="width: 100%;height: 45px;" frameborder="0" src="{{ url_for('comment') }}"></iframe>
                 </div>
