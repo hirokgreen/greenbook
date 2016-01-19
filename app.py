@@ -118,18 +118,30 @@ def like(post_id):
     r = []
     type = 'unliked'
     you = ''
+    comma=''
+    is_like=''
     for i in rs:
         if i[0]==session['auth']:
             type = 'like'
         id = int(i[0].replace("green", ""))
-        name = select([liker.c.uname],liker.c.id==id).execute()
+        name = select([liker.c.id],liker.c.id==id).execute()
         for n in name:
             r.append(n[0])
     if type=="like":
-        r.remove(str(session['name']))
         you='you'
+    c = len(r)
+    if c>=2:
+        comma = 'true'
+    if c>=1:
+        is_like = 'true'
 
-    return render_template('like.html',user=r,type=type,post_id=post_id,you=you)
+    current_id = int(session['auth'].replace("green", ""))
+
+    return render_template('like.html',user=r,user_id=rs,type=type,post_id=post_id,you=you,c_i=current_id,comma=comma,is_like=is_like)
+
+@app.route('/comment')
+def comment():
+    return render_template('comment.html')
 
 @app.context_processor
 def utility_processor():
@@ -195,7 +207,14 @@ def utility_processor():
                 type = 'pm'
 
             return  mon + ' '+str(t2.day) + ', '+ str(t2.year)+' at '+str(h2)+':'+str(m2)+type
-    return dict(interval=interval)
+    def name(id):
+        user = Table('users', metadata, autoload=True)
+        name = select([user.c.uname],user.c.id==id).execute()
+        for row in name:
+            liker = row[0]
+        return liker
+
+    return dict(interval=interval,name=name)
 
 @app.context_processor
 def utility_processor():

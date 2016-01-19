@@ -33,7 +33,9 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenboo
 
                     <div id="line" style="width: 100%;margin-top:15px; height: 1px; float:left;margin-left:-5px;background-color: #999999;"></div>
 
-                <iframe style=" margin-left:-5px; margin-top:15px;width: 100%;height: 45px;" frameborder="0" src="{{ url_for('like',post_id = fid+'_'+ item.id|string ) }}"></iframe>
+                <iframe style=" margin-left:-5px;width: 100%;height: 45px;" frameborder="0" src="{{ url_for('like',post_id = fid+'_'+ item.id|string ) }}"></iframe>
+
+                    <iframe style="width: 100%;height: 45px;" frameborder="0" src="{{ url_for('comment') }}"></iframe>
                 </div>
                 <script>
                     $(window).load(function(){

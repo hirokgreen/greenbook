@@ -28,15 +28,23 @@
         {% if type=='like' %}
         <a href="{{ url_for('like_delete',post_id=post_id) }}"><i class="fa fa-heart">&nbsp;Like</i></a>
          {% endif %}
-        <a href="#"><i class="fa fa-comments-o">&nbsp;Comment</i></a><br>
-        {{ you }}
+        &nbsp;<a href="#"><i class="fa fa-comments-o"> Comment</i></a>&nbsp;
+        <a href="#"><i class="glyphicon glyphicon-share">Share</i></a><br>
+       <div id="line" style="width: 100%; height: 1px; float:left;margin-left:-5px;background-color: #999999;"></div>
+
        {% for item in user %}
-                  {% if you=='you'%}
-                   ,
+                  {% if item==c_i %}
+                   you
+                      {% if comma=='true' %},{% endif %}
                   {% endif %}
-                  <a href="#">{{ item }}</a>
        {% endfor %}
-        and <a href="#"> 12 other </a> like this
+       {% for item in user %}
+                  {% if item!=c_i %}
+                  <a href="#">{{ name(item) }}</a>
+                      {% if comma=='true' %},{% endif %}
+                  {% endif %}
+       {% endfor %}
+        {% if is_like=='true' %}like this{% endif %}
 
     </div>
 <div id="embed"></div>
