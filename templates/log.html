@@ -1,65 +1,117 @@
-{% extends 'template.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Bootstrap Theme Simply Me</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+  body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .bg-1 {
+      background-color: #0C4B33; /* Green */
+      color: #ffffff;
+  }
+  .bg-4 {
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 1px;
+      padding-bottom: 1px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  a{color:#0C4B33;text-decoration: none;}
+  a:hover {
+      color: #1abc9c; !important;
+  }
+  </style>
+</head>
+<body>
 {% block content %}
-{% for message in get_flashed_messages() %}
-<div class="alert alert-danger">
-      <strong>Error!</strong>
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<!-- Navbar -->
+<nav class="navbar navbar-default" style="background-color:#0C4B33;">
+   <div class="container">
+
+     <a class="navbar-brand" href="/"><img style="height:57px; width: 280px;" src="/static/image/logo.png"><h6 style="color:#d9d9d9;margin-left: 180px; margin-top: -3px;">be social</h6></a>
+    </div>
+   </nav>
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center" style="margin-top: -40px">
+          {% for message in get_flashed_messages() %}
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 	      {{ message }}
-</div>
-{% endfor %}
+            </div>
+          {% endfor %}
 
-<form class="form-horizontal" role="form" method="post">
-<div cclass="form-group">
-    <label class="col-sm-offset-1 col-sm-10"><h2 style="color: #00853E;font-weight: bolder;"><span class="glyphicon glyphicon-lock"></span> Member Login</h2></label>
-</div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="username">Username:</label>
-        <div class="col-sm-2">
-          <input type="text" name="username" class="form-control input-sm" id="name" placeholder="Enter username" value="{{ request.form.username }}">
+    <div class="modal-dialog modal-sm">
+      <!-- Modal content-->
+      <div class="modal-content" >
+        <div class="modal-header" style="padding:35px 50px; background-color: #F56505;">
+          <h1 style="color:#0C4B33;"><span class="glyphicon glyphicon-lock"></span> Login</h1>
         </div>
-        <label class="control-label col-sm-offset- col-sm-2" style="color: #ff0000; text-align: left;font-weight: normal;font-size: 12px;">{{ form.hidden_tag() }}
-            {% for error in form.username.errors %}
-             {{ error }}
-            {% endfor %}
-        </label>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="password">Password:</label>
-        <div class="col-sm-2">
-          <input type="password" name="password" class="form-control input-sm" id="pass" placeholder="Enter password">
-        </div>
-        <label class="control-label col-sm-offset- col-sm-2" style="color: #ff0000; text-align: left;font-weight: normal;font-size: 12px;">
+        <div class="modal-body" style="padding:40px 50px; background-color: #F56505; margin-top: -20px;">
+          <form class="form-horizontal" role="form" method="post">
             {{ form.hidden_tag() }}
-            {% for error in form.password.errors %}
-             {{ error }}
-            {% endfor %}
-        </label>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-3" style="text-align: right;">
-          <div class="g-recaptcha" data-sitekey="6Ld90hMTAAAAAHMuWMHuxFV6OQJp224JtCgoXoyB"></div>
-        </div>
-    </div>
-     <div class="form-group">
-     <div class="col-sm-offset-2 col-sm-3">
-      <div class="checkbox">
-        <label><input type="checkbox" name="remember" value="1" checked> Remember me</label>
-      </div>
-     </div>
-     </div>
-     <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default" style="color: #00853E;font-weight: bolder;">Login</button>
-      </div>
-    </div>
+            <div class="form-group">
+              <input type="text" name="username" value="{{ request.form.username }}" class="form-control" id="name" placeholder="UserName" style="margin-top: -40px;">
+                <p style="color: #000000;font-size: 12px;text-align: left;">
+                    {% for error in form.username.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" id="pass" class="form-control" id="psw" placeholder="Enter password" style="margin-top: -20px;">
+                <p style="color: #000000;font-size: 12px;text-align: left;">
+                    {% for error in form.password.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="checkbox" style="margin-top: -20px;">
+              <h5><input type="checkbox" name="remember" value="1" checked>Remember me</h5>
+            </div>
+              <button type="submit" class="btn btn-default" style="color: #ffffff;background-color:#00853E; font-weight: bolder;">Login</button>
+              <center><h5>Forgot <a href="#">Password?</a></h5>
+          <h5>Not a member? <a href="/register">Sign Up</a></h5></center>
+          </form>
 
-</form>
-    <div class="col-sm-offset-2 col-sm-10">
-        <p style="text-align: left; margin-left:-20px;"><a href="#">forgot password?</a></p>
+
+        </div>
+
+      </div>
+
     </div>
-    <div class="col-sm-offset-1 col-sm-10">
-        <p>Not registered yet ? Now free <a href="/register">sign up</a> (be first)</p>
-    </div>
+  </div>
 
 {% endblock %}
+
+</div>
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center" style="margin-top: -90px;">
+  <p>Powered By <a href="http://www.greenlife.herokuapp.com">greenie.com</a></p>
+</footer>
+
+</body>
+</html>
+
 

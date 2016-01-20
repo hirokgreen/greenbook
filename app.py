@@ -14,12 +14,43 @@ app.secret_key='hirok'
 #def connect_db():
  #   return sqlite3.connect(app.config['DATABASE'])
 
-@app.route("/")
-def home():
-        return render_template('home.html')
+@app.route("/",methods=['GET', 'POST'])
+def log():
+    if 'logged_in' in session:
+        return  redirect(url_for('hello'))
+    else:
+        form = LoginForm()
+        name = None
+        if request.method == 'POST':
+            if form.validate_on_submit():
+               obj = Hssh(form.password.data)
+               table = Table('users', metadata, autoload=True)
+               rs = select([table.c.id,table.c.uname,table.c.password],table.c.uname==form.username.data).execute()
+               for row in rs:
+                  id = row[0]
+                  name = row[1]
+                  password = row[2]
+               if name != None:
+                 if obj.chkpassword(password) is True:
+                     session['logged_in'] = True
+                     #if request.form.get("remember")=='1':
+                        #cookie session
+                     session['name'] = name
+                     author = 'green'+str(id)
+                     session['auth'] = author
+                     flash('you are successfully logged in')
+                     return  redirect(url_for('hello'))
+                 else:
+                     flash('username or password is incorrect')
+                     return render_template('log.html',form=form)
 
-def welcome():
-    return render_template('welcome.html')
+               else:
+                   flash('username or password is incorrect')
+                   return render_template('log.html',form=form)
+
+        return render_template('log.html', form=form)
+
+
 
 def login_required(test):
     @wraps(test)
@@ -31,7 +62,7 @@ def login_required(test):
         else:
             flash('you need to login first')
             return redirect('')
-    return wrap    
+    return wrap
 
 @app.route("/hello/")
 @login_required
@@ -239,7 +270,7 @@ def logout():
     session.pop('logged_in',None)
     session.pop('name',None)
     flash('You are logged out')
-    return redirect('log')
+    return redirect('')
 
 @app.route("/register/",methods=['GET', 'POST'])
 def register():
@@ -266,7 +297,7 @@ def register():
              table = post.posttable(user_id)
              table.create()
 
-             flash('successfully registered'+ user_id)
+             flash('successfully registered'+ form.uname.data)
              return  redirect('')
          else:
              flash('please fill up the form correctly')
@@ -274,38 +305,6 @@ def register():
      return render_template('register.html', form=form)
 
 
-@app.route("/log/",methods=['GET', 'POST'])
-def log():
-    form = LoginForm()
-    name = None
-    if request.method == 'POST':
-        if form.validate_on_submit():
-           obj = Hssh(form.password.data)
-           table = Table('users', metadata, autoload=True)
-           rs = select([table.c.id,table.c.uname,table.c.password],table.c.uname==form.username.data).execute()
-           for row in rs:
-              id = row[0]
-              name = row[1]
-              password = row[2]
-           if name != None:
-             if obj.chkpassword(password) is True:
-                 session['logged_in'] = True
-                 #if request.form.get("remember")=='1':
-                    #cookie session
-                 session['name'] = name
-                 author = 'green'+str(id)
-                 session['auth'] = author
-                 flash('you are successfully logged in as '+ author)
-                 return  redirect(url_for('hello'))
-             else:
-                 flash('username or password is incorrect')
-                 return render_template('log.html',form=form)
-
-           else:
-               flash('username or password is incorrect')
-               return render_template('log.html',form=form)
-
-    return render_template('log.html', form=form)
 
 @app.route("/hello/<fid>/")
 @app.route("/hello/<fid>/<pid>")

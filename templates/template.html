@@ -85,7 +85,7 @@ function myFunction(arr) {
       </button>
 
 
-      <a style="color: #ffffff; font-size: 24px; font-weight: bolder;" class="navbar-brand" href="/"><span style="font-size: 49px; font-weight: bolder; font-family:'Buxton Sketch';">G</span>reenbook</a>
+     <a class="navbar-brand" href="/"><img style="margin-top: -7px; height:30px; width: 150px;" src="/static/image/logo.png"></a>
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -97,7 +97,7 @@ function myFunction(arr) {
       {% if session['logged_in'] != True %}
       <ul class="nav navbar-nav navbar-right" style="margin-right: 5px;">
         <li><a style="color: #ffffff;" href="/register" data-toggle="tooltip" data-placement="bottom" title="register as a new user"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a style="color: #ffffff;" href="/log"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a style="color: #ffffff;" href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
         {% endif %}
 
