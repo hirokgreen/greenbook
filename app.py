@@ -90,6 +90,11 @@ def add_post():
 @login_required
 def post_delete(id):
     table = Table(session['auth'], metadata, autoload=True)
+    lc_id = str(session['auth'])+'_'+str(id)
+    like = Table('like', metadata, autoload=True)
+    comment = Table('comment', metadata, autoload=True)
+    like.delete(like.c.post_id==lc_id).execute()
+    comment.delete(comment.c.post_id==lc_id).execute()
     table.delete(table.c.id == id).execute()
     return redirect('hello')
 
@@ -170,9 +175,28 @@ def like(post_id):
 
     return render_template('like.html',user=r,user_id=rs,type=type,post_id=post_id,you=you,c_i=current_id,comma=comma,is_like=is_like)
 
-@app.route('/comment')
-def comment():
-    return render_template('comment.html')
+@app.route("/comment/<post_id>/")
+def comment(post_id):
+    time = datetime.now()
+    table = Table('comment', metadata, autoload=True)
+    rs = table.select(table.c.post_id==post_id).order_by(table.c.id.asc()).execute()
+
+    return render_template('comment.html',rs=rs,post_id=post_id,time=time)
+
+
+@app.route("/add_comment",methods=['GET', 'POST'])
+@login_required
+def add_comment():
+    if request.method == 'POST':
+        try:
+            p_id = request.form['p_id']
+            table = Table('comment', metadata, autoload=True)
+            table.insert().execute({'post_id':p_id,'comment':request.form['body'],'user_id':session['auth'],'date_time':datetime.now()})
+        except:
+            flash('kk')
+    p_id = request.form['p_id']
+    return redirect(url_for('comment',post_id=p_id))
+
 
 @app.context_processor
 def utility_processor():
@@ -244,8 +268,15 @@ def utility_processor():
         for row in name:
             liker = row[0]
         return liker
+    def commenter(id):
+        uid = id.replace("green", "")
+        user = Table('users', metadata, autoload=True)
+        name = select([user.c.uname],user.c.id==uid).execute()
+        for row in name:
+            commenter = row[0]
+        return commenter
 
-    return dict(interval=interval,name=name)
+    return dict(interval=interval,name=name,commenter=commenter)
 
 @app.context_processor
 def utility_processor():

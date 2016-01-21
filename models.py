@@ -57,9 +57,24 @@ class Like():
 
         return table
 
+class Comment():
+    def __init__(self):
+        self.tablename = 'comment'
 
+
+    def comment(self):
+        table = Table(self.tablename, metadata,
+                    Column('id', Integer, primary_key=True),
+                    Column('post_id', String(50), nullable=False),
+                    Column('comment', String(10000), nullable=False),
+                    Column('user_id', String(20), nullable=False),
+                    Column('date_time', DateTime,default=datetime.now(),nullable=false),
+                      )
+
+        return table
     #def insert_post_table(self):
-
+#c = Comment()
+#c.comment().create()
 
 #
 #table = Table('test', metadata, autoload=True)

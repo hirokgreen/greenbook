@@ -10,7 +10,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         #like a:hover{color: #f89406;}
-        #like a{color: #0C4B33;padding: 5px;}
+        #like {padding: 5px;}
     </style>
     <script language="javascript">
     function playIt()
@@ -24,13 +24,13 @@
 
     <div id="like">
         {% if type=='unliked' %}
-        <a href="{{ url_for('like_add',post_id=post_id) }}" onclick="playIt()"><i class="fa fa-heart-o">&nbsp;Like</i></a>
+        <a style="color: #333333;" href="{{ url_for('like_add',post_id=post_id) }}" onclick="playIt()"><i class="fa fa-heart-o">&nbsp;Like</i></a>
         {% endif %}
         {% if type=='like' %}
-        <a href="{{ url_for('like_delete',post_id=post_id) }}"><i class="fa fa-heart">&nbsp;Like</i></a>
+        <a style="color: #5890FF;" href="{{ url_for('like_delete',post_id=post_id) }}"><i class="fa fa-heart">&nbsp;Like</i></a>
          {% endif %}
-        &nbsp;<a href="#"><i class="fa fa-comments-o"> Comment</i></a>&nbsp;
-        <a href="#"><i class="glyphicon glyphicon-share">Share</i></a><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: #333333;" href="#"><i class="fa fa-comments-o"> Comment</i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a style="color: #333333;" href="#"><i class="glyphicon glyphicon-share">Share</i></a><br>
        <div id="line" style="width: 100%; height: 1px; float:left;margin-left:-5px;background-color: #d9d9d9;"></div>
 
        {% for item in user %}
