@@ -197,6 +197,13 @@ def add_comment():
     p_id = request.form['p_id']
     return redirect(url_for('comment',post_id=p_id))
 
+@app.route("/comment_delete/<c_id>/<post_id>")
+@login_required
+def comment_delete(c_id,post_id):
+    comment = Table('comment', metadata, autoload=True)
+    comment.delete(comment.c.id==c_id).execute()
+    return redirect(url_for('comment',post_id=post_id))
+
 
 @app.context_processor
 def utility_processor():

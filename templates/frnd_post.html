@@ -2,11 +2,12 @@
 {% block content %}
 
 <script>
-document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenbook';
+document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie';
 </script>
 
 
 <div class="row" style="margin-top: 18px;">
+
       <div class="col-xs-0 col-sm-2 col-lg-2">
         <h4>Dashboard</h4>
      </div>
@@ -32,9 +33,9 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenboo
                  <div class="alert-block"  id="post{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
 
                     <div id="line" style="width: 100%;margin-top:15px; height: 1px; float:left;margin-left:-5px;background-color: #d9d9d9;"></div>
-                <iframe style=" margin-left:-5px;width: 100%;height: 45px;" frameborder="0" src="{{ url_for('like',post_id = fid+'_'+ item.id|string ) }}"></iframe>
+                <iframe style=" margin-left:-5px;width: 100%;height: 55px;" frameborder="0" src="{{ url_for('like',post_id = fid+'_'+ item.id|string ) }}"></iframe>
 
-                     <iframe onload="resizeIframe(this)" style="width: 100%;height: auto;" frameborder="0" src="{{ url_for('comment',post_id = session['auth']+'_'+ item.id|string) }}"></iframe>
+                     <iframe onload="resizeIframe(this)" style="width: 100%;height: auto;" frameborder="0" src="{{ url_for('comment',post_id = fid+'_'+ item.id|string) }}"></iframe>
                 </div>
                <script language="javascript" type="text/javascript">
                     function resizeIframe(obj) {

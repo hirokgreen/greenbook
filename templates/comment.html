@@ -17,7 +17,7 @@
 <div class="comment">
 
     {% for item in rs %}
-    <div class="avatar col-sm-1" style="float: left;font-size: 16px;">
+    <div class="avatar col-sm-1" style="float: left;font-size: 16px; width: 10%;margin-top: 6px;margin-left: -5px;">
         <a href=""><span class="glyphicon glyphicon-user"></span></a>
     </div>
 
@@ -29,9 +29,15 @@
         </p>
         <h6 style="color: #808080; margin-left: 10px; margin-top: -10px;">{{ interval(time,item.date_time) }}</h6>
     </div>
-    <div class="option" style="float: right;width: 5%">
-        i
-    </div>
+        {% if item.user_id==session['auth'] %}
+         <div class="dropdown" style="float: right;width: 5%;margin-top: -6px;">
+              <a href="#" data-toggle="dropdown"><h6><i style="color: #0e0e0e;font-size: 10px;" class="glyphicon glyphicon-pencil"></i></h6></a>
+              <ul class="dropdown-menu" style="margin-left: -150px;width: 20px;margin-top: -10px; ">
+                  <li><a href="#" id="{{ item.user_id }}"><span class="glyphicon glyphicon-pencil"> edit</span></a></li>
+                  <li><a href="{{ url_for('comment_delete',c_id = item.id, post_id=post_id ) }}"><span class="glyphicon glyphicon-trash"> delete</span></a> </li>
+              </ul>
+          </div>
+        {% endif %}
      {% endfor %}
        <div class="add">
        <form action="{{ url_for('add_comment') }}" method="post" role="form" name="comment">
