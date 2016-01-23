@@ -5,14 +5,28 @@
 document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie';
 </script>
 
-
 <div class="row" style="margin-top: 18px;">
+     <div class="col-xs-10 col-sm-10 col-lg-9 col-md-9">
+         {% for message in get_flashed_messages() %}
+           <div class="alert alert-success fade in">
+            {{ message }}
+          </div>
+         {% endfor %}
 
-      <div class="col-xs-0 col-sm-2 col-lg-2">
+        <div class="cover" style="margin-top: -10px;">
+            <img src="/static/image/jayden.jpg" style="width: 100%;max-height: 300px;min-height: 100px;"/>
+        </div>
+<div class="row">
+     <div class="clearfix visible-xs"></div>
+
+     <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
         <h4>Dashboard</h4>
+         <h5>comming soon....</h5>
      </div>
-     <div class="col-xs-12 col-sm-8 col-lg-6">
-         {% set var = '' %}
+
+
+     <div class="col-xs-12 col-sm-12 col-lg-8 col-md-8">
+          {% set var = '' %}
           {% for item in posts %}
            {% if item.description !="" %}
            <div class="panel panel-default">
@@ -76,23 +90,20 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                </div>
         {% endfor %}
      </div>
-    <div class="clearfix visible-xs"></div>
+     </div>
+     </div>
+     <div class="col-xs-1 col-sm-1 col-lg-2 col-md-2">
+        <h4>advertisement</h4>
+         <h5>comming soon....</h5>
+     </div>
 
-    <div class="col-xs-6 col-sm-2" style="background-color:#fbb450;">
-       Advertisement
+    <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
+    <div id="chat">
+    <iframe frameborder="0" style="position: fixed;margin-top: -15px; height: 93%;border: 1px solid #b3b3b3;" src="{{ url_for('chat') }}"></iframe>
+    </div>
     </div>
     <!-- Add clearfix for only the required viewport -->
-    <div class="clearfix visible-xs"></div>
 
-    <div class="col-xs-6 col-sm-2">
-    <iframe style="position: fixed; height: 100%;border-radius: 15px;" width="260" src="{{ url_for('chat') }}"></iframe>
-    <form class="form-inline" role="search">
-                <div class="input-group" style="float: right;bottom: 0;position: fixed;">
-                       <input type="text" class="form-control input-sm" name="query" id="msgquery" placeholder="Search friend" style="margin-top: 0px; border-radius: 15px;border: 2px solid #73AD21;padding: 10px;width: 250px;height: 30px;  ">
-
-                </div>
-    </form>
-    </div>
 </div>
 
 {% endblock %}

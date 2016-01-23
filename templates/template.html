@@ -90,7 +90,6 @@ function myFunction(arr) {
       <ul class="nav navbar-nav">
         <li><a style="color: #ffffff;" href="#" data-toggle="tooltip" data-placement="bottom" title="greenhirok">Home</a></li>
         <li><a style="color: #ffffff;" href="/hello">Profile</a></li>
-        <li><a style="color: #ffffff;" href="/about">Contact</a></li>
       </ul>
 
       {% if session['logged_in'] != True %}
@@ -124,7 +123,7 @@ function myFunction(arr) {
            <li>
                <form class="form-inline">
                      <div class="input-group">
-                       <input type="text" onkeyup="showHint(this.value)" class="form-control input-sm" placeholder="Search Here" style="margin-top: 8px;margin-left:15px;border-radius: 7px;border: 1px solid #73AD21;font-size:14px;padding: 5px;max-width:400px;min-width:300px;height: 30px; ">
+                       <input type="text" onkeyup="showHint(this.value)" class="form-control input-sm" placeholder="Search Here" style="margin-top: 8px;margin-left:15px;border-radius: 7px;border: 1px solid #73AD21;font-size:14px;padding: 5px;max-width:100%;min-width:150%;height: 30px; ">
                      </div>
                </form>
                <div style="margin-top:-15px;  position: absolute;width: 320px;" id="txtHint">

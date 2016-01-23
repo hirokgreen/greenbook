@@ -1,22 +1,27 @@
 {% extends 'template.html' %}
 {% block content %}
-{% for message in get_flashed_messages() %}
-    <div class="alert alert-success fade in">
-      {{ message }}
-    </div>
-{% endfor %}
 
 <div class="row" style="margin-top: 18px;">
-     <div class="col-xs-12 col-sm-12 col-lg-10 col-md-10">
-        <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12" style="margin-top: -10px;">
+     <div class="col-xs-10 col-sm-10 col-lg-9 col-md-9">
+         {% for message in get_flashed_messages() %}
+           <div class="alert alert-success fade in">
+            {{ message }}
+          </div>
+         {% endfor %}
+
+        <div class="cover" style="margin-top: -10px;">
             <img src="/static/image/cover.jpg" style="width: 100%;max-height: 300px;min-height: 100px;"/>
         </div>
+<div class="row">
+     <div class="clearfix visible-xs"></div>
 
-     <div class="col-xs-0 col-sm-0 col-lg-2 col-md-2">
+     <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
         <h4>Dashboard</h4>
          <h5>comming soon....</h5>
      </div>
-     <div class="col-xs-12 col-sm-10 col-lg-8 col-md-8">
+
+
+     <div class="col-xs-12 col-sm-12 col-lg-8 col-md-8">
      <button style="background-color:#60A839; color: #ffffff;" class="btn btn" type="button" data-toggle="collapse" data-target="#post"><i class="glyphicon glyphicon-edit" ></i> New Post</button>
          <div id="post" class="collapse">
            <div class="panel panel-default">
@@ -143,20 +148,20 @@
                </div>
         {% endfor %}
      </div>
-    <div class="clearfix visible-xs"></div>
-
-    <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2" style="background-color:#fbb450;">
-       comming soon...
-    </div>
      </div>
-    <!-- Add clearfix for only the required viewport -->
-    <div class="clearfix visible-xs"></div>
+     </div>
+     <div class="col-xs-1 col-sm-1 col-lg-2 col-md-2">
+        <h4>advertisement</h4>
+         <h5>comming soon....</h5>
+     </div>
 
-    <div class="col-xs-0 col-sm-0 col-lg-2 col-md-2">
+    <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
     <div id="chat">
-    <iframe style="position: fixed; height: 100%;border-radius: 15px;" width="260" src="{{ url_for('chat') }}"></iframe>
+    <iframe frameborder="0" style="position: fixed;margin-top: -15px; height: 93%;border: 1px solid #b3b3b3;" src="{{ url_for('chat') }}"></iframe>
     </div>
     </div>
+    <!-- Add clearfix for only the required viewport -->
+
 </div>
 
 {% endblock %}

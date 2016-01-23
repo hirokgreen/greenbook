@@ -75,6 +75,11 @@ def hello():
     print '<h2>Hello Word! This is my first CGI program</h2>'
     return render_template('hello.html', posts = rs,form=form,time=time)
 
+@app.route("/main/")
+@login_required
+def main():
+    return render_template('main.html')
+
 @app.route("/add_post",methods=['GET', 'POST'])
 @login_required
 def add_post():

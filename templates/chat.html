@@ -7,24 +7,35 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
-<body style="background-color: #F2F2F2;">
-<div class="msg" style="position: fixed; width: 100%; height: auto; text-align: left;">
 <style>
 #chat a:hover{color: #f89406;}
 </style>
-            <div class="list-group" id="chat">
+</head>
+<body style="background-color: #F2F2F2;">
+<div class="container-fluid">
+<div class="row">
+    <div class="col-xs-8">
+          <div class="msg" style="margin-top: -10px;margin-left: -15px;">
+            <div class="list-group" id="chat" style="">
                 {% for u in user %}
-                   <a style="font-size: 13px; background-color:#F2F2F2;" href="#" class="list-group-item"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{ u.uname }}<img src="/static/image/online.png" width="8" height="8" style="float: right; margin-top: 5px;"></a>
+                   <a style="font-size: 13px;float:left;width:100%;background-color:#F2F2F2;" href="#" class="list-group-item">
+
+                       <img src="/static/image/online.png" width="8" height="8" style="float: left; margin-top: 5px; margin-left: -10px;">&nbsp;&nbsp;&nbsp;&nbsp;
+
+                       <span style="float: left;" class="glyphicon glyphicon-user">&nbsp;{{ u.uname }}</span>
+
+                   </a>
                 {% endfor %}
 
             </div>
             <form class="form-inline">
-                <div class="input-group" style="float: right;bottom: 0;position: fixed;">
-                       <input type="text" class="form-control input-sm" name="query" id="msgquery" placeholder="Search friend" style="margin-top: 0px; border-radius: 15px;border: 2px solid #73AD21;padding: 10px;width: 250px;height: 30px;  ">
-
+                <div class="input-group" style="float:left;bottom: 0;position: fixed; width: 100%;">
+                       <input type="text" class="form-control input-sm" name="query" id="msgquery" placeholder="Search friend" style=" border-radius: 15px;border: 2px solid #73AD21;padding: 10px;width:90%;height: 30px;  ">
                 </div>
             </form>
+          </div>
+    </div>
+</div>
 </div>
 </body>
 </html>
