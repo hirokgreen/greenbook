@@ -1,6 +1,8 @@
 {% extends 'template.html' %}
 {% block content %}
-
+<style>
+#avatar:hover{background-color: #b3b3b3;}
+</style>
 <script>
 document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie';
 </script>
@@ -12,10 +14,16 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
             {{ message }}
           </div>
          {% endfor %}
-
-        <div class="cover" style="margin-top: -10px;">
-            <img src="/static/image/jayden.jpg" style="width: 100%;max-height: 300px;min-height: 100px;"/>
+     {% if pid == 'Anonymous' %}
+        <div class="cover" style="margin-top: -10px; position: relative;">
+            <div id="background">
+                <img src="/static/image/jayden.jpg" style="width: 100%;max-height: 300px;min-height: 100px;position: relative;"/>
+            </div>
+            <div id="avatar" style="width: 120px;height: 120px; border-radius: 5px;border: 2px solid #b3b3b3; bottom: 0;left:0;margin-left: 20px; position: absolute;">
+                <a style="color:#1f6377;;" href="#"><i style="font-size:120px;text-align: center;" class="glyphicon glyphicon-user"></i></a>
+            </div>
         </div>
+     {% endif %}
 <div class="row">
      <div class="clearfix visible-xs"></div>
 

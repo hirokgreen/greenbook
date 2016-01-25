@@ -1,6 +1,8 @@
 {% extends 'template.html' %}
 {% block content %}
-
+<style>
+#avatar:hover{background-color: #b3b3b3;}
+</style>
 <div class="row" style="margin-top: 18px;">
      <div class="col-xs-10 col-sm-10 col-lg-9 col-md-9">
          {% for message in get_flashed_messages() %}
@@ -9,8 +11,13 @@
           </div>
          {% endfor %}
 
-        <div class="cover" style="margin-top: -10px;">
-            <img src="/static/image/cover.jpg" style="width: 100%;max-height: 300px;min-height: 100px;"/>
+        <div class="cover" style="margin-top: -10px; position: relative;">
+            <div id="background">
+                <img src="/static/image/cover.jpg" style="width: 100%;max-height: 300px;min-height: 100px;position: relative;"/>
+            </div>
+            <div id="avatar" style="width: 120px;height: 120px; border-radius: 5px;border: 2px solid #b3b3b3; bottom: 0;left:0;margin-left: 20px; position: absolute;">
+                <a style="color:#1f6377;;" href="#"><i style="font-size:120px;text-align: center;" class="glyphicon glyphicon-user"></i></a>
+            </div>
         </div>
 <div class="row">
      <div class="clearfix visible-xs"></div>

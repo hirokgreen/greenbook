@@ -340,7 +340,7 @@ def register():
              table = post.posttable(user_id)
              table.create()
 
-             flash('successfully registered'+ form.uname.data)
+             flash('you have successfully registered as  '+ form.uname.data)
              return  redirect('')
          else:
              flash('please fill up the form correctly')
@@ -367,7 +367,7 @@ def frnd_specefic_posts(fid,pid='Anonymous'):
     else:
         rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
-    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs,fid=fid)
+    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs,fid=fid,pid=pid)
 
 if __name__ == "__main__":
     app.run()
