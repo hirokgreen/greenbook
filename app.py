@@ -18,6 +18,10 @@ app.secret_key='hirok'
 def log():
     if 'logged_in' in session:
         return  redirect(url_for('hello'))
+    if request.cookies.get('auth') is not None:
+        session['logged_in']=True
+        session['auth']=request.cookies.get('auth')
+        return  redirect(url_for('hello'))
     else:
         form = LoginForm()
         name = None
@@ -33,13 +37,16 @@ def log():
                if name != None:
                  if obj.chkpassword(password) is True:
                      session['logged_in'] = True
-                     #if request.form.get("remember")=='1':
-                        #cookie session
                      session['name'] = name
                      author = 'green'+str(id)
                      session['auth'] = author
+                     if request.form.get("remember")=='1':
+                         rsp = make_response(redirect(url_for('hello')))
+                         rsp.set_cookie('auth',session['auth'],expires=datetime.now()+timedelta(days=10))
+                         return  rsp
                      flash('you are successfully logged in')
-                     return  redirect(url_for('hello'))
+                     return redirect(url_for('hello'))
+
                  else:
                      flash('username or password is incorrect')
                      return render_template('log.html',form=form)
@@ -55,9 +62,11 @@ def log():
 def login_required(test):
     @wraps(test)
     def wrap(*args, **kwargs):
-        if request.cookies.get('cookie_name') is not None:
-           flash('cookie success')
         if 'logged_in' in session:
+            return test(*args, **kwargs)
+        if request.cookies.get('auth') is not None:
+            session['logged_in']=True
+            session['auth']=request.cookies.get('auth')
             return test(*args, **kwargs)
         else:
             flash('you need to login first')
@@ -69,6 +78,12 @@ def login_required(test):
 def hello():
     form = Addpost()
     id = session['auth']
+    c_id = int(id.replace("green", ""))
+    table = Table('users', metadata, autoload=True)
+    us = select([table.c.uname],table.c.id==c_id).execute()
+    for row in us:
+        session['name']=str(row[0])
+
     table = Table(id, metadata, autoload=True)
     rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
@@ -129,9 +144,9 @@ def search(q):
 @app.route("/chat")
 @login_required
 def chat():
-    id = session['auth']
+    id = int(session['auth'].replace("green", ""))
     table = Table('users', metadata, autoload=True)
-    us = select([table.c.id,table.c.uname],table.c.uname!=session['name']).execute()
+    us = select([table.c.id,table.c.uname],table.c.id!=id).execute()
     return render_template('chat.html',user=us)
 
 @app.route("/like_add/<post_id>/")
@@ -311,9 +326,14 @@ def about():
 @app.route("/logout")
 def logout():
     session.pop('logged_in',None)
-    session.pop('name',None)
-    flash('You are logged out')
-    return redirect('')
+    #session.pop('name',None)
+    rsp = make_response(redirect(''))
+    rsp.delete_cookie('auth')
+    flash('You are successfully logged out')
+    return  rsp
+
+
+    #return redirect('')
 
 @app.route("/register/",methods=['GET', 'POST'])
 def register():
