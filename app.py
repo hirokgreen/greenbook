@@ -87,8 +87,10 @@ def hello():
     table = Table(id, metadata, autoload=True)
     rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
-    print '<h2>Hello Word! This is my first CGI program</h2>'
-    return render_template('hello.html', posts = rs,form=form,time=time)
+
+    chat_table = Table('users', metadata, autoload=True)
+    us = select([chat_table.c.id,chat_table.c.uname],chat_table.c.id!=c_id).execute()
+    return render_template('hello.html', posts = rs,form=form,time=time,chat=us)
 
 @app.route("/main/")
 @login_required
@@ -141,13 +143,36 @@ def search(q):
 
     return  text
 
-@app.route("/chat")
+@app.route("/chat/<con>/<con2>",methods=['GET', 'POST','REQUEST'])
 @login_required
-def chat():
+def chat(con,con2):
     id = int(session['auth'].replace("green", ""))
-    table = Table('users', metadata, autoload=True)
-    us = select([table.c.id,table.c.uname],table.c.id!=id).execute()
-    return render_template('chat.html',user=us)
+    table1 = Table(con, metadata, autoload=False)
+    table2 = Table(con2, metadata, autoload=False)
+    if not table1.exists() and not table2.exists():
+            c = Chat(con)
+            c.chat().create()
+    else:
+        if table1.exists():
+            pass
+        else:
+            pass
+
+    return redirect('hello')
+
+@app.route("/chat_add/",methods=['GET', 'POST','REQUEST'])
+@login_required
+def chat_add():
+    if request.method == 'POST':
+        t1 = request.form['table']
+        t2 = request.form['table2']
+        table = Table(t1, metadata, autoload=True)
+        table2 = Table(t2, metadata, autoload=True)
+        if table.exists():
+            table.insert().execute({'myself':request.form['input_chat']})
+        else:
+            table2.insert().execute({'friend':request.form['input_chat']})
+        return redirect(url_for('chat',con=t1,con2=t2))
 
 @app.route("/like_add/<post_id>/")
 @login_required
@@ -377,8 +402,11 @@ def frnd_specefic_posts(fid,pid='Anonymous'):
         return redirect('hello')
 
     id = fid.replace("green", "")
+    c_id = session['auth'].replace("green", "")
     frnd = Table('users', metadata, autoload=True)
     fr = select([frnd.c.uname],frnd.c.id==id).execute()
+    chat_table = Table('users', metadata, autoload=True)
+    us = select([chat_table.c.id,chat_table.c.uname],chat_table.c.id!=c_id).execute()
     for item in fr:
         fs = item.uname
     table = Table(fid, metadata, autoload=True)
@@ -387,8 +415,8 @@ def frnd_specefic_posts(fid,pid='Anonymous'):
     else:
         rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
-    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs,fid=fid,pid=pid)
+    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs,fid=fid,pid=pid,chat=us)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 

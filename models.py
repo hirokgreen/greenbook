@@ -72,9 +72,26 @@ class Comment():
                       )
 
         return table
+
+class Chat():
+    def __init__(self,connection):
+        self.tablename = connection
+
+
+    def chat(self):
+        table = Table(self.tablename, metadata,
+                    Column('id', Integer, primary_key=True),
+                    Column('myself', String(10000), nullable=True),
+                    Column('friend', String(10000), nullable=True),
+                    Column('date_time', DateTime,default=datetime.now(),nullable=false),extend_existing=True
+                      )
+
+        return table
+
     #def insert_post_table(self):
-#c = Comment()
-#c.comment().create()
+#c = Chat('green6_green8')
+#c.chat()
+
 
 #
 #table = Table('test', metadata, autoload=True)
