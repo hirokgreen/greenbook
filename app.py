@@ -174,6 +174,16 @@ def chat_add():
             table2.insert().execute({'friend':request.form['input_chat']})
         return redirect(url_for('chat',con=t1,con2=t2))
 
+@app.route("/chat_body/",methods=['GET', 'POST'])
+def chat_body():
+    time = datetime.now()
+    t1="null"
+    #t1 = request.form['table']
+    #table = Table('comment', metadata, autoload=True)
+    #rs = table.select(table.c.post_id==post_id).order_by(table.c.id.asc()).execute()
+
+    return render_template('chatting.html',t1=t1)
+
 @app.route("/like_add/<post_id>/")
 @login_required
 def like_add(post_id):
@@ -419,4 +429,3 @@ def frnd_specefic_posts(fid,pid='Anonymous'):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
