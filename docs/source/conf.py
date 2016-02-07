@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-# greeni documentation build configuration file, created by
-# sphinx-quickstart on Sun Feb 07 23:12:46 2016.
+# greenie documentation build configuration file, created by
+# sphinx-quickstart on Mon Feb 08 00:22:15 2016.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -47,7 +47,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'greeni'
+project = u'greenie'
 copyright = u'2016, hirok'
 author = u'hirok'
 
@@ -109,7 +109,7 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'alabaster'
+html_theme = 'default'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -201,7 +201,7 @@ html_static_path = ['nstatic']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'greenidoc'
+htmlhelp_basename = 'greeniedoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -223,7 +223,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'greeni.tex', u'greeni Documentation',
+    (master_doc, 'greenie.tex', u'greenie Documentation',
      u'hirok', 'manual'),
 ]
 
@@ -253,7 +253,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'greeni', u'greeni Documentation',
+    (master_doc, 'greenie', u'greenie Documentation',
      [author], 1)
 ]
 
@@ -267,8 +267,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'greeni', u'greeni Documentation',
-     author, 'greeni', 'One line description of project.',
+    (master_doc, 'greenie', u'greenie Documentation',
+     author, 'greenie', 'One line description of project.',
      'Miscellaneous'),
 ]
 

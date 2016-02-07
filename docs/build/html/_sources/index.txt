@@ -1,10 +1,10 @@
-.. greeni documentation master file, created by
-   sphinx-quickstart on Sun Feb 07 23:12:46 2016.
+.. greenie documentation master file, created by
+   sphinx-quickstart on Mon Feb 08 00:22:15 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to greeni's documentation!
-==================================
+Welcome to greenie's documentation!
+===================================
 
 Contents:
 
