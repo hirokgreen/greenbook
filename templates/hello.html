@@ -89,11 +89,40 @@
                 text-decoration: none;
                 color: inherit;
             }
-            .popup-box iframe
+            .popup-box .popup-messages
             {
-                height: 90%;
+                height: 80%;
+                overflow-y: scroll;
+                width: 100%;
+                float: left;
+            }
+            .popup-box .type_here
+            {
+                height: 4%;
+                bottom: 0;
+                float: left;
+                position: fixed;
                 width: 100%;
             }
+             .popup-box .type_here .type_here_field{
+                width:295px;
+                font-size: 13px;
+                font-weight: bold;
+                 float:left;
+                margin-bottom: 0px;
+            }
+            .popup-box .type_here .type_here_field:focus{
+                background-color: #d4d4d4;
+            }
+            .popup-box .type_here .send{
+                margin-left: -5px;;
+                font-size: 13px;
+                float:left;
+                font-weight: bold;
+                margin-bottom: 0px;
+            }
+
+
 
 
 </style>
@@ -349,7 +378,9 @@
                 element = element + '<div class="popup-head-left"><a href="#">'+ name +'</a></div>';
                 element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
                 element = element + '<div style="clear: both"></div></div>' +
-                        '<iframe frameborder="0" src="{{ url_for('chat_body') }}">' +
+                        '<div class="popup-messages" id="frnd'+id+'">lol</div>' +
+                        '<div class="type_here">' +
+                        '<textarea rows="1" onkeyup="chat(event,this.value,name)" value="hirok" name="frnd'+id+'" id="input_chatfrnd'+id+'" placeholder="Type here..." class="type_here_field"></textarea>' +
                         '<input type="hidden" value="'+table+'" name="table">' +
                         '<input type="hidden" value="'+table2+'" name="table2"></iframe>' +
                         '</div>';
@@ -357,6 +388,43 @@
                 popups.unshift(id);
                 calculate_popups();
             }
+            function chat(e,val,idd){
+                if (e.keyCode == 13 && val.charCodeAt(0)!=10) {
+                    var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "/chat_add/"+val, true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var myArr = JSON.parse(xmlhttp.responseText);
+                myFunction(myArr,idd);
+
+            }
+        };
+
+              }
+              return;
+
+            }
+
+                function myFunction(arr,idd) {
+                var out = "";
+
+                for(i = 1; i < arr.length; i++) {
+                    out += '<p><span class="glyphicon glyphicon-user"></span>' + arr[i].self + '</p>'
+                            +'<p><span class="glyphicon glyphicon-user"></span>'+' '+
+                            arr[i].frnd + '</p>';
+
+                }
+
+                 document.getElementById(idd).innerHTML += out;
+                 document.getElementById('input_chat'+idd).value ='';
+                    window.setInterval(function() {
+                     var elem = document.getElementById(idd);
+                 elem.scrollTop = elem.scrollHeight;
+              }, 5000);
+                   
+             }
+
             //calculate the total number of popups suitable and then populate the toatal_popups variable.
             function calculate_popups()
             {
@@ -376,14 +444,6 @@
             //recalculate when window is loaded and also when window is resized.
             window.addEventListener("resize", calculate_popups);
             window.addEventListener("load", calculate_popups);
-</script>
-    <script type="text/javascript">
-    function chat(e){
-        if (e.keyCode == 13) {
-            document.getElementById("chatform").submit();
-        }
-        return;
-    }
 </script>
 
 {% endblock %}

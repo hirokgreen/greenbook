@@ -160,19 +160,24 @@ def chat(con,con2):
 
     return redirect('hello')
 
-@app.route("/chat_add/",methods=['GET', 'POST','REQUEST'])
+@app.route("/chat_add/<c>",methods=['GET', 'POST','REQUEST'])
 @login_required
-def chat_add():
-    if request.method == 'POST':
-        t1 = request.form['table']
-        t2 = request.form['table2']
-        table = Table(t1, metadata, autoload=True)
-        table2 = Table(t2, metadata, autoload=True)
-        if table.exists():
-            table.insert().execute({'myself':request.form['input_chat']})
-        else:
-            table2.insert().execute({'friend':request.form['input_chat']})
-        return redirect(url_for('chat',con=t1,con2=t2))
+def chat_add(c):
+    #if request.method == 'POST':
+     #   t1 = request.form['table']
+      #  t2 = request.form['table2']
+       # table = Table(t1, metadata, autoload=True)
+       # table2 = Table(t2, metadata, autoload=True)
+        #if table.exists():
+         #   table.insert().execute({'myself':request.form['input_chat']})
+        #else:
+         #   table2.insert().execute({'friend':request.form['input_chat']})
+        #return redirect(url_for('chat',con=t1,con2=t2))
+    jsn = [{ "self":"" , "frnd":"" }]
+    jsn.append({"self":c,"frnd":"yeah!got it..."})
+    text = json.dumps(jsn)
+
+    return  text
 
 @app.route("/chat_body/",methods=['GET', 'POST'])
 def chat_body():

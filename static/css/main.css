@@ -27,6 +27,7 @@ ul.social-network {
 	list-style: none;
 	display: inline;
 	margin-left:0 !important;
+	margin-top: 5px;
 	padding: 0;
 }
 ul.social-network li {
@@ -36,50 +37,10 @@ ul.social-network li {
 
 
 /* footer social icons */
-.social-network a.icoRss:hover {
-	background-color: #F56505;
-}
-.social-network a.icoFacebook:hover {
-	background-color:#3B5998;
-}
-.social-network a.icoTwitter:hover {
-	background-color:#33ccff;
-}
-.social-network a.icoGoogle:hover {
-	background-color:#BD3518;
-}
-.social-network a.icoVimeo:hover {
-	background-color:#0590B8;
-}
-.social-network a.icoLinkedin:hover {
-	background-color:#007bb7;
-}
-.social-network a.icoRss:hover i, .social-network a.icoFacebook:hover i, .social-network a.icoTwitter:hover i,
-.social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i {
+
+ .social-network a.icoVimeo:hover i{
 	color:#fff;
-}
-
-.social-network .icoRss, .social-network .icoFacebook , .social-network .icoTwitter,
-.social-network .icoGoogle, .social-network .icoVimeo, .social-network .icoLinkedin
-{background-color: #000000;
-}
-
-.social-circle li a {
-	display:inline-block;
-	position:relative;
-	margin:0 auto 0 auto;
-	-moz-border-radius:50%;
-	-webkit-border-radius:50%;
-	border-radius:50%;
-	text-align:center;
-	width: 40px;
-	height: 40px;
-	font-size:15px;
-}
-.social-circle li i {
-	margin:0;
-	line-height:40px;
-	text-align: center;
+	font-size: 27px;
 }
 
 .social-circle li a:hover i, .triggeredHover {
@@ -95,6 +56,8 @@ ul.social-network li {
 }
 .social-circle i {
 	color: #fff;
+	margin-top: 7px;
+	font-size: 20px;
 	-webkit-transition: all 0.8s;
 	-moz-transition: all 0.8s;
 	-o-transition: all 0.8s;
