@@ -1,4 +1,5 @@
-
+from sqlalchemy import *
+from models import *
 #post = PostTable('post_01')
 #table = post.posttable()
 #table.create()
@@ -29,4 +30,18 @@
 #stmt = update(users).where(users.c.id==5).\
  #       values(name='user #5')
 
+t1 = Table('green6_green7', metadata, autoload=True)
+table1 = Table('green6_green7', metadata, autoload=False)
+#table2 = Table('green7_green6', metadata, autoload=False)
 
+if table1.exists():
+    #t1.insert().execute({'myself':'lol','friend':'na'})
+    print 'lol'
+   # sql = text('select * from '+str('green6_green7')+'')
+   #result = db.engine.execute(sql)
+    rs = t1.select().execute()
+    for item in rs:
+        print item.friend,item.myself
+else:
+    t2 = Table('green7_green6', metadata, autoload=True)
+    print 'bal'

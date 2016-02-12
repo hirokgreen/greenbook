@@ -2,17 +2,16 @@ from flask import Flask, render_template, request, redirect, flash, session, url
 from functools import wraps
 from pass_hash import Hssh
 from form import LoginForm, Signupform, Addpost
-from sqlalchemy import *
 from models import *
 import json
 import  Cookie
-import textwrap
 from datetime import datetime, timedelta
 import re
+from sqlalchemy import *
+from chat import *
+
 app = Flask(__name__)
 app.secret_key='hirok'
-#def connect_db():
- #   return sqlite3.connect(app.config['DATABASE'])
 
 @app.route("/",methods=['GET', 'POST'])
 def log():
@@ -160,22 +159,16 @@ def chat(con,con2):
 
     return redirect('hello')
 
-@app.route("/chat_add/<c>",methods=['GET', 'POST','REQUEST'])
+@app.route("/chat_add/<c>/<id>",methods=['GET', 'POST','REQUEST'])
 @login_required
-def chat_add(c):
-    #if request.method == 'POST':
-     #   t1 = request.form['table']
-      #  t2 = request.form['table2']
-       # table = Table(t1, metadata, autoload=True)
-       # table2 = Table(t2, metadata, autoload=True)
-        #if table.exists():
-         #   table.insert().execute({'myself':request.form['input_chat']})
-        #else:
-         #   table2.insert().execute({'friend':request.form['input_chat']})
-        #return redirect(url_for('chat',con=t1,con2=t2))
-    jsn = [{ "self":"" , "frnd":"" }]
-    jsn.append({"self":c,"frnd":"yeah!got it..."})
-    text = json.dumps(jsn)
+def chat_add(c,id):
+    f = 'green'+str(id.replace("frndchat", ""))
+    me = session['auth']
+    con = me+'_'+f
+    con2 = f+'_'+me
+    jsn = [{ "frnd":"" , "self":"" }]
+    chat = Chat_Add(con,con2,jsn)
+    text = json.dumps(chat.add())
 
     return  text
 

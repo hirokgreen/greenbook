@@ -2,6 +2,7 @@
 <head>
 <title>Greenie | be social</title>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/static/image/rel.png">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -27,7 +28,7 @@ function showHint(str) {
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var myArr = JSON.parse(xmlhttp.responseText);
-                myFunction(myArr);
+                chatFunction(myArr);
 
             }
         };
@@ -36,7 +37,7 @@ function showHint(str) {
 
     }
 }
-function myFunction(arr) {
+function chatFunction(arr) {
     var out = "";
     var i;
     if (arr.length==0)

@@ -390,13 +390,14 @@
             }
             function chat(e,val,idd){
                 if (e.keyCode == 13 && val.charCodeAt(0)!=10) {
+                   var v = encodeURIComponent(val);
                     var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "/chat_add/"+val, true);
+        xmlhttp.open("POST", "/chat_add/"+v+"/"+idd, true);
         xmlhttp.send();
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var myArr = JSON.parse(xmlhttp.responseText);
-                myFunction(myArr,idd);
+                chatFunction(myArr,idd);
 
             }
         };
@@ -406,13 +407,13 @@
 
             }
 
-                function myFunction(arr,idd) {
+                function chatFunction(arr,idd) {
                 var out = "";
 
                 for(i = 1; i < arr.length; i++) {
-                    out += '<p><span class="glyphicon glyphicon-user"></span>' + arr[i].self + '</p>'
+                    out += '<p><span class="glyphicon glyphicon-user"></span>' + arr[i].frnd + '</p>'
                             +'<p><span class="glyphicon glyphicon-user"></span>'+' '+
-                            arr[i].frnd + '</p>';
+                            arr[i].self + '</p>';
 
                 }
 
@@ -422,7 +423,7 @@
                      var elem = document.getElementById(idd);
                  elem.scrollTop = elem.scrollHeight;
               }, 5000);
-                   
+
              }
 
             //calculate the total number of popups suitable and then populate the toatal_popups variable.
