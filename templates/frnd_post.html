@@ -231,7 +231,7 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
          <h5>comming soon....</h5>
      </div>
 
-    <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
+   <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
     <div class="chat-sidebar">
         {% for u in chat %}
             <div class="sidebar-name">
@@ -297,24 +297,22 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                     element.style.display = "none";
                 }
             }
-            //creates markup for a new popup. Adds the id to popups array.
-            function register_popup(id, name, myself, frn_id)
-            {
-                var frnd = 'green'+frn_id;
-                var table  = myself+'_'+frnd;
-                var table2 = frnd+'_'+myself;
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
-                xmlhttp.send();
-                xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var myArr = JSON.parse(xmlhttp.responseText);
-                idd = 'frndchat'+frn_id;
-                //alert(idd);
-                chatFunction(myArr,idd);
-
-            }
-        };
+            //creates markup for a new popup. Adds the id to popups array.\
+                function register_popup(id, name, myself, frn_id)
+                {
+                    var frnd = 'green'+frn_id;
+                    var table  = myself+'_'+frnd;
+                    var table2 = frnd+'_'+myself;
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
+                    xmlhttp.send();
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            var myArr = JSON.parse(xmlhttp.responseText);
+                            idd = 'frndchat'+frn_id;
+                            //alert(idd);
+                            chatFunction(myArr,idd);
+                        }};
                 for(var iii = 0; iii < popups.length; iii++)
                 {
                     //already registered. Bring it to front.
@@ -337,27 +335,41 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                         '<input type="hidden" value="'+table+'" name="table">' +
                         '<input type="hidden" value="'+table2+'" name="table2"></iframe>' +
                         '</div>';
+                $(document).ready(function(e){
+                    $.ajaxSetup({cache:false});
+                    setInterval(function(){$("#frnd"+id).html(autoload(table,table2,frn_id));},2000);
+                   });
                 document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
                 popups.unshift(id);
                 calculate_popups();
+            }
+            function autoload(table,table2,frn_id){
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
+                    xmlhttp.send();
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            var myArr = JSON.parse(xmlhttp.responseText);
+                            idd = 'frndchat'+frn_id;
+                            //alert(idd);
+                            chatFunction(myArr,idd);
+                        }};
+
             }
             function chat(e,val,idd){
                 if (e.keyCode == 13 && val.charCodeAt(0)!=10) {
                    var v = encodeURIComponent(val);
                     var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "/chat_add/"+v+"/"+idd, true);
-        xmlhttp.send();
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var myArr = JSON.parse(xmlhttp.responseText);
-                chatFunction(myArr,idd);
-
-            }
-        };
-
-              }
-              return;
-
+                    xmlhttp.open("POST", "/chat_add/"+v+"/"+idd, true);
+                    xmlhttp.send();
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            var myArr = JSON.parse(xmlhttp.responseText);
+                            chatFunction(myArr,idd);
+                        }};
+                    document.getElementById('input_chat'+idd).value ='';
+                }
+                return;
             }
 
                 function chatFunction(arr,idd) {
@@ -379,11 +391,10 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
 
 
                 }
-
                     document.getElementById(idd).innerHTML = out;
                     var elem = document.getElementById(idd);
                     elem.scrollTop = elem.scrollHeight;
-                    document.getElementById('input_chat'+idd).value ='';
+
 
              }
 

@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e1e4fd3-d31b-4703-9ef4-cd41a95aa491" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/autosize.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/bootstrap_min_3.3.5.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/jquery_min_1.11.3.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database.db" afterPath="$PROJECT_DIR$/database.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chat.py" afterPath="$PROJECT_DIR$/chat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/chat.css" afterPath="$PROJECT_DIR$/static/css/chat.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/comment.html" afterPath="$PROJECT_DIR$/templates/comment.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/frnd_post.html" afterPath="$PROJECT_DIR$/templates/frnd_post.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/hello.html" afterPath="$PROJECT_DIR$/templates/hello.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/like.html" afterPath="$PROJECT_DIR$/templates/like.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/template.html" afterPath="$PROJECT_DIR$/templates/template.html" />
     </list>
     <ignored path="hello.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,7 +38,7 @@
     <favorites_list name="hello" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.893053">
+    <splitter split-orientation="horizontal" split-proportion="0.14429224">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="log.html" pinned="false" current-in-tab="false">
@@ -91,7 +79,7 @@
             <entry file="file://$PROJECT_DIR$/templates/hello.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.61187214">
-                  <caret line="281" column="35" selection-start-line="281" selection-start-column="35" selection-end-line="281" selection-end-column="35" />
+                  <caret line="352" column="9" selection-start-line="166" selection-start-column="4" selection-end-line="352" selection-end-column="9" />
                   <folding />
                 </state>
               </provider>
@@ -176,8 +164,8 @@
           <file leaf-file-name="frnd_post.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/frnd_post.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.39269406">
-                  <caret line="382" column="20" selection-start-line="382" selection-start-column="20" selection-end-line="382" selection-end-column="20" />
+                <state vertical-scroll-proportion="0.30136988">
+                  <caret line="409" column="17" selection-start-line="409" selection-start-column="17" selection-end-line="409" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -289,9 +277,9 @@
         <option value="$PROJECT_DIR$/templates/like.html" />
         <option value="$PROJECT_DIR$/chat.py" />
         <option value="$PROJECT_DIR$/static/css/chat.css" />
-        <option value="$PROJECT_DIR$/templates/frnd_post.html" />
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/hello.html" />
+        <option value="$PROJECT_DIR$/templates/frnd_post.html" />
       </list>
     </option>
   </component>
@@ -1407,7 +1395,7 @@
     <entry file="file://$PROJECT_DIR$/templates/log.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="100" column="12" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="12" />
+          <caret line="72" column="35" selection-start-line="72" selection-start-column="12" selection-end-line="72" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -1460,14 +1448,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/frnd_post.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39269406">
-          <caret line="382" column="20" selection-start-line="382" selection-start-column="20" selection-end-line="382" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/css/chat.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.538462">
@@ -1478,8 +1458,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.925926">
-          <caret line="329" column="17" selection-start-line="329" selection-start-column="17" selection-end-line="329" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#118#0" expanded="true" />
           </folding>
@@ -1489,7 +1469,15 @@
     <entry file="file://$PROJECT_DIR$/templates/hello.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.61187214">
-          <caret line="281" column="35" selection-start-line="281" selection-start-column="35" selection-end-line="281" selection-end-column="35" />
+          <caret line="352" column="9" selection-start-line="166" selection-start-column="4" selection-end-line="352" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/frnd_post.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30136988">
+          <caret line="409" column="17" selection-start-line="409" selection-start-column="17" selection-end-line="409" selection-end-column="17" />
           <folding />
         </state>
       </provider>
