@@ -1,131 +1,5 @@
 {% extends 'template.html' %}
 {% block content %}
-<style>
-#avatar:hover{background-color: #b3b3b3;}
-            @media only screen and (max-width : 540px)
-            {
-                .chat-sidebar
-                {
-                    display: none !important;
-                }
-                .chat-popup
-                {
-                    display: none !important;
-                }
-            }
-            .chat-sidebar
-            {
-                width: 200px;
-                position: fixed;
-                height: 93%;
-                right: 0;
-                bottom: 0;
-                padding-top: 10px;
-                padding-bottom: 10px;
-                border: 1px solid rgba(29, 49, 91, .3);
-            }
-            .sidebar-name
-            {
-                padding-left: 10px;
-                padding-right: 10px;
-                margin-bottom: 4px;
-                font-size: 12px;
-            }
-            .sidebar-name span
-            {
-                padding-left: 5px;
-            }
-            .sidebar-name a
-            {
-                display: block;
-                text-decoration: none;
-                color: inherit;
-            }
-            .sidebar-name:hover
-            {
-                background-color:#e1e2e5;
-            }
-            .sidebar-name img
-            {
-                width: 32px;
-                height: 32px;
-                vertical-align:middle;
-            }
-            .popup-box
-            {
-                display: none;
-                position: fixed;
-                bottom: 0px;
-                right: 220px;
-                height: 285px;
-                background-color: rgb(237, 239, 244);
-                width: 300px;
-                border: 1px solid rgba(29, 49, 91, .3);
-            }
-            .popup-box .popup-head
-            {
-                background-color: #0C4B33;
-                padding: 5px;
-                color: white;
-                font-weight: bold;
-                font-size: 14px;
-                clear: both;
-            }
-            .popup-box .popup-head .popup-head-left
-            {
-                float: left;
-            }
-            .popup-box .popup-head .popup-head-left a
-            {
-                color: #ffffff;
-            }
-            .popup-box .popup-head .popup-head-right
-            {
-                float: right;
-                opacity: 0.5;
-            }
-            .popup-box .popup-head .popup-head-right a
-            {
-                text-decoration: none;
-                color: inherit;
-            }
-            .popup-box .popup-messages
-            {
-                height: 80%;
-                overflow-y: scroll;
-                width: 100%;
-                float: left;
-            }
-            .popup-box .type_here
-            {
-                height: 4%;
-                bottom: 0;
-                float: left;
-                position: fixed;
-                width: 100%;
-            }
-             .popup-box .type_here .type_here_field{
-                width:295px;
-                font-size: 13px;
-                font-weight: bold;
-                 float:left;
-                margin-bottom: 0px;
-            }
-            .popup-box .type_here .type_here_field:focus{
-                background-color: #d4d4d4;
-            }
-            .popup-box .type_here .send{
-                margin-left: -5px;;
-                font-size: 13px;
-                float:left;
-                font-weight: bold;
-                margin-bottom: 0px;
-            }
-
-
-
-
-</style>
 <div class="row" style="margin-top: 18px;">
      <div class="col-xs-10 col-sm-10 col-lg-9 col-md-9">
          {% for message in get_flashed_messages() %}
@@ -156,6 +30,9 @@
      <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
         <h4>Dashboard</h4>
          <h5>comming soon....</h5>
+         <div id ="ajax">
+          lol
+        </div>
      </div>
 
 
@@ -292,7 +169,7 @@
         {% for u in chat %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
-                    <img width="30" height="30" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p50x50/1510656_10203002897620130_521137935_n.jpg?oh=572eaca929315b26c58852d24bb73310&oe=54BEE7DA&__gda__=1418131725_c7fb34dd0f499751e94e77b1dd067f4c" />
+                    <img width="30" height="30" src="/static/image/sorry.png" />
                     <span>{{ u.uname }}</span>
                     <img src="/static/image/online.png"style="width:7px;height:7px;margin-top:10px;float: right;">
                 </a>
@@ -353,15 +230,22 @@
                     element.style.display = "none";
                 }
             }
-            //creates markup for a new popup. Adds the id to popups array.
-            function register_popup(id, name, myself, frn_id)
-            {
-                var frnd = 'green'+frn_id;
-                var table  = myself+'_'+frnd;
-                var table2 = frnd+'_'+myself;
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
-                xmlhttp.send();
+            //creates markup for a new popup. Adds the id to popups array.\
+                function register_popup(id, name, myself, frn_id)
+                {
+                    var frnd = 'green'+frn_id;
+                    var table  = myself+'_'+frnd;
+                    var table2 = frnd+'_'+myself;
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
+                    xmlhttp.send();
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            var myArr = JSON.parse(xmlhttp.responseText);
+                            idd = 'frndchat'+frn_id;
+                            //alert(idd);
+                            chatFunction(myArr,idd);
+                        }};
                 for(var iii = 0; iii < popups.length; iii++)
                 {
                     //already registered. Bring it to front.
@@ -378,51 +262,72 @@
                 element = element + '<div class="popup-head-left"><a href="#">'+ name +'</a></div>';
                 element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
                 element = element + '<div style="clear: both"></div></div>' +
-                        '<div class="popup-messages" id="frnd'+id+'">lol</div>' +
+                        '<div class="popup-messages" id="frnd'+id+'"></div>' +
                         '<div class="type_here">' +
                         '<textarea rows="1" onkeyup="chat(event,this.value,name)" value="hirok" name="frnd'+id+'" id="input_chatfrnd'+id+'" placeholder="Type here..." class="type_here_field"></textarea>' +
                         '<input type="hidden" value="'+table+'" name="table">' +
                         '<input type="hidden" value="'+table2+'" name="table2"></iframe>' +
                         '</div>';
+                $(document).ready(function(e){
+                    $.ajaxSetup({cache:false});
+                    setInterval(function(){$("#frnd"+id).html(autoload(table,table2,frn_id));},2000);
+                   });
                 document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
                 popups.unshift(id);
                 calculate_popups();
+            }
+            function autoload(table,table2,frn_id){
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
+                    xmlhttp.send();
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            var myArr = JSON.parse(xmlhttp.responseText);
+                            idd = 'frndchat'+frn_id;
+                            //alert(idd);
+                            chatFunction(myArr,idd);
+                        }};
+
             }
             function chat(e,val,idd){
                 if (e.keyCode == 13 && val.charCodeAt(0)!=10) {
                    var v = encodeURIComponent(val);
                     var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "/chat_add/"+v+"/"+idd, true);
-        xmlhttp.send();
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var myArr = JSON.parse(xmlhttp.responseText);
-                chatFunction(myArr,idd);
-
-            }
-        };
-
-              }
-              return;
-
+                    xmlhttp.open("POST", "/chat_add/"+v+"/"+idd, true);
+                    xmlhttp.send();
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            var myArr = JSON.parse(xmlhttp.responseText);
+                            chatFunction(myArr,idd);
+                        }};
+                    document.getElementById('input_chat'+idd).value ='';
+                }
+                return;
             }
 
                 function chatFunction(arr,idd) {
                 var out = "";
-
                 for(i = 1; i < arr.length; i++) {
-                    out += '<p><span class="glyphicon glyphicon-user"></span>' + arr[i].frnd + '</p>'
-                            +'<p><span class="glyphicon glyphicon-user"></span>'+' '+
-                            arr[i].self + '</p>';
+                    if (arr[i].frnd=='n/a'){
+                        out +='<div class="Area">';
+                        out +='<div class="text_r R textR">'+ arr[i].self + '</div>';
+                        out+='</div>'
+
+                    }
+                   else if (arr[i].self=='n/a'){
+                        out +='<div class="Area"><div class="L">' +
+                                '<img class="chat_img" src="/static/image/sorry.png"/></div>';
+                        out +='<div class="text_l L textR">'+ arr[i].frnd + '</div>';
+                        out+='</div>'
+
+                    }
+
 
                 }
+                    document.getElementById(idd).innerHTML = out;
+                    var elem = document.getElementById(idd);
+                    elem.scrollTop = elem.scrollHeight;
 
-                 document.getElementById(idd).innerHTML += out;
-                 document.getElementById('input_chat'+idd).value ='';
-                    window.setInterval(function() {
-                     var elem = document.getElementById(idd);
-                 elem.scrollTop = elem.scrollHeight;
-              }, 5000);
 
              }
 
@@ -446,5 +351,11 @@
             window.addEventListener("resize", calculate_popups);
             window.addEventListener("load", calculate_popups);
 </script>
+    <script>
+    //$(document).ready(function(e){
+      //  $.ajaxSetup({cache:false});
+        //setInterval(function(){$("#ajax").html("");},2000);
+   // });
+    </script>
 
 {% endblock %}

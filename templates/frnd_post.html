@@ -235,8 +235,8 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
     <div class="chat-sidebar">
         {% for u in chat %}
             <div class="sidebar-name">
-                <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}');">
-                    <img width="30" height="30" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p50x50/1510656_10203002897620130_521137935_n.jpg?oh=572eaca929315b26c58852d24bb73310&oe=54BEE7DA&__gda__=1418131725_c7fb34dd0f499751e94e77b1dd067f4c" />
+                <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
+                    <img width="30" height="30" src="/static/image/sorry.png" />
                     <span>{{ u.uname }}</span>
                     <img src="/static/image/online.png"style="width:7px;height:7px;margin-top:10px;float: right;">
                 </a>
@@ -252,20 +252,16 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
 
 
 <script>
-
                 //this function can remove a array element.
             Array.remove = function(array, from, to) {
                 var rest = array.slice((to || from) + 1 || array.length);
                 array.length = from < 0 ? array.length + from : from;
                 return array.push.apply(array, rest);
             };
-
             //this variable represents the total number of popups can be displayed according to the viewport width
             var total_popups = 0;
-
             //arrays of popups ids
             var popups = [];
-
             //this is used to close a popup
             function close_popup(id)
             {
@@ -274,21 +270,16 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                     if(id == popups[iii])
                     {
                         Array.remove(popups, iii);
-
                         document.getElementById(id).style.display = "none";
-
                         calculate_popups();
-
                         return;
                     }
                 }
             }
-
             //displays the popups. Displays based on the maximum number of popups that can be displayed on the current viewport width
             function display_popups()
             {
                 var right = 220;
-
                 var iii = 0;
                 for(iii; iii < total_popups; iii++)
                 {
@@ -300,52 +291,101 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                         element.style.display = "block";
                     }
                 }
-
                 for(var jjj = iii; jjj < popups.length; jjj++)
                 {
                     var element = document.getElementById(popups[jjj]);
                     element.style.display = "none";
                 }
             }
-
             //creates markup for a new popup. Adds the id to popups array.
-            function register_popup(id, name)
+            function register_popup(id, name, myself, frn_id)
             {
+                var frnd = 'green'+frn_id;
+                var table  = myself+'_'+frnd;
+                var table2 = frnd+'_'+myself;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
+                xmlhttp.send();
+                xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var myArr = JSON.parse(xmlhttp.responseText);
+                idd = 'frndchat'+frn_id;
+                //alert(idd);
+                chatFunction(myArr,idd);
 
+            }
+        };
                 for(var iii = 0; iii < popups.length; iii++)
                 {
                     //already registered. Bring it to front.
                     if(id == popups[iii])
                     {
                         Array.remove(popups, iii);
-
                         popups.unshift(id);
-
                         calculate_popups();
-
-
                         return;
                     }
                 }
-
                 var element = '<div class="popup-box chat-popup" id="'+ id +'">';
                 element = element + '<div class="popup-head">';
                 element = element + '<div class="popup-head-left"><a href="#">'+ name +'</a></div>';
                 element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
-                element = element + '<div style="clear: both"></div></div><div class="popup-messages"></div>' +
+                element = element + '<div style="clear: both"></div></div>' +
+                        '<div class="popup-messages" id="frnd'+id+'"></div>' +
                         '<div class="type_here">' +
-                        '<form action="" role="form" method="post" id="chatform">' +
-                        '<textarea rows="1" onkeyup="chat(event)" name="input_chat" id="input_chat" placeholder="Type here..." class="type_here_field"></textarea>' +
-                        '</form></div></div>';
-
+                        '<textarea rows="1" onkeyup="chat(event,this.value,name)" value="hirok" name="frnd'+id+'" id="input_chatfrnd'+id+'" placeholder="Type here..." class="type_here_field"></textarea>' +
+                        '<input type="hidden" value="'+table+'" name="table">' +
+                        '<input type="hidden" value="'+table2+'" name="table2"></iframe>' +
+                        '</div>';
                 document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
-
                 popups.unshift(id);
-
                 calculate_popups();
+            }
+            function chat(e,val,idd){
+                if (e.keyCode == 13 && val.charCodeAt(0)!=10) {
+                   var v = encodeURIComponent(val);
+                    var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "/chat_add/"+v+"/"+idd, true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var myArr = JSON.parse(xmlhttp.responseText);
+                chatFunction(myArr,idd);
+
+            }
+        };
+
+              }
+              return;
 
             }
 
+                function chatFunction(arr,idd) {
+                var out = "";
+                for(i = 1; i < arr.length; i++) {
+                    if (arr[i].frnd=='n/a'){
+                        out +='<div class="Area">';
+                        out +='<div class="text_r R textR">'+ arr[i].self + '</div>';
+                        out+='</div>'
+
+                    }
+                   else if (arr[i].self=='n/a'){
+                        out +='<div class="Area"><div class="L">' +
+                                '<img class="chat_img" src="/static/image/sorry.png"/></div>';
+                        out +='<div class="text_l L textR">'+ arr[i].frnd + '</div>';
+                        out+='</div>'
+
+                    }
+
+
+                }
+
+                    document.getElementById(idd).innerHTML = out;
+                    var elem = document.getElementById(idd);
+                    elem.scrollTop = elem.scrollHeight;
+                    document.getElementById('input_chat'+idd).value ='';
+
+             }
 
             //calculate the total number of popups suitable and then populate the toatal_popups variable.
             function calculate_popups()
@@ -361,26 +401,11 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                     //320 is width of a single popup box
                     total_popups = parseInt(width/320);
                 }
-
                 display_popups();
-
             }
-
             //recalculate when window is loaded and also when window is resized.
             window.addEventListener("resize", calculate_popups);
             window.addEventListener("load", calculate_popups);
-
-
-
-</script>
-    <script type="text/javascript">
-    function chat(e){
-        if (e.keyCode == 13) {
-            document.getElementById("chatform").submit();
-        }
-        return;
-    }
-
 </script>
 
 {% endblock %}

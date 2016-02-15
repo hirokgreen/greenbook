@@ -145,42 +145,33 @@ def search(q):
 @app.route("/chat/<con>/<con2>",methods=['GET', 'POST','REQUEST'])
 @login_required
 def chat(con,con2):
+    jsn = [{ "frnd":"" , "self":"" }]
     id = int(session['auth'].replace("green", ""))
     table1 = Table(con, metadata, autoload=False)
     table2 = Table(con2, metadata, autoload=False)
     if not table1.exists() and not table2.exists():
             c = Chat(con)
             c.chat().create()
+    if table1.exists():
+        chat = Chat_view('t1',con,jsn)
+        text = json.dumps(chat.view())
     else:
-        if table1.exists():
-            pass
-        else:
-            pass
+        chat = Chat_view('t2',con2,jsn)
+        text = json.dumps(chat.view())
+    return text
 
-    return redirect('hello')
-
-@app.route("/chat_add/<c>/<id>",methods=['GET', 'POST','REQUEST'])
+@app.route("/chat_add/<t>/<id>",methods=['GET', 'POST','REQUEST'])
 @login_required
-def chat_add(c,id):
+def chat_add(t,id):
     f = 'green'+str(id.replace("frndchat", ""))
     me = session['auth']
     con = me+'_'+f
     con2 = f+'_'+me
     jsn = [{ "frnd":"" , "self":"" }]
-    chat = Chat_Add(con,con2,jsn)
+    chat = Chat_Add(t,con,con2,jsn)
     text = json.dumps(chat.add())
 
     return  text
-
-@app.route("/chat_body/",methods=['GET', 'POST'])
-def chat_body():
-    time = datetime.now()
-    t1="null"
-    #t1 = request.form['table']
-    #table = Table('comment', metadata, autoload=True)
-    #rs = table.select(table.c.post_id==post_id).order_by(table.c.id.asc()).execute()
-
-    return render_template('chatting.html',t1=t1)
 
 @app.route("/like_add/<post_id>/")
 @login_required
@@ -335,8 +326,10 @@ def utility_processor():
         for row in name:
             commenter = row[0]
         return commenter
+    def ajax(t1,t2):
+        return t1
 
-    return dict(interval=interval,name=name,commenter=commenter)
+    return dict(interval=interval,name=name,commenter=commenter,ajax=ajax)
 
 @app.context_processor
 def utility_processor():
