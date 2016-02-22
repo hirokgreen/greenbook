@@ -79,17 +79,16 @@ def hello():
     id = session['auth']
     c_id = int(id.replace("green", ""))
     table = Table('users', metadata, autoload=True)
-    us = select([table.c.uname],table.c.id==c_id).execute()
-    for row in us:
+    usr = select([table.c.uname],table.c.id==c_id).execute()
+    for row in usr:
         session['name']=str(row[0])
 
     table = Table(id, metadata, autoload=True)
     rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
 
-    chat_table = Table('users', metadata, autoload=True)
-    us = select([chat_table.c.id,chat_table.c.uname],chat_table.c.id!=c_id).execute()
-    return render_template('hello.html', posts = rs,form=form,time=time,chat=us)
+
+    return render_template('hello.html', posts = rs,form=form,time=time,chat=c_id)
 
 @app.route("/main/")
 @login_required
@@ -328,8 +327,27 @@ def utility_processor():
         return commenter
     def ajax(t1,t2):
         return t1
+    def status(id,type):
+        uid = int(session['auth'].replace("green", ""))
+        table = Table('users', metadata, autoload=True)
+        if type=='on':
+            us = table.select(table.c.time_last_active >= (datetime.now() - timedelta(seconds=6))).execute()
 
-    return dict(interval=interval,name=name,commenter=commenter,ajax=ajax)
+        if type=='off':
+            us = table.select(table.c.time_last_active <= (datetime.now() - timedelta(seconds=6))).execute()
+
+        return us
+    def online(id):
+        uid = id.replace("green", "")
+        table = Table('users', metadata, autoload=True)
+        table.update(table.c.id == uid , values=({'time_last_active':datetime.now()}) ).execute()
+
+    def getid():
+        id  = session['auth'].replace("green", "")
+
+        return id
+
+    return dict(interval=interval,name=name,commenter=commenter,ajax=ajax,status=status,online=online,getid=getid)
 
 @app.context_processor
 def utility_processor():
@@ -352,6 +370,7 @@ def about():
 @app.route("/logout")
 def logout():
     session.pop('logged_in',None)
+    id = session['auth'].replace("green", "")
     #session.pop('name',None)
     rsp = make_response(redirect(''))
     rsp.delete_cookie('auth')
@@ -406,8 +425,6 @@ def frnd_specefic_posts(fid,pid='Anonymous'):
     c_id = session['auth'].replace("green", "")
     frnd = Table('users', metadata, autoload=True)
     fr = select([frnd.c.uname],frnd.c.id==id).execute()
-    chat_table = Table('users', metadata, autoload=True)
-    us = select([chat_table.c.id,chat_table.c.uname],chat_table.c.id!=c_id).execute()
     for item in fr:
         fs = item.uname
     table = Table(fid, metadata, autoload=True)
@@ -416,7 +433,7 @@ def frnd_specefic_posts(fid,pid='Anonymous'):
     else:
         rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
-    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs,fid=fid,pid=pid,chat=us)
+    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs,fid=fid,pid=pid,chat=c_id)
 
 if __name__ == "__main__":
     app.run(debug=True)

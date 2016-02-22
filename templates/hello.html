@@ -74,7 +74,7 @@
                    <script>$("#body{{ item.id }}").autosize()</script>
                 <div class="panel-body" style="background-color: #ffffff; border-radius: 10px;">
                 <div class="alert-block" style="background-color: #ffffff; width: 100%;">
-                 <div class="dropdown" style="float:right; margin-top: 0px;margin-right: 20px; ">
+                 <div class="dropdown" style="float:right; margin-top: 0px;margin-right: 10px; ">
                     <a href="#" data-toggle="dropdown" >
                       <span class="glyphicon glyphicon-wrench"></span></a>
                         <ul  class="dropdown-menu dropdown-menu-bottom">
@@ -120,11 +120,19 @@
                     });
                     </script>
 
-                   <a href=""><h1 style="float: left;margin-top: 0px;"><span class="glyphicon glyphicon-user"></span></h1></a>
-                    <div id="user" style="float: left; margin-top: -10px;margin-left: 9px;">
-                       <a href="" style="color:#60A839;"><h4>{{ session['name'] }}</h4></a>
 
-                       <h6 style="color: #808080;">{{ interval(time,item.date_time) }}</h6>
+                    <div id="user" style="width:95%;float: left; margin-top: -10px; margin-left: -5px;">
+                        <a href=""><h1 style="float: left;margin-top: 0px;"><span class="glyphicon glyphicon-user"></span></h1></a>
+                        <div id="name" style="float: left; line-height: 5px; margin-left: 6px;">
+                            <h4 style="float: left;margin-top: 0px;"><a href="" style="color:#60A839;">{{ session['name'] }}</a> </h4>
+                            <h5 style="float: left; margin-left: 8px;margin-top: 2px;">
+                                 with <a href="#">jayden</a>,
+                                     <a href="#">greenhirok</a>
+                                and 2 others
+                            </h5>
+                            <div style="clear: both;"></div>
+                            <h6 style="float:left;color: #808080; margin-top: -6px;">{{ interval(time,item.date_time) }}</h6>
+                        </div>
                    </div>
                  </div>
                  <div class="alert-block"  id="post{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
@@ -165,8 +173,9 @@
      </div>
 
     <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
-    <div class="chat-sidebar">
-        {% for u in chat %}
+    <div class="chat-sidebar" id="chatbox">
+        {% for u in status(chat,'on') %}
+            {% if u.id!=getid() %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
@@ -174,10 +183,21 @@
                     <img src="/static/image/online.png"style="width:7px;height:7px;margin-top:10px;float: right;">
                 </a>
             </div>
-
+             {% endif %}
          {% endfor %}
 
-        </div>
+         {% for u in status(chat,'off') %}
+            {% if u.id!=getid() %}
+            <div class="sidebar-name">
+                <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
+                    <img width="30" height="30" src="/static/image/sorry.png" />
+                    <span>{{ u.uname }}</span>
+                    <img src="/static/image/offline.png"style="width:7px;height:7px;margin-top:10px;float: right;">
+                </a>
+            </div>
+             {% endif %}
+         {% endfor %}
+    </div>
     </div>
     <!-- Add clearfix for only the required viewport -->
 
@@ -264,7 +284,7 @@
                 element = element + '<div style="clear: both"></div></div>' +
                         '<div class="popup-messages" id="frnd'+id+'"></div>' +
                         '<div class="type_here">' +
-                        '<textarea rows="1" onkeyup="chat(event,this.value,name)" value="hirok" name="frnd'+id+'" id="input_chatfrnd'+id+'" placeholder="Type here..." class="type_here_field"></textarea>' +
+                        '<textarea autofocus rows="1" onkeyup="chat(event,this.value,name)" value="hirok" name="frnd'+id+'" id="input_chatfrnd'+id+'" placeholder="Type here..." class="type_here_field"></textarea>' +
                         '<input type="hidden" value="'+table+'" name="table">' +
                         '<input type="hidden" value="'+table2+'" name="table2"></iframe>' +
                         '</div>';
@@ -352,10 +372,18 @@
             window.addEventListener("load", calculate_popups);
 </script>
     <script>
-    //$(document).ready(function(e){
-      //  $.ajaxSetup({cache:false});
-        //setInterval(function(){$("#ajax").html("");},2000);
-   // });
+    $(document).ready(function(e){
+        $.ajaxSetup({cache:false});
+        setInterval(function(){$("#chatbox").load(location.href + ' #chatbox');},3000);
+    });
+    $(document).ready(function(e){
+                    $.ajaxSetup({cache:false});
+                    setInterval(function(){load('{{ online(session['auth']) }}');},2000);
+                   });
+
     </script>
+
+
+
 
 {% endblock %}

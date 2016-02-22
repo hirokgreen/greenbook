@@ -39,6 +39,7 @@ class User():
                     Column('gender', String(10), nullable=False),
                     Column('address', String(1000), nullable=False),
                     Column('dob', String(30), nullable=False),
+                     Column('time_last_active', DateTime,default=datetime.now(),nullable=false),
                       )
 
         return table

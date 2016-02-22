@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e1e4fd3-d31b-4703-9ef4-cd41a95aa491" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/search.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/chat.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/home.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database.db" afterPath="$PROJECT_DIR$/database.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db_create.py" afterPath="$PROJECT_DIR$/db_create.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo.py" afterPath="$PROJECT_DIR$/demo.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models.py" afterPath="$PROJECT_DIR$/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/main.css" afterPath="$PROJECT_DIR$/static/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/comment.html" afterPath="$PROJECT_DIR$/templates/comment.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/form.html" afterPath="$PROJECT_DIR$/templates/form.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/frnd_post.html" afterPath="$PROJECT_DIR$/templates/frnd_post.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/hello.html" afterPath="$PROJECT_DIR$/templates/hello.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/like.html" afterPath="$PROJECT_DIR$/templates/like.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/log.html" afterPath="$PROJECT_DIR$/templates/log.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/register.html" afterPath="$PROJECT_DIR$/templates/register.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/template.html" afterPath="$PROJECT_DIR$/templates/template.html" />
     </list>
     <ignored path="hello.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -16,8 +33,8 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/hello$db_create.coverage" NAME="db_create Coverage Results" MODIFIED="1453204121866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/hello$app.coverage" NAME="app Coverage Results" MODIFIED="1455565805095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hello$db_create.coverage" NAME="db_create Coverage Results" MODIFIED="1456163363881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hello$app.coverage" NAME="app Coverage Results" MODIFIED="1456163870544" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/hello$Unittest_FlaskTestCase_test_login_page_loads.coverage" NAME="Unittest FlaskTestCase.test_login_page_loads Coverage Results" MODIFIED="1450699256206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/hello$database.coverage" NAME="database Coverage Results" MODIFIED="1450519454966" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/hello$hello.coverage" NAME="hello Coverage Results" MODIFIED="1450111039895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -38,7 +55,7 @@
     <favorites_list name="hello" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.14429224">
+    <splitter split-orientation="horizontal" split-proportion="0.4884422">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="log.html" pinned="false" current-in-tab="false">
@@ -54,8 +71,8 @@
           <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+                <state vertical-scroll-proportion="-10.703704">
+                  <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
                   <folding>
                     <element signature="e#0#24#0" expanded="true" />
                   </folding>
@@ -66,8 +83,8 @@
           <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-9.925926">
-                  <caret line="329" column="17" selection-start-line="329" selection-start-column="17" selection-end-line="329" selection-end-column="17" />
+                <state vertical-scroll-proportion="-3.107143">
+                  <caret line="375" column="29" selection-start-line="375" selection-start-column="29" selection-end-line="375" selection-end-column="29" />
                   <folding>
                     <element signature="e#0#118#0" expanded="true" />
                   </folding>
@@ -75,11 +92,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="hello.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="hello.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/hello.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.61187214">
-                  <caret line="352" column="9" selection-start-line="166" selection-start-column="4" selection-end-line="352" selection-end-column="9" />
+                <state vertical-scroll-proportion="-2.746988">
+                  <caret line="199" column="10" selection-start-line="175" selection-start-column="4" selection-end-line="199" selection-end-column="10" />
                   <folding />
                 </state>
               </provider>
@@ -88,8 +105,18 @@
           <file leaf-file-name="chat.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/static/css/chat.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-10.538462">
-                  <caret line="181" column="16" selection-start-line="181" selection-start-column="16" selection-end-line="181" selection-end-column="16" />
+                <state vertical-scroll-proportion="-0.65384614">
+                  <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="frnd_post.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/templates/frnd_post.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.7671233">
+                  <caret line="264" column="10" selection-start-line="264" selection-start-column="10" selection-end-line="264" selection-end-column="10" />
                   <folding />
                 </state>
               </provider>
@@ -99,12 +126,14 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="db_create.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="db_create.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/db_create.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
+                <state vertical-scroll-proportion="0.66132724">
+                  <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+                  <folding>
+                    <element signature="e#0#24#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -112,7 +141,7 @@
           <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
+                <state vertical-scroll-proportion="28.333334">
                   <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#118#0" expanded="true" />
@@ -134,8 +163,8 @@
           <file leaf-file-name="template.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/template.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.65384614">
-                  <caret line="13" column="104" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="104" />
+                <state vertical-scroll-proportion="-9.653846">
+                  <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -144,7 +173,7 @@
           <file leaf-file-name="comment.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/comment.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.65384614">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="10" column="105" selection-start-line="10" selection-start-column="105" selection-end-line="10" selection-end-column="105" />
                   <folding />
                 </state>
@@ -154,18 +183,8 @@
           <file leaf-file-name="like.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/like.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
+                <state vertical-scroll-proportion="-0.65384614">
                   <caret line="9" column="104" selection-start-line="9" selection-start-column="104" selection-end-line="9" selection-end-column="104" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="frnd_post.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/templates/frnd_post.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.30136988">
-                  <caret line="409" column="17" selection-start-line="409" selection-start-column="17" selection-end-line="409" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -174,34 +193,11 @@
           <file leaf-file-name="demo.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/demo.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="40" column="35" selection-start-line="39" selection-start-column="3" selection-end-line="40" selection-end-column="35" />
+                <state vertical-scroll-proportion="-0.6296296">
+                  <caret line="1" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="20" />
                   <folding>
                     <element signature="e#0#24#0" expanded="true" />
                     <marker date="1455225758102" expanded="true" signature="1201:1215" placeholder="select * fro... missing_value" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="chat.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/chat.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.8148148">
-                  <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
-                  <folding>
-                    <element signature="e#0#24#0" expanded="true" />
-                    <marker date="1455448756621" expanded="true" signature="449:479" placeholder="INSERT INTO missing_value... " />
-                    <marker date="1455448756621" expanded="true" signature="449:500" placeholder="INSERT INTO missing_value... " />
-                    <marker date="1455448756621" expanded="true" signature="449:502" placeholder="INSERT INTO missing_value... " />
-                    <marker date="1455448756621" expanded="true" signature="449:515" placeholder="INSERT INTO missing_value... " />
-                    <marker date="1455448756621" expanded="true" signature="449:517" placeholder="INSERT INTO missing_value... " />
-                    <marker date="1455448756621" expanded="true" signature="577:591" placeholder="select * fro... missing_value" />
-                    <marker date="1455448756621" expanded="true" signature="577:610" placeholder="select * fro... " />
-                    <marker date="1455448756621" expanded="true" signature="888:955" placeholder="INSERT INTO missing_value... " />
-                    <marker date="1455448756621" expanded="true" signature="1017:1031" placeholder="select * fro... missing_value" />
-                    <marker date="1455448756621" expanded="true" signature="1415:1429" placeholder="select * fro... missing_value" />
-                    <marker date="1455448756621" expanded="true" signature="1637:1651" placeholder="select * fro... missing_value" />
                   </folding>
                 </state>
               </provider>
@@ -255,7 +251,6 @@
         <option value="$PROJECT_DIR$/like.html" />
         <option value="$PROJECT_DIR$/user/user.py" />
         <option value="$PROJECT_DIR$/user.py" />
-        <option value="$PROJECT_DIR$/db_create.py" />
         <option value="$PROJECT_DIR$/templates/tem2.html" />
         <option value="$PROJECT_DIR$/templates/main.html" />
         <option value="$PROJECT_DIR$/templates/chat.html" />
@@ -271,14 +266,15 @@
         <option value="$PROJECT_DIR$/static/js/bootstrap_min_3.3.5.js" />
         <option value="$PROJECT_DIR$/static/css/font-awesome.min_4.2.0.css" />
         <option value="$PROJECT_DIR$/static/js/autosize.js" />
-        <option value="$PROJECT_DIR$/models.py" />
-        <option value="$PROJECT_DIR$/templates/template.html" />
         <option value="$PROJECT_DIR$/templates/comment.html" />
         <option value="$PROJECT_DIR$/templates/like.html" />
         <option value="$PROJECT_DIR$/chat.py" />
         <option value="$PROJECT_DIR$/static/css/chat.css" />
-        <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/templates/template.html" />
+        <option value="$PROJECT_DIR$/models.py" />
+        <option value="$PROJECT_DIR$/db_create.py" />
         <option value="$PROJECT_DIR$/templates/hello.html" />
+        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/frnd_post.html" />
       </list>
     </option>
@@ -319,8 +315,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -426,7 +422,7 @@
       <recent name="E:\flask\hello\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.app">
+  <component name="RunManager" selected="Python.db_create">
     <configuration default="false" name="db_create" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -772,11 +768,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.chat" />
-        <item index="1" class="java.lang.String" itemvalue="Python.demo" />
-        <item index="2" class="java.lang.String" itemvalue="Python.models" />
-        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.hello.html" />
-        <item index="4" class="java.lang.String" itemvalue="Python.db_create" />
+        <item index="0" class="java.lang.String" itemvalue="Python.db_create" />
+        <item index="1" class="java.lang.String" itemvalue="Python.chat" />
+        <item index="2" class="java.lang.String" itemvalue="Python.demo" />
+        <item index="3" class="java.lang.String" itemvalue="Python.models" />
+        <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.hello.html" />
       </list>
     </recent_temporary>
   </component>
@@ -996,17 +992,17 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19838946" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2715959" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16403785" sideWeight="0.681552" order="14" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22397476" sideWeight="0.13396779" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12302839" sideWeight="0.48243046" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22397476" sideWeight="0.31844804" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22397476" sideWeight="0.8660322" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39747635" sideWeight="0.4941435" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39747635" sideWeight="0.48828697" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1067,11 +1063,32 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="8" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/chat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+            <marker date="1455448756621" expanded="true" signature="449:479" placeholder="INSERT INTO missing_value... " />
+            <marker date="1455448756621" expanded="true" signature="449:500" placeholder="INSERT INTO missing_value... " />
+            <marker date="1455448756621" expanded="true" signature="449:502" placeholder="INSERT INTO missing_value... " />
+            <marker date="1455448756621" expanded="true" signature="449:515" placeholder="INSERT INTO missing_value... " />
+            <marker date="1455448756621" expanded="true" signature="449:517" placeholder="INSERT INTO missing_value... " />
+            <marker date="1455448756621" expanded="true" signature="577:591" placeholder="select * fro... missing_value" />
+            <marker date="1455448756621" expanded="true" signature="577:610" placeholder="select * fro... " />
+            <marker date="1455448756621" expanded="true" signature="888:955" placeholder="INSERT INTO missing_value... " />
+            <marker date="1455448756621" expanded="true" signature="1017:1031" placeholder="select * fro... missing_value" />
+            <marker date="1455448756621" expanded="true" signature="1415:1429" placeholder="select * fro... missing_value" />
+            <marker date="1455448756621" expanded="true" signature="1637:1651" placeholder="select * fro... missing_value" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/log.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1325,7 +1342,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12068965">
           <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1340,7 +1356,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16831683">
           <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1348,10 +1363,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2027833">
           <caret line="6" column="4656" selection-start-line="6" selection-start-column="4656" selection-end-line="6" selection-end-column="4656" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#36816#36856#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1359,61 +1370,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2027833">
           <caret line="6" column="2984" selection-start-line="6" selection-start-column="2984" selection-end-line="6" selection-end-column="2984" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#3200#3240#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db_create.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/like.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="104" selection-start-line="9" selection-start-column="104" selection-end-line="9" selection-end-column="104" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/log.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="35" selection-start-line="72" selection-start-column="12" selection-end-line="72" selection-end-column="35" />
+          <caret line="100" column="12" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demo.py">
+    <entry file="file://$PROJECT_DIR$/templates/comment.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="35" selection-start-line="39" selection-start-column="3" selection-end-line="40" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <marker date="1455225758102" expanded="true" signature="1201:1215" placeholder="select * fro... missing_value" />
-          </folding>
+          <caret line="10" column="105" selection-start-line="10" selection-start-column="105" selection-end-line="10" selection-end-column="105" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chat.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.8148148">
+        <state vertical-scroll-proportion="0.036637932">
           <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
@@ -1432,34 +1410,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/comment.html">
+    <entry file="file://$PROJECT_DIR$/templates/template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
-          <caret line="10" column="105" selection-start-line="10" selection-start-column="105" selection-end-line="10" selection-end-column="105" />
+        <state vertical-scroll-proportion="-9.653846">
+          <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/template.html">
+    <entry file="file://$PROJECT_DIR$/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.703704">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6296296">
+          <caret line="1" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+            <marker date="1455225758102" expanded="true" signature="1201:1215" placeholder="select * fro... missing_value" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/like.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.65384614">
-          <caret line="13" column="104" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="104" />
+          <caret line="9" column="104" selection-start-line="9" selection-start-column="104" selection-end-line="9" selection-end-column="104" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_create.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66132724">
+          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/css/chat.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.538462">
-          <caret line="181" column="16" selection-start-line="181" selection-start-column="16" selection-end-line="181" selection-end-column="16" />
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-3.107143">
+          <caret line="375" column="29" selection-start-line="375" selection-start-column="29" selection-end-line="375" selection-end-column="29" />
           <folding>
             <element signature="e#0#118#0" expanded="true" />
           </folding>
@@ -1468,16 +1477,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/hello.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61187214">
-          <caret line="352" column="9" selection-start-line="166" selection-start-column="4" selection-end-line="352" selection-end-column="9" />
+        <state vertical-scroll-proportion="-2.746988">
+          <caret line="199" column="10" selection-start-line="175" selection-start-column="4" selection-end-line="199" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/frnd_post.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30136988">
-          <caret line="409" column="17" selection-start-line="409" selection-start-column="17" selection-end-line="409" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.7671233">
+          <caret line="264" column="10" selection-start-line="264" selection-start-column="10" selection-end-line="264" selection-end-column="10" />
           <folding />
         </state>
       </provider>
