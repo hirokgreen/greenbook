@@ -192,8 +192,11 @@
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
                     <span>{{ u.uname }}</span>
-                    <img src="/static/image/offline.png"style="width:7px;height:7px;margin-top:10px;float: right;">
+                    <h6 style="width:auto;height:7px;margin-top:12px;float: right; font-size: 9px; color: #aaaaaa;">
+                        {{ offlinetime(time,u.time_last_active) }}
+                    </h6>
                 </a>
+
             </div>
              {% endif %}
          {% endfor %}

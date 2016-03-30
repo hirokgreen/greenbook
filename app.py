@@ -312,6 +312,44 @@ def utility_processor():
                 type = 'pm'
 
             return  mon + ' '+str(t2.day) + ', '+ str(t2.year)+' at '+str(h2)+':'+str(m2)+type
+    def offlinetime(t1, t2):
+        s1 = int(t1.second)
+        m1 = int(t1.minute)
+        h1 = int(t1.hour)
+        d1 = int(t1.day)
+        mo1 = int(t1.month)
+        s2 = int(t2.second)
+        m2 = int(t2.minute)
+        h2 = int(t2.hour)
+        d2 = int(t2.day)
+        mo2 = int(t2.month)
+
+        if s2 > s1:
+            m1 = m1 - 1
+            s1 = s1 + 60
+        seconds = s1 - s2
+        if m2 > m1:
+            h1 = h1 - 1
+            m1 = m1 + 60
+        minutes = m1 - m2
+        if h2 > h1:
+            d1 = d1 - 1
+            h1 = h1 + 24
+        hours = h1 - h2
+        if d2 > d1:
+            mo1 = mo1 - 1
+            d1 = d1 + 30
+        days = d1 - d2
+        if days==0 and hours==0 and minutes==0:
+            return '1m'
+        if days==0 and hours==0 and minutes!=0:
+            return str(minutes) + 'm'
+        if days==0 and hours!=0:
+            return str(hours) + 'h'
+        if days!=0:
+            return str(days) + 'd'
+        else:
+            return ''
     def name(id):
         user = Table('users', metadata, autoload=True)
         name = select([user.c.uname],user.c.id==id).execute()
@@ -347,7 +385,7 @@ def utility_processor():
 
         return id
 
-    return dict(interval=interval,name=name,commenter=commenter,ajax=ajax,status=status,online=online,getid=getid)
+    return dict(interval=interval,name=name,commenter=commenter,ajax=ajax,status=status,online=online,getid=getid,offlinetime=offlinetime)
 
 @app.context_processor
 def utility_processor():
