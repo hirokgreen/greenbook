@@ -7,11 +7,21 @@ import json
 import  Cookie
 from datetime import datetime, timedelta
 import re
+from werkzeug import secure_filename
+import os
 from sqlalchemy import *
 from chat import *
 
+UPLOAD_FOLDER = 'static/uploads'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
 app = Flask(__name__)
 app.secret_key='hirok'
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 @app.route("/",methods=['GET', 'POST'])
 def log():
@@ -88,6 +98,7 @@ def hello():
     time = datetime.now()
 
 
+
     return render_template('hello.html', posts = rs,form=form,time=time,chat=c_id)
 
 @app.route("/main/")
@@ -95,7 +106,7 @@ def hello():
 def main():
     return render_template('main.html')
 
-@app.route("/add_post",methods=['GET', 'POST'])
+@app.route("/add_post/",methods=['GET', 'POST'])
 @login_required
 def add_post():
     if request.method == 'POST':
@@ -106,6 +117,15 @@ def add_post():
             flash('something goes wrong....')
     return redirect('hello')
 
+@app.route("/add_pic/",methods=['GET', 'POST'])
+@login_required
+def add_pic():
+    if request.method == 'POST' and 'file' in request.files:
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    return redirect('hello')
 @app.route("/post_delete/<int:id>")
 @login_required
 def post_delete(id):
