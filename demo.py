@@ -12,17 +12,15 @@ from models import *
 #table.insert().execute({'title': 'first post', 'description': 'i\'m here'},
          # {'title': '2nd post', 'description': 'hello again'})
 
-#table = Table('users', metadata, autoload=True)
-#rs = select([table.c.in_friend_req],table.c.id==int('8')).execute()
+table = Table('users', metadata, autoload=True)
+rs = select([table.c.friend],table.c.id==int('6')).execute()
 #rs = table.select().order_by(table.c.id.desc()).execute()
 # retrive table data
 #rs = table.select().execute()
-#row = rs.fetchone()
-#print 'Id:', row[0]
+row = rs.fetchone()[0]
+print row
 #print 'title:', row['title']
 #print 'description:', row[table.c.description]
-#for row in rs:
- #   print str(row[0])
     #print row.uname, '::', row.password,'.'
 #if rs.fetchone()[0] != None:
 #    print str(rs.fetchone()[0])
@@ -48,14 +46,4 @@ from models import *
 #else:
     #t2 = Table('green7_green6', metadata, autoload=True)
     #print 'bal'
-class Lol():
-   def dis(self):
-      append()
-
-def append():
-   print 'appended'
-
-
-l = Lol()
-l.dis()
 

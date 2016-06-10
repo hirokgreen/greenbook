@@ -59,6 +59,39 @@ class Friend():
         self.table.update(self.table.c.id == int(self.u_id) , values=({'friend':user_f_list,'in_friend_req':user_in_list})).execute()
         self.table.update(self.table.c.id == int(self.fid) , values=({'friend':mem_f_list,'out_friend_req':mem_out_list})).execute()
 
+    def unfriend(self):
+        query = select([self.table.c.friend],self.table.c.id==int(self.u_id)).execute()
+        f_query = select([self.table.c.friend],self.table.c.id==int(self.fid)).execute()
+        user_f = str(query.fetchone()[0])
+        friend_f = str(f_query.fetchone()[0])
+        flist = remove_id(self.to_be_add_to_user, user_f)
+        f_flist = remove_id(self.to_be_add_to_frnd, friend_f)
+        self.table.update(self.table.c.id == int(self.u_id) , values=({'friend':flist})).execute()
+        self.table.update(self.table.c.id == int(self.fid) , values=({'friend':f_flist})).execute()
+
+    def cancel_request(self):
+        query = select([self.table.c.out_friend_req],self.table.c.id==int(self.u_id)).execute()
+        f_query = select([self.table.c.in_friend_req],self.table.c.id==int(self.fid)).execute()
+        user_out = str(query.fetchone()[0])
+        friend_in = str(f_query.fetchone()[0])
+        flist = remove_id(self.to_be_add_to_user, user_out)
+        f_flist = remove_id(self.to_be_add_to_frnd, friend_in)
+        self.table.update(self.table.c.id == int(self.u_id) , values=({'out_friend_req':flist})).execute()
+        self.table.update(self.table.c.id == int(self.fid) , values=({'in_friend_req':f_flist})).execute()
+
+    def reject_request(self):
+        query = select([self.table.c.in_friend_req],self.table.c.id==int(self.u_id)).execute()
+        f_query = select([self.table.c.out_friend_req],self.table.c.id==int(self.fid)).execute()
+        user_in = str(query.fetchone()[0])
+        friend_out = str(f_query.fetchone()[0])
+        flist = remove_id(self.to_be_add_to_user, user_in)
+        f_flist = remove_id(self.to_be_add_to_frnd, friend_out)
+        self.table.update(self.table.c.id == int(self.u_id) , values=({'in_friend_req':flist})).execute()
+        self.table.update(self.table.c.id == int(self.fid) , values=({'out_friend_req':f_flist})).execute()
+
+
+
+
 
 def append_id(id,s):
     userlist = s.split(";")

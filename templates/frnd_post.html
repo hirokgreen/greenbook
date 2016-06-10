@@ -154,9 +154,13 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                       </a>
                     {% endif %}
                     {% if request_status == "request_sent"  %}
-                      <a href="#" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
-                        <span class="glyphicon glyphicon-user"></span> friend request sent
-                      </a>
+                      <div class="dropdown">
+                          <a href="#" data-toggle="dropdown" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
+                          <span class="glyphicon glyphicon-user"></span> friend request sent</a>
+                               <ul  class="dropdown-menu dropdown-menu-bottom">
+                                  <li><a href="{{ url_for('unfriend',f_id=fid,cancel='cancel') }}"> cancel request</a></li>
+                               </ul>
+                       </div>
                     {% endif %}
                     {% if request_status == "accept"  %}
                        <div class="dropdown">
@@ -167,7 +171,7 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                                        confirm</a>
                                    </li>
                                    <li class="divider"></li>
-                                  <li><a href="#"> reject</a></li>
+                                  <li><a href="{{ url_for('unfriend',f_id=fid,cancel='reject') }}"> reject</a></li>
                                </ul>
                        </div>
                     {% endif %}
@@ -179,7 +183,7 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                                   <li><a href="#"> get notification</a></li>
                                   <li><a href="#"><span class="glyphicon glyphicon-user"></span>close friend</a> </li>
                                    <li class="divider"></li>
-                                  <li><a href="#"> Unfriend</a></li>
+                                  <li><a href="{{ url_for('unfriend',f_id=fid) }}"> Unfriend</a></li>
                                </ul >
                       </div>
                     {% endif %}
@@ -279,7 +283,7 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
    <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
     <div class="chat-sidebar" id="chatbox">
         {% for u in status(chat,'on') %}
-            {% if u.id|string!=getid()|string %}
+            {% if u.id|string!=getid()|string and clearance(u.id)=='true' %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
@@ -291,12 +295,14 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
          {% endfor %}
 
          {% for u in status(chat,'off') %}
-            {% if u.id|string!=getid()|string %}
+            {% if u.id|string!=getid()|string and clearance(u.id)=='true' %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
                     <span>{{ u.uname }}</span>
-                    <img src="/static/image/offline.png"style="width:7px;height:7px;margin-top:10px;float: right;">
+                    <h6 style="width:auto;height:7px;margin-top:12px;float: right; font-size: 9px; color: #aaaaaa;">
+                        {{ offlinetime(time,u.time_last_active) }}
+                    </h6>
                 </a>
             </div>
              {% endif %}

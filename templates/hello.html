@@ -177,7 +177,7 @@
     <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
     <div class="chat-sidebar" id="chatbox">
         {% for u in status(chat,'on') %}
-            {% if u.id|string!=getid()|string %}
+            {% if u.id|string!=getid()|string and clearance(u.id)=='true' %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
@@ -189,7 +189,7 @@
          {% endfor %}
 
          {% for u in status(chat,'off') %}
-            {% if u.id|string!=getid()|string %}
+            {% if u.id|string!=getid()|string and clearance(u.id)=='true' %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />

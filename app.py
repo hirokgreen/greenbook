@@ -387,7 +387,6 @@ def utility_processor():
     def ajax(t1,t2):
         return t1
     def status(id,type):
-        uid = int(session['auth'].replace("green", ""))
         table = Table('users', metadata, autoload=True)
         if type=='on':
             us = table.select(table.c.time_last_active >= (datetime.now() - timedelta(seconds=6))).execute()
@@ -404,8 +403,18 @@ def utility_processor():
     def getid():
         id  = session['auth'].replace("green", "")
         return id
+    def clearance(fid):
+        uid = session['auth'].replace("green", "")
+        table = Table('users', metadata, autoload=True)
+        user_f_list  = select([table.c.friend],table.c.id==int(uid)).execute()
+        list = str(user_f_list.fetchone()[0]).split(";")
+        if str('green'+str(fid)) in list:
+            return 'true'
+        else:
+            return 'false'
 
-    return dict(interval=interval,name=name,commenter=commenter,ajax=ajax,status=status,online=online,getid=getid,offlinetime=offlinetime)
+
+    return dict(interval=interval,name=name,commenter=commenter,ajax=ajax,status=status,online=online,getid=getid,offlinetime=offlinetime,clearance=clearance)
 
 @app.context_processor
 def utility_processor():
@@ -507,6 +516,20 @@ def friend_add_req(f_id):
 def accept_req(f_id):
     accept = Friend(session['auth'],f_id)
     accept.accept_request()
+
+    return redirect(url_for('member',fid=f_id))
+
+@app.route("/unfriend/<f_id>")
+@app.route("/unfriend/<f_id>/<cancel>")
+@login_required
+def unfriend(f_id,cancel='Anonymous'):
+    friend = Friend(session['auth'],f_id)
+    if cancel=='Anonymous':
+        friend.unfriend()
+    if cancel=='cancel':
+        friend.cancel_request()
+    if cancel=='reject':
+        friend.reject_request()
 
     return redirect(url_for('member',fid=f_id))
 
