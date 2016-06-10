@@ -17,8 +17,8 @@
                 <a style="color:#1f6377;" href="#"><i style="font-size:120px;text-align: center;" class="glyphicon glyphicon-user"></i></a>
 
                </div>
-               <div id="name" style="color: #000000;float: left; margin-left: 10px;margin-top: 10px; ">
-                <p style="font-size:2em; font-weight: bolder;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;">
+               <div id="name" style="color: #000000;float: left; margin-left: 10px;margin-top: 70px; ">
+                <p style="font-size:1.8em; font-weight: bolder;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;">
                     {{ session['name'] }}
                 </p>
                </div>
@@ -177,7 +177,7 @@
     <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
     <div class="chat-sidebar" id="chatbox">
         {% for u in status(chat,'on') %}
-            {% if u.id!=getid() %}
+            {% if u.id|string!=getid()|string %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
@@ -189,7 +189,7 @@
          {% endfor %}
 
          {% for u in status(chat,'off') %}
-            {% if u.id!=getid() %}
+            {% if u.id|string!=getid()|string %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />

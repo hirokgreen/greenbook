@@ -30,7 +30,7 @@ class User():
 
     def usertable(self):
         table = Table(self.tablename, metadata,
-                    Column('id', Integer, primary_key=True),
+                    Column('id', Integer, primary_key=True,autoincrement=True),
                     Column('uname', String(20), nullable=False),
                     Column('password', String(500), nullable=False),
                     Column('fname', String(20), nullable=False),
@@ -39,8 +39,11 @@ class User():
                     Column('gender', String(10), nullable=False),
                     Column('address', String(1000), nullable=False),
                     Column('dob', String(30), nullable=False),
-                     Column('time_last_active', DateTime,default=datetime.now(),nullable=false),
-                      )
+                    Column('time_last_active', DateTime,default=datetime.now(),nullable=false),
+                    Column('friend',Text,nullable=True),
+                    Column('in_friend_req',Text,nullable=True),
+                    Column('out_friend_req',Text,nullable=True),
+                     )
 
         return table
 

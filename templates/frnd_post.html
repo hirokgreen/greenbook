@@ -137,21 +137,60 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
             <div id="background">
                 <a href="#"><img src="/static/image/jayden.jpg" style="width: 100%;max-height: 300px;min-height: 100px;position: relative;"/></a>
             </div>
-            <div class="intro" style="bottom: 0;left:0;margin-left: 10px;margin-bottom:-10px;position: absolute;">
+            <div class="intro" style="bottom: 0;left:0;margin-left: 10px;margin-bottom:0px;position: absolute;width:97%">
                <div id="avatar class=img-responsive" style="width: 120px;height: 120px;float: left; border-radius: 5px;border: 2px solid #b3b3b3;">
-                <a style="color:#1f6377;" href="#"><i style="font-size:120px;text-align: center;" class="glyphicon glyphicon-user"></i></a>
+                <a style="color:#ffffff;" href="#"><i style="font-size:120px;text-align: center;" class="glyphicon glyphicon-user"></i></a>
 
                </div>
-               <div id="name" style="color: #000000;float: left; margin-left: 10px;margin-top: 10px; ">
-                <p style="font-size:2em; font-weight: bolder;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;">
+               <div id="name" style="color: #000000;float: left; margin-left: 10px;margin-top: 80px; ">
+                <p style="font-size:1.7em; font-weight: bolder;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;">
                     {{ fr_id }}
                 </p>
                </div>
+                <div class="frnd_status" style="background-color:#ffffff;float: right;margin-top:80px;border-radius: 5px;border: 2px solid #b3b3b3;">
+                    {% if request_status == "not_friend"  %}
+                      <a href="{{ url_for('friend_add_req',f_id=fid) }}" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
+                        <span class="glyphicon glyphicon-user"></span> add friend
+                      </a>
+                    {% endif %}
+                    {% if request_status == "request_sent"  %}
+                      <a href="#" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
+                        <span class="glyphicon glyphicon-user"></span> friend request sent
+                      </a>
+                    {% endif %}
+                    {% if request_status == "accept"  %}
+                       <div class="dropdown">
+                          <a href="#" data-toggle="dropdown" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
+                          <span class="glyphicon glyphicon-ok"></span> accept request</a>
+                               <ul  class="dropdown-menu dropdown-menu-bottom">
+                                   <li><a href="{{ url_for('accept_req',f_id=fid) }}"><span class="glyphicon glyphicon-ok"></span>
+                                       confirm</a>
+                                   </li>
+                                   <li class="divider"></li>
+                                  <li><a href="#"> reject</a></li>
+                               </ul>
+                       </div>
+                    {% endif %}
+                    {% if request_status == "friend"  %}
+                      <div class="dropdown">
+                         <a href="#" data-toggle="dropdown" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;" >
+                             <span class="glyphicon glyphicon-ok"></span> friends</a>
+                               <ul class="dropdown-menu dropdown-menu-bottom">
+                                  <li><a href="#"> get notification</a></li>
+                                  <li><a href="#"><span class="glyphicon glyphicon-user"></span>close friend</a> </li>
+                                   <li class="divider"></li>
+                                  <li><a href="#"> Unfriend</a></li>
+                               </ul >
+                      </div>
+                    {% endif %}
+                </div>
+
             </div>
+
         </div>
      {% endif %}
 <div class="row">
-     <div class="clearfix visible-xs"></div>
+     <div class="clearfix visible-xs"></div><br>
 
      <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
         <h4>Dashboard</h4>
@@ -240,7 +279,7 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
    <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
     <div class="chat-sidebar" id="chatbox">
         {% for u in status(chat,'on') %}
-            {% if u.id!=getid() %}
+            {% if u.id|string!=getid()|string %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
@@ -252,7 +291,7 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
          {% endfor %}
 
          {% for u in status(chat,'off') %}
-            {% if u.id!=getid() %}
+            {% if u.id|string!=getid()|string %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
@@ -444,6 +483,6 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                     $.ajaxSetup({cache:false});
                     setInterval(function(){load('{{ online(session['auth']) }}');},2000);
                    });
-    </script>
-    </script>
+</script>
+
 {% endblock %}

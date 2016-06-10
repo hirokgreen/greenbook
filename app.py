@@ -11,6 +11,7 @@ from werkzeug import secure_filename
 import os
 from sqlalchemy import *
 from chat import *
+from friend_req import *
 
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -154,7 +155,7 @@ def search(q):
     table = Table('users', metadata, autoload=True)
     rs = select([table.c.id,table.c.uname],table.c.uname.like('%'+s+'%')).execute()
     for item in rs:
-        id = '/hello/green'+str(item.id)+'/'
+        id = '/member/green'+str(item.id)+'/'
         jsn.append({"url":id,"display":item.uname})
     jsn.append({"url":"#","display":"see more"})
     text = json.dumps(jsn)
@@ -402,7 +403,6 @@ def utility_processor():
 
     def getid():
         id  = session['auth'].replace("green", "")
-
         return id
 
     return dict(interval=interval,name=name,commenter=commenter,ajax=ajax,status=status,online=online,getid=getid,offlinetime=offlinetime)
@@ -472,17 +472,16 @@ def register():
 
 
 
-@app.route("/hello/<fid>/")
-@app.route("/hello/<fid>/<pid>")
+@app.route("/member/<fid>/")
+@app.route("/member/<fid>/<pid>")
 @login_required
-def frnd_specefic_posts(fid,pid='Anonymous'):
+def member(fid,pid='Anonymous'):
     if fid==session['auth']:
         return redirect('hello')
-
     id = fid.replace("green", "")
     c_id = session['auth'].replace("green", "")
-    frnd = Table('users', metadata, autoload=True)
-    fr = select([frnd.c.uname],frnd.c.id==id).execute()
+    member = Table('users', metadata, autoload=True)
+    fr = select([member.c.uname],member.c.id==id).execute()
     for item in fr:
         fs = item.uname
     table = Table(fid, metadata, autoload=True)
@@ -491,7 +490,25 @@ def frnd_specefic_posts(fid,pid='Anonymous'):
     else:
         rs = table.select().order_by(table.c.id.desc()).execute()
     time = datetime.now()
-    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs,fid=fid,pid=pid,chat=c_id)
+    friend_status = Friend(session['auth'],fid)
+    request_status= friend_status.check_friend()
+    return render_template('frnd_post.html', posts=rs, time=time,fr_id=fs,fid=fid,pid=pid,chat=c_id,request_status=request_status)
+
+@app.route("/friend_add_req/<f_id>")
+@login_required
+def friend_add_req(f_id):
+    add_friend = Friend(session['auth'],f_id)
+    add_friend.add()
+    #print "f req sent"
+    return redirect(url_for('member',fid=f_id))
+
+@app.route("/accept_req/<f_id>")
+@login_required
+def accept_req(f_id):
+    accept = Friend(session['auth'],f_id)
+    accept.accept_request()
+
+    return redirect(url_for('member',fid=f_id))
 
 if __name__ == "__main__":
     app.run(debug=True)

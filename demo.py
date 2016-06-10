@@ -13,7 +13,7 @@ from models import *
          # {'title': '2nd post', 'description': 'hello again'})
 
 #table = Table('users', metadata, autoload=True)
-#rs = select([table.c.id,table.c.uname,table.c.password],table.c.uname=='greenhirok').execute()
+#rs = select([table.c.in_friend_req],table.c.id==int('8')).execute()
 #rs = table.select().order_by(table.c.id.desc()).execute()
 # retrive table data
 #rs = table.select().execute()
@@ -24,24 +24,38 @@ from models import *
 #for row in rs:
  #   print str(row[0])
     #print row.uname, '::', row.password,'.'
-
+#if rs.fetchone()[0] != None:
+#    print str(rs.fetchone()[0])
+#table.update(table.c.id == '56' , values=({'out_friend_req':'lol'}) ).execute()
+#print "done"
 
 
 #stmt = update(users).where(users.c.id==5).\
  #       values(name='user #5')
 
-t1 = Table('green6_green7', metadata, autoload=True)
-table1 = Table('green6_green7', metadata, autoload=False)
+#t1 = Table('green6_green7', metadata, autoload=True)
+#table1 = Table('green6_green7', metadata, autoload=False)
 #table2 = Table('green7_green6', metadata, autoload=False)
 
-if table1.exists():
+#if table1.exists():
     #t1.insert().execute({'myself':'lol','friend':'na'})
-    print 'lol'
+    #print 'lol'
    # sql = text('select * from '+str('green6_green7')+'')
    #result = db.engine.execute(sql)
-    rs = t1.select().execute()
-    for item in rs:
-        print item.friend,item.myself
-else:
-    t2 = Table('green7_green6', metadata, autoload=True)
-    print 'bal'
+    #rs = t1.select().execute()
+    #for item in rs:
+        #print item.friend,item.myself
+#else:
+    #t2 = Table('green7_green6', metadata, autoload=True)
+    #print 'bal'
+class Lol():
+   def dis(self):
+      append()
+
+def append():
+   print 'appended'
+
+
+l = Lol()
+l.dis()
+
