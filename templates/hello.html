@@ -124,23 +124,29 @@
 
 
                     <div id="user" style="width:95%;float: left; margin-top: -10px; margin-left: -5px;">
-                        <a href=""><h1 style="float: left;margin-top: 0px;"><span class="glyphicon glyphicon-user"></span></h1></a>
-                        <div id="name" style="float: left; line-height: 5px; margin-left: 6px;">
-                            <h4 style="float: left;margin-top: 0px;"><a href="" style="color:#60A839;">{{ session['name'] }}</a> </h4>
-                            <h5 style="float: left; margin-left: 8px;margin-top: 2px;">
-                                 with <a href="#">jayden</a>,
-                                     <a href="#">greenhirok</a>
-                                and 2 others
-                            </h5>
-                            <div style="clear: both;"></div>
-                            <h6 style="float:left;color: #808080; margin-top: -6px;">{{ interval(time,item.date_time) }}</h6>
+                        <a href=""><h1 style="margin-top: 0px;float: left;"><span class="glyphicon glyphicon-user"></span></h1></a>
+                        <div id="post_info" style="float: left;width: 90%; line-height: 5px; margin-left: 6px;">
+                            <div id ="name" style="float: left; width:90%;">
+                               <h4 style="float:left;font-weight: bolder;">
+                                  <a href="#" style="color:#60A839;">{{ session['name'] }}</a>
+                               </h4>
+                                <h5 style="float: left;margin-left: 10px; color: #808080;"> update his status</h5>
+                            </div>
+
+                            <iframe onload="resizeIframe(this)" style="margin-top:-5px;width: 100%;height:20px;" frameborder="0" src="{{ url_for('post_info',post_id = session['auth']+'_'+ item.id|string ) }}"></iframe>
+
+
+
+                            <br>
+                            <h6 style="float:left;color: #808080; margin-top: 0px;">{{ interval(time,item.date_time) }}</h6>
                         </div>
                    </div>
+
                  </div>
                  <div class="alert-block"  id="post{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
                     <div id="line" style="width: 100%;margin-top:15px; height: 1px; float:left;margin-left:-5px;background-color: #d9d9d9;"></div>
                     <iframe style="width: 100%;height: 55px;" frameborder="0" src="{{ url_for('like',post_id = session['auth']+'_'+ item.id|string ) }}"></iframe>
-                    <iframe onload="resizeIframe(this)" style="width: 100%;height: auto;" frameborder="0" src="{{ url_for('comment',post_id = session['auth']+'_'+ item.id|string) }}"></iframe>
+                    <iframe onload="resizeIframe(this)" style="width: 100%;height:20px;" frameborder="0" src="{{ url_for('comment',post_id = session['auth']+'_'+ item.id|string) }}"></iframe>
                 </div>
                <script language="javascript" type="text/javascript">
                     function resizeIframe(obj) {

@@ -102,11 +102,6 @@ def hello():
 
     return render_template('hello.html', posts = rs,form=form,time=time,chat=c_id)
 
-@app.route("/main/")
-@login_required
-def main():
-    return render_template('main.html')
-
 @app.route("/add_post/",methods=['GET', 'POST'])
 @login_required
 def add_post():
@@ -146,6 +141,11 @@ def post_update(id):
         table = Table(session['auth'], metadata, autoload=True)
         table.update(table.c.id == id , values=({'description':request.form['body']}) ).execute()
     return redirect('hello')
+
+@app.route("/post_info/<post_id>/")
+@login_required
+def post_info(post_id):
+    return render_template('post_info.html')
 
 @app.route("/search/<q>",methods=['GET', 'POST','REQUEST'])
 @login_required
@@ -419,7 +419,7 @@ def utility_processor():
 @app.context_processor
 def utility_processor():
     def url(s):
-        r = re.compile(r"(http[s]://[^ ]+)")
+        r = re.compile(r'(http(s)*://[^ ]*)')
         rm = r.sub(r'<a href="\1">\1</a>', s)
 
         return rm
