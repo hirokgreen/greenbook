@@ -130,10 +130,10 @@
                                <h4 style="float:left;font-weight: bolder;">
                                   <a href="#" style="color:#60A839;">{{ session['name'] }}</a>
                                </h4>
-                                <h5 style="float: left;margin-left: 10px; color: #808080;"> update his status</h5>
+                                <h5 style="float: left;margin-left: 10px; color: #808080;">has updated status</h5>
                             </div>
 
-                            <iframe onload="resizeIframe(this)" style="margin-top:-5px;width: 100%;height:20px;" frameborder="0" src="{{ url_for('post_info',post_id = session['auth']+'_'+ item.id|string ) }}"></iframe>
+                            <iframe onload="resizeIframe(this)" style="margin-top:-5px;width: 100%;height:20px;" frameborder="0" src="{{ url_for('tag_info',post_id = session['auth']+'_'+ item.id|string ) }}"></iframe>
 
 
 

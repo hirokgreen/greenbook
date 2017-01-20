@@ -92,9 +92,25 @@ class Chat():
 
         return table
 
-    #def insert_post_table(self):
-#c = Chat('green6_green8')
-#c.chat()
+class Tag():
+    def __init__(self):
+        self.tablename = 'tag'
+
+
+    def tag(self):
+        table = Table(self.tablename, metadata,
+                    Column('id', Integer, primary_key=True),
+                    Column('post_id', String(50), nullable=False),
+                    Column('owner_id', String(50), nullable=False),
+                    Column('friends_id', Text,nullable=True),
+                      )
+
+        return table
+
+
+#def insert_post_table(self):
+#c = Tag()
+#c.tag().create()
 
 
 #

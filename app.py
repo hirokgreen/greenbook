@@ -142,11 +142,6 @@ def post_update(id):
         table.update(table.c.id == id , values=({'description':request.form['body']}) ).execute()
     return redirect('hello')
 
-@app.route("/post_info/<post_id>/")
-@login_required
-def post_info(post_id):
-    return render_template('post_info.html')
-
 @app.route("/search/<q>",methods=['GET', 'POST','REQUEST'])
 @login_required
 def search(q):
@@ -161,6 +156,20 @@ def search(q):
     text = json.dumps(jsn)
 
     return  text
+
+@app.route("/tag_info/<post_id>/")
+@login_required
+def tag_info(post_id):
+    current_id = int(session['auth'].replace("green", ""))
+    table = Table('tag', metadata, autoload=True)
+    tag_buffer = select([table.c.friends_id],table.c.post_id==post_id).execute()
+    taglist = ['None']
+    empty = 'true'
+    for item in tag_buffer:
+        taglist = item.friends_id.split(";")
+        taglist = taglist[1:]
+        empty = 'false'
+    return render_template('tag_info.html',u_id = current_id, tag_list=taglist, post_id=post_id, empty=empty)
 
 @app.route("/chat/<con>/<con2>",methods=['GET', 'POST','REQUEST'])
 @login_required
@@ -238,6 +247,7 @@ def like(post_id):
     current_id = int(session['auth'].replace("green", ""))
 
     return render_template('like.html',user=r,user_id=rs,type=type,post_id=post_id,you=you,c_i=current_id,comma=comma,is_like=is_like)
+
 
 @app.route("/comment/<post_id>/")
 def comment(post_id):
@@ -367,8 +377,8 @@ def utility_processor():
             return str(minutes) + 'm'
         if days==0 and hours!=0:
             return str(hours) + 'h'
-        if days!=0:
-            return str(days) + 'd'
+        #if days<=7:
+        #    return str(days) + 'd'
         else:
             return ''
     def name(id):
@@ -378,6 +388,8 @@ def utility_processor():
             liker = row[0]
         return liker
     def commenter(id):
+        if id == 'None':
+            return ''
         uid = id.replace("green", "")
         user = Table('users', metadata, autoload=True)
         name = select([user.c.uname],user.c.id==uid).execute()

@@ -9,15 +9,20 @@
 </head>
 <body>
 {% block content %}
- <div class = "names" style="float:left;">
-   <h5 style="margin-top: 0px;width:90%;">
-     with <a href="#">jayden</a>,
-     <a href="#">greenhirok</a>
-
-     fdfdf dffdd dvfdfd  and 2 others
+ <div class = "names" style="float:left; background-color:red;">
+    {% if empty == 'false' %}
+   <h5 style="margin-top: 0px;width:auto;height:auto">
+     with
+     {% for item in tag_list %}
+        <a href="#">
+            {{ commenter(item) }},
+        </a>
+     {% endfor %}
+      at tangail bnhg vghg vvbvgbg vbb v vbfbv vbfbf cv 
    </h5>
+   {% endif %}
  </div>
- <div class="option" style='float:right;'>
+ <div class="option" style='float:right;background-color:green;'>
     <h6><a href="#">+Tag</a></h6>
  </div>
 

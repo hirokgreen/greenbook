@@ -42,7 +42,7 @@
        {% for item in user %}
                   {% if item!=c_i %}
                   <a href="#">{{ name(item) }}</a>
-                      {% if comma=='true' %},{% endif %}
+                  {% if comma=='true' %},{% endif %}
                   {% endif %}
        {% endfor %}
         {% if is_like=='true' %}like this{% endif %}
