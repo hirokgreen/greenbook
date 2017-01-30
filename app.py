@@ -12,6 +12,7 @@ import os
 from sqlalchemy import *
 from chat import *
 from friend_req import *
+from tag_friend import Tag
 
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -157,6 +158,24 @@ def search(q):
 
     return  text
 
+@app.route("/tagsearch/<p_id>/<q>",methods=['GET', 'POST','REQUEST'])
+@login_required
+def tagsearch(p_id, q):
+    s = q
+    print(s)
+    jsn = [{ "post":"","friend":"", "display":"" }]
+    table = Table('users', metadata, autoload=True)
+    rs = select([table.c.id,table.c.uname],table.c.uname.like('%'+s+'%')).execute()
+    for item in rs:
+        id = '/member/green'+str(item.id)+'/'
+        current_id = int(session['auth'].replace("green", ""))
+        if item.id != current_id:
+            jsn.append({"post":p_id,"friend":"green"+str(item.id),"display":item.uname})
+    jsn.append({"post":"#","friend":"#","display":"see more"})
+    text = json.dumps(jsn)
+
+    return  text
+
 @app.route("/tag_info/<post_id>/")
 @login_required
 def tag_info(post_id):
@@ -170,6 +189,17 @@ def tag_info(post_id):
         taglist = taglist[1:]
         empty = 'false'
     return render_template('tag_info.html',u_id = current_id, tag_list=taglist, post_id=post_id, empty=empty)
+
+
+@app.route("/tag_add/<post_id>/<f_id>", methods=['GET', 'POST','REQUEST'])
+@login_required
+def tag_add(post_id, f_id):
+    """method to tag a friend"""
+    add_tag = Tag(post_id, f_id, session['auth'])
+    add_tag.add()
+    print(post_id,f_id)
+    print "tag successful"
+    return 'success'
 
 @app.route("/chat/<con>/<con2>",methods=['GET', 'POST','REQUEST'])
 @login_required

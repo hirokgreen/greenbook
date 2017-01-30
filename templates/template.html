@@ -62,6 +62,60 @@ function myFunction(arr) {
 
     document.getElementById("txtHint").innerHTML = out;
 }
+function tagHint(str, pstr) {
+    if (str.length == 0) {
+        document.getElementById("gettagHint").innerHTML = "";
+        return;
+    } else {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "/tagsearch/"+pstr+"/"+str, true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var myArr = JSON.parse(xmlhttp.responseText);
+                mytagFunction(myArr,pstr);
+
+            }
+        };
+
+
+
+    }
+}
+
+function addtag(pstr, str) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "/tag_add/"+pstr+"/"+str, true);
+        xmlhttp.send();
+}
+
+
+function mytagFunction(arr,pstr) {
+    var out = "";
+    var i;
+    if (arr.length==0)
+    {
+        return;
+    }
+    out += '<ul style="list-style: none;margin-left: -20px;">';
+    for(i = 1; i < arr.length; i++) {
+        if(arr[i].display=='see more')
+        {
+           
+        }
+        else
+        {   
+            out += '<li style="float:none;background-color: #ffffff;text-align: left;"><button style="background:none!important;border:none;padding:2!important;color:#60A839;text-decoration:none;" onclick="addtag(\'' + arr[i].post + '\',\'' + arr[i].friend + '\')">' +'<span class="glyphicon glyphicon-user"></span>'+' '+
+                    arr[i].display + '</button></li>';
+        }
+    }
+    out+= '</ul';
+
+    var pstr = "gettagHint"+pstr; 
+    document.getElementById(pstr).innerHTML = out;
+    
+}
 </script>
     <style>
         #txtHint ul li a{color: #60A839;
@@ -74,6 +128,17 @@ function myFunction(arr) {
         #txtHint ul li{float:none;background-color: #ffffff;text-align: left;}
         #txtHint ul li a:hover{background-color:#F2F2F2;}
         #txtHint ul{list-style: none; margin-left: -20px; }
+        #gettagHint ul li button {
+            background:none!important;
+            border:none; 
+            padding:2!important;
+    
+           /*optional*/
+            color:#60A839;
+            text-decoration:none;}
+        #gettagHint ul li{float:none;background-color: #ffffff;text-align: left;}
+        #gettagHint ul li button:hover{color:green;}
+        #gettagHint ul{list-style: none; margin-left: -20px; }
     </style>
 </head>
 <body style = "background-color: #F2F2F2;">

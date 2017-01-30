@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="refresh" content="2">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/css/bootstrap3.5.css" type="text/css">
     <script src="/static/js/jquery_min_1.11.3.js" type="TEXT/JAVASCRIPT"></script>
@@ -9,23 +10,23 @@
 </head>
 <body>
 {% block content %}
- <div class = "names" style="float:left; background-color:red;">
+<div class = "tag_body" style="width: 100%; height: auto; float:left;margin-top:-10px;">
+ <div class = "names" style="width:100%;float:left;">
     {% if empty == 'false' %}
-   <h5 style="margin-top: 0px;width:auto;height:auto">
+    {% set comma = joiner(",") %}
+   <h5 style = "color: #808080;">
      with
      {% for item in tag_list %}
-        <a href="#">
-            {{ commenter(item) }},
+        {{ comma() }}<a href="#" style = "color:#60A839;">
+            {{ commenter(item) }}
         </a>
+            
      {% endfor %}
-      at tangail bnhg vghg vvbvgbg vbb v vbfbv vbfbf cv 
+      
    </h5>
    {% endif %}
  </div>
- <div class="option" style='float:right;background-color:green;'>
-    <h6><a href="#">+Tag</a></h6>
- </div>
-
+</div>
 {% endblock %}
 </body>
 </html>
