@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta http-equiv="refresh" content="2">
+    <meta http-equiv="refresh" content="10">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/css/bootstrap3.5.css" type="text/css">
     <script src="/static/js/jquery_min_1.11.3.js" type="TEXT/JAVASCRIPT"></script>
     <script src="/static/js/bootstrap_min_3.3.5.js" type="TEXT/JAVASCRIPT"></script>
     <meta charset="UTF-8">
 </head>
+
 <body>
-{% block content %}
-<div class = "tag_body" style="width: 100%; height: auto; float:left;margin-top:-10px;">
- <div class = "names" style="width:100%;float:left;">
-    {% if empty == 'false' %}
-    {% set comma = joiner(",") %}
-   <h5 style = "color: #808080;">
-     with
-     {% for item in tag_list %}
-        {{ comma() }}<a href="#" style = "color:#60A839;">
+    {% block content %}
+    <div class="tag_body" style="width: 100%; height: auto; float:left;margin-top:-10px;">
+        <div class="names" style="width:100%;float:left;">
+            {% if empty == 'false' %} {% set comma = joiner(",") %}
+            <h5 style="color: #808080;">
+                with {% for item in tag_list %} {{ comma() }}<a href="#" style="color:#60A839;">
             {{ commenter(item) }}
-        </a>
-            
-     {% endfor %}
-      
-   </h5>
-   {% endif %}
- </div>
-</div>
-{% endblock %}
+        </a> {% endfor %}
+
+            </h5>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
 </body>
+
 </html>

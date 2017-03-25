@@ -1,217 +1,219 @@
-{% extends 'template.html' %}
-{% block content %}
+{% extends 'template.html' %} {% block content %}
 <div class="row" style="margin-top: 18px;">
-     <div class="col-xs-10 col-sm-10 col-lg-9 col-md-9">
-         {% for message in get_flashed_messages() %}
-           <div class="alert alert-success fade in">
+    <div class="col-xs-10 col-sm-10 col-lg-9 col-md-9">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-success fade in">
             {{ message }}
-          </div>
-         {% endfor %}
+        </div>
+        {% endfor %}
 
         <div class="cover" style="margin-top: -10px; position: relative;">
             <div id="background">
-                <a href="#"><img src="/static/image/jayden.jpg" style="width: 100%;max-height: 300px;min-height: 100px;position: relative;"/></a>
+                <a href="#"><img src="/static/image/jayden.jpg" style="width: 100%;max-height: 300px;min-height: 100px;position: relative;"
+                    /></a>
             </div>
             <div class="intro" style="bottom: 0;left:0;margin-left: 10px;margin-bottom:-10px;position: absolute;">
-               <div id="avatar" class="img-responsive" style="width: 120px;height: 120px;float: left; border-radius: 5px;border: 2px solid #b3b3b3;">
-                <a style="color:#1f6377;" href="#"><i style="font-size:120px;text-align: center;" class="glyphicon glyphicon-user"></i></a>
+                <div id="avatar" class="img-responsive" style="width: 120px;height: 120px;float: left; border-radius: 5px;border: 2px solid #b3b3b3;">
+                    <a style="color:#1f6377;" href="#"><i style="font-size:120px;text-align: center;" class="glyphicon glyphicon-user"></i></a>
 
-               </div>
-               <div id="name" style="color: #000000;float: left; margin-left: 10px;margin-top: 70px; ">
-                <p style="font-size:1.8em; font-weight: bolder;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;">
-                    {{ session['name'] }}
-                </p>
-               </div>
+                </div>
+                <div id="name" style="color: #000000;float: left; margin-left: 10px;margin-top: 70px; ">
+                    <p style="font-size:1.8em; font-weight: bolder;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;">
+                        {{ session['name'] }}
+                    </p>
+                </div>
             </div>
         </div>
-<div class="row">
-     <div class="clearfix visible-xs"></div>
+        <div class="row">
+            <div class="clearfix visible-xs"></div>
 
-     <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
-        <h4>Dashboard</h4>
-         <h5>comming soon....</h5>
-         <div id ="ajax">
-          lol
-        </div>
-     </div>
-
-
-     <div class="col-xs-12 col-sm-12 col-lg-8 col-md-8">
-       <button style="background-color:#60A839; color: #ffffff;" class="btn btn" type="button" data-toggle="collapse" data-target="#post"><i class="glyphicon glyphicon-edit" ></i> New Post</button>
-         <div id="post" class="collapse">
-           <div class="panel panel-default">
-             <div class="dropdown">
-                <form action="{{ url_for('add_post') }}" class="form-horizontal" role="form" method="post" name="add">
-
-                <div class="panel-body">
-                    <div class="form-group">
-                       <textarea class="foo form-control input-default" rows="6" id="body" name="body" placeholder="Say Somethings....." style="width: 100%;"></textarea>
+            <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                <h4>Dashboard</h4>
+                <h5>comming soon....</h5>
+                <div id="ajax">
+                    lol
+                </div>
+            </div>
 
 
-                    </div>
-                    <div class="alert-block" style="border: 1px solid #b3b3b3; border-radius:5px; margin-top: -15px; margin-left: 0px; width:100%;height: auto;">
-                      <h4>
-                          <a style="margin-left: 20px;"data-toggle="modal" data-target="#CamModal" data-placement="bottom" title="upload photo" href="#"><i class="fa fa-camera"></i></a>
-                          <a style="margin-left: 20px;" data-toggle="tooltip" data-placement="bottom" title="what are you doing/ feeling" href="#"><i class="fa fa-smile-o"></i></a>
-                          <a style="margin-left: 20px;" data-toggle="tooltip" data-placement="bottom" title="tag your friends" href="#"><i class="fa fa-users"></i></a>
-                          <a style="margin-left: 20px;" data-toggle="tooltip" data-placement="bottom" title="check in" href="#"><i class="fa fa-map-marker"></i></a>
-                      </h4>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Post" class="btn btn-default" style="background-color:#60A839; color: #ffffff; font-weight: bolder; float: right; margin-right: 10px;">
-                    </div>
-                 </div>
-                </form>
-             </div>
-           </div>
-         </div>
+            <div class="col-xs-12 col-sm-12 col-lg-8 col-md-8">
+                <button style="background-color:#60A839; color: #ffffff;" class="btn btn" type="button" data-toggle="collapse" data-target="#post"><i class="glyphicon glyphicon-edit" ></i> New Post</button>
+                <div id="post" class="collapse">
+                    <div class="panel panel-default">
+                        <div class="dropdown">
+                            <form action="{{ url_for('add_post') }}" class="form-horizontal" role="form" method="post" name="add">
 
-
-          {% set var = "lol" %}
-          {% for item in posts %}
-           {% if item.description !="" %}
-           <div class="panel panel-default" style="width: 100%;">
-
-                <textarea style="background-color: #ffffff; display: none;" id="body{{ item.id }}" hidden class="foo form-control input-default" readonly="readonly" name="body" style="width: 100%;">{{ url(item.description) }}</textarea>
-                   <script>$("#body{{ item.id }}").autosize()</script>
-                <div class="panel-body" style="background-color: #ffffff; border-radius: 10px;">
-                <div class="alert-block" style="background-color: #ffffff; width: 100%;">
-                 <div class="dropdown" style="float:right; margin-top: 0px;margin-right: 10px; ">
-                    <a href="#" style="color:#60A839;" data-toggle="dropdown" >
-                      <span class="glyphicon glyphicon-wrench"></span></a>
-                        <ul  class="dropdown-menu dropdown-menu-bottom">
-                              <li><a href="#" id="{{ item.id }}"><span class="glyphicon glyphicon-pencil"> edit</span></a></li>
-                              <li><a href="{{ url_for('post_delete', id = item.id) }}"><span class="glyphicon glyphicon-trash"> delete</span></a> </li>
-                              <li><a href="#" id="myBtn55"><span class="glyphicon glyphicon-lock"> Lock</span></a></li>
-                        </ul >
-                  </div>
-
-                   <!--for edit option-->
-                    <div class="modal fade" id="modal{{ item.id }}" role="dialog">
-                    <div class="modal-dialog">
-
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-header" style="padding:35px 50px;">
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body" style="padding:40px 50px;">
-                          <form action="{{ url_for('post_update', id = item.id) }}" class="form-horizontal" role="form" method="post">
-
+                                <div class="panel-body">
                                     <div class="form-group">
-                                       <textarea  class="foo form-control input-default" rows="8" resize="none" name="body" style="width: 100%;">{{ item.description }}</textarea>
+                                        <textarea class="foo form-control input-default" rows="6" id="body" name="body" placeholder="Say Somethings....." style="width: 100%;"></textarea>
+
+
+                                    </div>
+                                    <div class="alert-block" style="border: 1px solid #b3b3b3; border-radius:5px; margin-top: -15px; margin-left: 0px; width:100%;height: auto;">
+                                        <h4>
+                                            <a style="margin-left: 20px;" data-toggle="modal" data-target="#CamModal" data-placement="bottom" title="upload photo" href="#"><i class="fa fa-camera"></i></a>
+                                            <a style="margin-left: 20px;" data-toggle="tooltip" data-placement="bottom" title="what are you doing/ feeling" href="#"><i class="fa fa-smile-o"></i></a>
+                                            <a style="margin-left: 20px;" data-toggle="tooltip" data-placement="bottom" title="tag your friends" href="#"><i class="fa fa-users"></i></a>
+                                            <a style="margin-left: 20px;" data-toggle="tooltip" data-placement="bottom" title="check in" href="#"><i class="fa fa-map-marker"></i></a>
+                                        </h4>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                                        <button type="submit" class="btn btn-success btn-default pull-right"><span class="glyphicon glyphicon-ok"></span> Done Editing</button>
+                                        <input type="submit" value="Post" class="btn btn-default" style="background-color:#60A839; color: #ffffff; font-weight: bolder; float: right; margin-right: 10px;">
                                     </div>
-                        </form>
+                                </div>
+                            </form>
                         </div>
-
-                      </div>
-
                     </div>
-                  </div>
+                </div>
 
 
+                {% set var = "lol" %} {% for item in posts %} {% if item.description !="" %}
+                <div class="panel panel-default" style="width: 100%;">
+
+                    <textarea style="background-color: #ffffff; display: none;" id="body{{ item.id }}" hidden class="foo form-control input-default"
+                        readonly="readonly" name="body" style="width: 100%;">{{ url(item.description) }}</textarea>
                     <script>
-                    $(document).ready(function(){
-                        $("#{{ item.id }}").click(function(){
-                            $("#modal{{ item.id }}").modal();
+                        $("#body{{ item.id }}").autosize()
+                    </script>
+                    <div class="panel-body" style="background-color: #ffffff; border-radius: 10px;">
+                        <div class="alert-block" style="background-color: #ffffff; width: 100%;">
+                            <div class="dropdown" style="float:right; margin-top: 0px;margin-right: 10px; ">
+                                <a href="#" style="color:#60A839;" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-wrench"></span></a>
+                                <ul class="dropdown-menu dropdown-menu-bottom">
+                                    <li><a href="#" id="{{ item.id }}"><span class="glyphicon glyphicon-pencil"> edit</span></a></li>
+                                    <li><a href="{{ url_for('post_delete', id = item.id) }}"><span class="glyphicon glyphicon-trash"> delete</span></a>                                        </li>
+                                    <li><a href="#" id="myBtn55"><span class="glyphicon glyphicon-lock"> Lock</span></a></li>
+                                </ul>
+                            </div>
+
+                            <!--for edit option-->
+                            <div class="modal fade" id="modal{{ item.id }}" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="padding:35px 50px;">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body" style="padding:40px 50px;">
+                                            <form action="{{ url_for('post_update', id = item.id) }}" class="form-horizontal" role="form" method="post">
+
+                                                <div class="form-group">
+                                                    <textarea class="foo form-control input-default" rows="8" resize="none" name="body" style="width: 100%;">{{ item.description }}</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                                    <button type="submit" class="btn btn-success btn-default pull-right"><span class="glyphicon glyphicon-ok"></span> Done Editing</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <script>
+                                $(document).ready(function () {
+                                    $("#{{ item.id }}").click(function () {
+                                        $("#modal{{ item.id }}").modal();
+                                    });
+                                });
+                            </script>
+
+
+                            <div id="user" style="width:95%;float: left; margin-top: -10px; margin-left: -5px;">
+                                <a href="">
+                                    <h1 style="color:#60A839;margin-top: 0px;float: left;"><span class="glyphicon glyphicon-user"></span></h1>
+                                </a>
+                                <div id="post_info" style="float: left;width: 90%; line-height: 5px; margin-left: 6px;">
+                                    <div id="name" style="float: left; width:90%;">
+                                        <h4 style="float:left;font-weight: bolder;">
+                                            <a href="#" style="color:#60A839;">{{ session['name'] }}</a>
+                                        </h4>
+                                        <h5 style="float: left;margin-left: 10px; color: #808080;">has updated status</h5>
+                                    </div>
+
+                                    <iframe onload="resizeIframe(this)" style="margin-top:-10px;width: 100%;height:20px;float:left;" allowtransparency="true"
+                                        frameborder="0" src="{{ url_for('tag_info',post_id = session['auth']+'_'+ item.id|string ) }}">
+                                    </iframe>
+
+                                    <div class="option" style='float:right;width:10%;'>
+                                        <div class="dropdown" style="float:right; margin-top: 0px;margin-right: 10px; ">
+                                            <a href="#" style="color:#60A839;" data-toggle="dropdown">+Tag</a>
+                                            <ul class="dropdown-menu dropdown-menu-bottom">
+                                                <li>
+                                                    <form class="form-inline">
+                                                        <div class="input-group">
+                                                            <input type="text" onkeyup="tagHint(this.value,'{{ session['auth']+'_'+ item.id|string }}')" class="form-control input-sm"
+                                                                placeholder="Search friend" style="margin-top: 8px;margin-left:15px;border-radius: 5px;border: 1px solid #73AD21;font-size:12px;padding: 4px;max-width:100%;min-width:50%;height: 30px; ">
+                                                        </div>
+                                                    </form>
+                                                    <div style="margin-top:-15px; position: relative;width: 200px;" id="gettagHint{{session['auth']+'_'+ item.id|string}}">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                    <h6 style="float:left;color: #808080; margin-top: 0px;">{{ interval(time,item.date_time) }}</h6>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="alert-block" id="post{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
+                        <div id="line" style="width: 100%;margin-top:15px; height: 1px; float:left;margin-left:-5px;background-color: #d9d9d9;"></div>
+                        <iframe style="width: 100%;height: 55px;" frameborder="0" src="{{ url_for('like',post_id = session['auth']+'_'+ item.id|string ) }}"></iframe>
+                        <iframe onload="resizeIframe(this)" style="width: 100%;height:20px;" frameborder="0" src="{{ url_for('comment',post_id = session['auth']+'_'+ item.id|string) }}"></iframe>
+                    </div>
+                    <script language="javascript" type="text/javascript">
+                                        function resizeIframe(obj) {
+                                            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+                                        }
+                    </script>
+                    <script>
+                        $(window).load(function () {
+                            setTimeout(function () {
+                                var text = $('#body{{ item.id }}').val();
+                                var t = text.replace(/\r?\n/g, '<br/>');
+                                $('#post{{ item.id }}').html(t);
+                            }, 100);
+                            $('#post').css('padding', '10px');
                         });
-                    });
                     </script>
 
-
-                    <div id="user" style="width:95%;float: left; margin-top: -10px; margin-left: -5px;">
-                        <a href=""><h1 style="color:#60A839;margin-top: 0px;float: left;"><span class="glyphicon glyphicon-user"></span></h1></a>
-                        <div id="post_info" style="float: left;width: 90%; line-height: 5px; margin-left: 6px;">
-                            <div id ="name" style="float: left; width:90%;">
-                               <h4 style="float:left;font-weight: bolder;">
-                                  <a href="#" style="color:#60A839;">{{ session['name'] }}</a>
-                               </h4>
-                                <h5 style="float: left;margin-left: 10px; color: #808080;">has updated status</h5>
-                            </div>
-                            
-                            <iframe onload="resizeIframe(this)" style="margin-top:-10px;width: 90%;height:auto;float:left;"allowtransparency="true" frameborder="0" src="{{ url_for('tag_info',post_id = session['auth']+'_'+ item.id|string ) }}">
-                            </iframe>
-                                
-                            <div class="option" style='float:right;width:10%;'>
-                              <div class="dropdown" style="float:right; margin-top: 0px;margin-right: 10px; ">
-                              <a href="#"style="color:#60A839;" data-toggle="dropdown" >+Tag</a>
-                                <ul  class="dropdown-menu dropdown-menu-bottom">
-                                    <li>
-                                    <form class="form-inline">
-                                     <div class="input-group">
-                                       <input type="text" onkeyup="tagHint(this.value,'{{ session['auth']+'_'+ item.id|string }}')" class="form-control input-sm" placeholder="Search friend" style="margin-top: 8px;margin-left:15px;border-radius: 5px;border: 1px solid #73AD21;font-size:12px;padding: 4px;max-width:100%;min-width:50%;height: 30px; ">
-                                      </div>
-                                    </form>
-                                    <div style="margin-top:-15px; position: relative;width: 200px;" id="gettagHint{{session['auth']+'_'+ item.id|string}}">
-                                    </div>
-                                    </li>
-                                </ul>
-                              </div>
-                            </div>
-
-                            <br>
-                            <h6 style="float:left;color: #808080; margin-top: 0px;">{{ interval(time,item.date_time) }}</h6>
-                        </div>
-                   </div>
-
-                 </div>
-                    <div class="alert-block"  id="post{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
-                    <div id="line" style="width: 100%;margin-top:15px; height: 1px; float:left;margin-left:-5px;background-color: #d9d9d9;"></div>
-                    <iframe style="width: 100%;height: 55px;" frameborder="0" src="{{ url_for('like',post_id = session['auth']+'_'+ item.id|string ) }}"></iframe>
-                    <iframe onload="resizeIframe(this)" style="width: 100%;height:20px;" frameborder="0" src="{{ url_for('comment',post_id = session['auth']+'_'+ item.id|string) }}"></iframe>
                 </div>
-               <script language="javascript" type="text/javascript">
-                    function resizeIframe(obj) {
-                         obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-                      }
-                </script>
-                <script>
-                    $(window).load(function(){
-                        setTimeout(function () {
-                            var text =$('#body{{ item.id }}').val();
-                            var t=text.replace(/\r?\n/g,'<br/>');
-                            $('#post{{ item.id }}').html(t);
-                        }, 100);
-                        $('#post').css('padding', '10px');
-                    });
-                </script>
-
-           </div>
-           {% endif %}
-           {% else %}
-               <div class="panel panel-default">
-                   <div class="panel-heading"><h5> No activity yet</h5></div>
-                       <div class="panel-body"></div>
-               </div>
-        {% endfor %}
-     </div>
-     </div>
-     </div>
-     <div class="col-xs-1 col-sm-1 col-lg-2 col-md-2">
+                {% endif %} {% else %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5> No activity yet</h5>
+                    </div>
+                    <div class="panel-body"></div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-1 col-sm-1 col-lg-2 col-md-2">
         <h4>advertisement</h4>
-         <h5>comming soon....</h5>
-     </div>
+        <h5>comming soon....</h5>
+    </div>
 
     <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
-    <div class="chat-sidebar" id="chatbox">
-        {% for u in status(chat,'on') %}
-            {% if u.id|string!=getid()|string and clearance(u.id)=='true' %}
+        <div class="chat-sidebar" id="chatbox">
+            {% for u in status(chat,'on') %} {% if u.id|string!=getid()|string and clearance(u.id)=='true' %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
                     <span>{{ u.uname }}</span>
-                    <img src="/static/image/online.png"style="width:7px;height:7px;margin-top:10px;float: right;">
+                    <img src="/static/image/online.png" style="width:7px;height:7px;margin-top:10px;float: right;">
                 </a>
             </div>
-             {% endif %}
-         {% endfor %}
-
-         {% for u in status(chat,'off') %}
-            {% if u.id|string!=getid()|string and clearance(u.id)=='true' %}
+            {% endif %} {% endfor %} {% for u in status(chat,'off') %} {% if u.id|string!=getid()|string and clearance(u.id)=='true'
+            %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
@@ -222,218 +224,209 @@
                 </a>
 
             </div>
-             {% endif %}
-         {% endfor %}
-    </div>
+            {% endif %} {% endfor %}
+        </div>
     </div>
     <!-- Add clearfix for only the required viewport -->
 
 </div>
-<div class="modal fade" id="CamModal" role="dialog"<div class="modal-dialog">
-    <!-- Modal content--><div class="modal-content">
-    <div class="modal-header" style="padding:35px 50px;">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-    </div>
-    <div class="modal-body" style="padding:40px 50px;">
-        <form action="{{ url_for('add_pic') }}" method=post enctype=multipart/form-data class="form-horizontal" >
-            <div class="form-group">
-                <img style="width:400px; height:300px;" id="output"/>
-            </div>
-            <div class="form-group">
-                <input type=file name=file accept="image/*" onchange="loadFile(event)">
-                <button type="submit" class="btn btn-success btn-default pull-right"><span class="glyphicon glyphicon-ok"></span>Done</button>
-            </div>
+<div class="modal fade" id="CamModal" role="dialog" <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+            <form action="{{ url_for('add_pic') }}" method=post enctype=multipart/form-data class="form-horizontal">
+                <div class="form-group">
+                    <img style="width:400px; height:300px;" id="output" />
+                </div>
+                <div class="form-group">
+                    <input type=file name=file accept="image/*" onchange="loadFile(event)">
+                    <button type="submit" class="btn btn-success btn-default pull-right"><span class="glyphicon glyphicon-ok"></span>Done</button>
+                </div>
 
-            <script>
-                var loadFile = function(event) {
-                    var output = document.getElementById('output');
-                    output.src = URL.createObjectURL(event.target.files[0]);
-                };
-            </script>
-        </form>
+                <script>
+                                                                          var loadFile = function (event) {
+                                                                              var output = document.getElementById('output');
+                                                                              output.src = URL.createObjectURL(event.target.files[0]);
+                                                                          };
+                </script>
+            </form>
+        </div>
     </div>
-</div></div>
+</div>
 </div>
 
 
 <script>
-                //this function can remove a array element.
-            Array.remove = function(array, from, to) {
-                var rest = array.slice((to || from) + 1 || array.length);
-                array.length = from < 0 ? array.length + from : from;
-                return array.push.apply(array, rest);
-            };
-            //this variable represents the total number of popups can be displayed according to the viewport width
-            var total_popups = 0;
-            //arrays of popups ids
-            var popups = [];
-            //this is used to close a popup
-            function close_popup(id)
-            {
-                for(var iii = 0; iii < popups.length; iii++)
-                {
-                    if(id == popups[iii])
-                    {
-                        Array.remove(popups, iii);
-                        document.getElementById(id).style.display = "none";
-                        calculate_popups();
-                        return;
+                    //this function can remove a array element.
+                    Array.remove = function (array, from, to) {
+                        var rest = array.slice((to || from) + 1 || array.length);
+                        array.length = from < 0 ? array.length + from : from;
+                        return array.push.apply(array, rest);
+                    };
+                    //this variable represents the total number of popups can be displayed according to the viewport width
+                    var total_popups = 0;
+                    //arrays of popups ids
+                    var popups = [];
+                    //this is used to close a popup
+                    function close_popup(id) {
+                        for (var iii = 0; iii < popups.length; iii++) {
+                            if (id == popups[iii]) {
+                                Array.remove(popups, iii);
+                                document.getElementById(id).style.display = "none";
+                                calculate_popups();
+                                return;
+                            }
+                        }
                     }
-                }
-            }
-            //displays the popups. Displays based on the maximum number of popups that can be displayed on the current viewport width
-            function display_popups()
-            {
-                var right = 220;
-                var iii = 0;
-                for(iii; iii < total_popups; iii++)
-                {
-                    if(popups[iii] != undefined)
-                    {
-                        var element = document.getElementById(popups[iii]);
-                        element.style.right = right + "px";
-                        right = right + 320;
-                        element.style.display = "block";
+                    //displays the popups. Displays based on the maximum number of popups that can be displayed on the current viewport width
+                    function display_popups() {
+                        var right = 220;
+                        var iii = 0;
+                        for (iii; iii < total_popups; iii++) {
+                            if (popups[iii] != undefined) {
+                                var element = document.getElementById(popups[iii]);
+                                element.style.right = right + "px";
+                                right = right + 320;
+                                element.style.display = "block";
+                            }
+                        }
+                        for (var jjj = iii; jjj < popups.length; jjj++) {
+                            var element = document.getElementById(popups[jjj]);
+                            element.style.display = "none";
+                        }
                     }
-                }
-                for(var jjj = iii; jjj < popups.length; jjj++)
-                {
-                    var element = document.getElementById(popups[jjj]);
-                    element.style.display = "none";
-                }
-            }
-            //creates markup for a new popup. Adds the id to popups array.\
-                function register_popup(id, name, myself, frn_id)
-                {
-                    var frnd = 'green'+frn_id;
-                    var table  = myself+'_'+frnd;
-                    var table2 = frnd+'_'+myself;
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
-                    xmlhttp.send();
-                    xmlhttp.onreadystatechange = function() {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            var myArr = JSON.parse(xmlhttp.responseText);
-                            idd = 'frndchat'+frn_id;
-                            //alert(idd);
-                            chatFunction(myArr,idd);
-                        }};
-                for(var iii = 0; iii < popups.length; iii++)
-                {
-                    //already registered. Bring it to front.
-                    if(id == popups[iii])
-                    {
-                        Array.remove(popups, iii);
+                    //creates markup for a new popup. Adds the id to popups array.\
+                    function register_popup(id, name, myself, frn_id) {
+                        var frnd = 'green' + frn_id;
+                        var table = myself + '_' + frnd;
+                        var table2 = frnd + '_' + myself;
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("POST", "/chat/" + table + "/" + table2, true);
+                        xmlhttp.send();
+                        xmlhttp.onreadystatechange = function () {
+                            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                var myArr = JSON.parse(xmlhttp.responseText);
+                                idd = 'frndchat' + frn_id;
+                                //alert(idd);
+                                chatFunction(myArr, idd);
+                            }
+                        };
+                        for (var iii = 0; iii < popups.length; iii++) {
+                            //already registered. Bring it to front.
+                            if (id == popups[iii]) {
+                                Array.remove(popups, iii);
+                                popups.unshift(id);
+                                calculate_popups();
+                                return;
+                            }
+                        }
+                        var element = '<div class="popup-box chat-popup" id="' + id + '">';
+                        element = element + '<div class="popup-head">';
+                        element = element + '<div class="popup-head-left"><a href="#">' + name + '</a></div>';
+                        element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\'' + id + '\');">&#10005;</a></div>';
+                        element = element + '<div style="clear: both"></div></div>' +
+                            '<div class="popup-messages" id="frnd' + id + '"></div>' +
+                            '<div class="type_here">' +
+                            '<textarea autofocus rows="1" onkeyup="chat(event,this.value,name)" value="hirok" name="frnd' + id + '" id="input_chatfrnd' + id + '" placeholder="Type here..." class="type_here_field"></textarea>' +
+                            '<input type="hidden" value="' + table + '" name="table">' +
+                            '<input type="hidden" value="' + table2 + '" name="table2"></iframe>' +
+                            '</div>';
+                        $(document).ready(function (e) {
+                            $.ajaxSetup({ cache: false });
+                            setInterval(function () { $("#frnd" + id).html(autoload(table, table2, frn_id)); }, 2000);
+                        });
+                        document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
                         popups.unshift(id);
                         calculate_popups();
+                    }
+                    function autoload(table, table2, frn_id) {
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("POST", "/chat/" + table + "/" + table2, true);
+                        xmlhttp.send();
+                        xmlhttp.onreadystatechange = function () {
+                            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                var myArr = JSON.parse(xmlhttp.responseText);
+                                idd = 'frndchat' + frn_id;
+                                //alert(idd);
+                                chatFunction(myArr, idd);
+                            }
+                        };
+
+                    }
+                    function chat(e, val, idd) {
+                        if (e.keyCode == 13 && val.charCodeAt(0) != 10) {
+                            var v = encodeURIComponent(val);
+                            var xmlhttp = new XMLHttpRequest();
+                            xmlhttp.open("POST", "/chat_add/" + v + "/" + idd, true);
+                            xmlhttp.send();
+                            xmlhttp.onreadystatechange = function () {
+                                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                    var myArr = JSON.parse(xmlhttp.responseText);
+                                    chatFunction(myArr, idd);
+                                }
+                            };
+                            document.getElementById('input_chat' + idd).value = '';
+                        }
                         return;
                     }
-                }
-                var element = '<div class="popup-box chat-popup" id="'+ id +'">';
-                element = element + '<div class="popup-head">';
-                element = element + '<div class="popup-head-left"><a href="#">'+ name +'</a></div>';
-                element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
-                element = element + '<div style="clear: both"></div></div>' +
-                        '<div class="popup-messages" id="frnd'+id+'"></div>' +
-                        '<div class="type_here">' +
-                        '<textarea autofocus rows="1" onkeyup="chat(event,this.value,name)" value="hirok" name="frnd'+id+'" id="input_chatfrnd'+id+'" placeholder="Type here..." class="type_here_field"></textarea>' +
-                        '<input type="hidden" value="'+table+'" name="table">' +
-                        '<input type="hidden" value="'+table2+'" name="table2"></iframe>' +
-                        '</div>';
-                $(document).ready(function(e){
-                    $.ajaxSetup({cache:false});
-                    setInterval(function(){$("#frnd"+id).html(autoload(table,table2,frn_id));},2000);
-                   });
-                document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
-                popups.unshift(id);
-                calculate_popups();
-            }
-            function autoload(table,table2,frn_id){
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
-                    xmlhttp.send();
-                    xmlhttp.onreadystatechange = function() {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            var myArr = JSON.parse(xmlhttp.responseText);
-                            idd = 'frndchat'+frn_id;
-                            //alert(idd);
-                            chatFunction(myArr,idd);
-                        }};
 
-            }
-            function chat(e,val,idd){
-                if (e.keyCode == 13 && val.charCodeAt(0)!=10) {
-                   var v = encodeURIComponent(val);
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.open("POST", "/chat_add/"+v+"/"+idd, true);
-                    xmlhttp.send();
-                    xmlhttp.onreadystatechange = function() {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            var myArr = JSON.parse(xmlhttp.responseText);
-                            chatFunction(myArr,idd);
-                        }};
-                    document.getElementById('input_chat'+idd).value ='';
-                }
-                return;
-            }
+                    function chatFunction(arr, idd) {
+                        var out = "";
+                        for (i = 1; i < arr.length; i++) {
+                            if (arr[i].frnd == 'n/a') {
+                                out += '<div class="Area">';
+                                out += '<div class="text_r R textR">' + arr[i].self + '</div>';
+                                out += '</div>'
 
-                function chatFunction(arr,idd) {
-                var out = "";
-                for(i = 1; i < arr.length; i++) {
-                    if (arr[i].frnd=='n/a'){
-                        out +='<div class="Area">';
-                        out +='<div class="text_r R textR">'+ arr[i].self + '</div>';
-                        out+='</div>'
+                            }
+                            else if (arr[i].self == 'n/a') {
+                                out += '<div class="Area"><div class="L">' +
+                                    '<img class="chat_img" src="/static/image/sorry.png"/></div>';
+                                out += '<div class="text_l L textR">' + arr[i].frnd + '</div>';
+                                out += '</div>'
 
-                    }
-                   else if (arr[i].self=='n/a'){
-                        out +='<div class="Area"><div class="L">' +
-                                '<img class="chat_img" src="/static/image/sorry.png"/></div>';
-                        out +='<div class="text_l L textR">'+ arr[i].frnd + '</div>';
-                        out+='</div>'
+                            }
+
+
+                        }
+                        document.getElementById(idd).innerHTML = out;
+                        var elem = document.getElementById(idd);
+                        elem.scrollTop = elem.scrollHeight;
+
 
                     }
 
+                    //calculate the total number of popups suitable and then populate the toatal_popups variable.
+                    function calculate_popups() {
+                        var width = window.innerWidth;
+                        if (width < 540) {
+                            total_popups = 0;
+                        }
+                        else {
+                            width = width - 200;
+                            //320 is width of a single popup box
+                            total_popups = parseInt(width / 320);
+                        }
+                        display_popups();
+                    }
+                    //recalculate when window is loaded and also when window is resized.
+                    window.addEventListener("resize", calculate_popups);
+                    window.addEventListener("load", calculate_popups);
 
-                }
-                    document.getElementById(idd).innerHTML = out;
-                    var elem = document.getElementById(idd);
-                    elem.scrollTop = elem.scrollHeight;
-
-
-             }
-
-            //calculate the total number of popups suitable and then populate the toatal_popups variable.
-            function calculate_popups()
-            {
-                var width = window.innerWidth;
-                if(width < 540)
-                {
-                    total_popups = 0;
-                }
-                else
-                {
-                    width = width - 200;
-                    //320 is width of a single popup box
-                    total_popups = parseInt(width/320);
-                }
-                display_popups();
-            }
-            //recalculate when window is loaded and also when window is resized.
-            window.addEventListener("resize", calculate_popups);
-            window.addEventListener("load", calculate_popups);
 </script>
-    <script>
-    $(document).ready(function(e){
-        $.ajaxSetup({cache:false});
-        setInterval(function(){$("#chatbox").load(location.href + ' #chatbox');},3000);
-    });
-    $(document).ready(function(e){
-                    $.ajaxSetup({cache:false});
-                    setInterval(function(){load('{{ online(session['auth']) }}');},2000);
-                   });
-
-    </script>
+<script>
+            $(document).ready(function (e) {
+                $.ajaxSetup({ cache: false });
+                setInterval(function () { $("#chatbox").load(location.href + ' #chatbox'); }, 3000);
+            });
+            $(document).ready(function (e) {
+                $.ajaxSetup({ cache: false });
+                setInterval(function () { load('{{ online(session['auth']) }}'); }, 2000);
+            });
+</script>
 
 
 

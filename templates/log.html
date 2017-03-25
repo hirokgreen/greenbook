@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
   <title>Greenie | be social</title>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="/static/image/rel.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="/static/image/rel.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/static/css/bootstrap3.5.css" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
-  body {
+    body {
       font: 20px Montserrat, sans-serif;
       line-height: 1.8;
       color: #f5f6f7;
-  }
-  p {font-size: 16px;}
-  .bg-1 {
-      background-color: #0C4B33; /* Green */
+    }
+    
+    p {
+      font-size: 16px;
+    }
+    
+    .bg-1 {
+      background-color: #0C4B33;
+      /* Green */
       color: #ffffff;
-  }
-  .bg-4 {
-      background-color: #2f2f2f; /* Black Gray */
+    }
+    
+    .bg-4 {
+      background-color: #2f2f2f;
+      /* Black Gray */
       color: #fff;
-  }
-  .container-fluid {
+    }
+    
+    .container-fluid {
       padding-top: 70px;
       padding-bottom: 70px;
-  }
-  .navbar {
+    }
+    
+    .navbar {
       padding-top: 1px;
       padding-bottom: 1px;
       border: 0;
@@ -37,34 +47,41 @@
       margin-bottom: 0;
       font-size: 12px;
       letter-spacing: 5px;
-  }
-  a{color:#0C4B33;text-decoration: none;}
-  a:hover {
-      color: #1abc9c; !important;
-  }
+    }
+    
+    a {
+      color: #0C4B33;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      color: #1abc9c;
+    }
   </style>
 </head>
-<body>
-{% block content %}
-<!-- Navbar -->
-<nav class="navbar navbar-default" style="background-color:#0C4B33;">
-   <div class="container">
 
-     <a class="navbar-brand" href="/"><img style="height:57px; width: 280px;" src="/static/image/logo.png"><h6 style="color:#d9d9d9;margin-left: 180px; margin-top: -3px;">be social</h6></a>
+<body>
+  {% block content %}
+  <!-- Navbar -->
+  <nav class="navbar navbar-default" style="background-color:#0C4B33;">
+    <div class="container">
+
+      <a class="navbar-brand" href="/"><img style="height:57px; width: 280px;" src="/static/image/logo.png">
+        <h6 style="color:#d9d9d9;margin-left: 180px; margin-top: -3px;">be social</h6>
+      </a>
     </div>
-   </nav>
-<!-- First Container -->
-<div class="container-fluid bg-1 text-center" style="margin-top: -40px">
-          {% for message in get_flashed_messages() %}
-            <div class="alert alert-danger">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	      {{ message }}
-            </div>
-          {% endfor %}
+  </nav>
+  <!-- First Container -->
+  <div class="container-fluid bg-1 text-center" style="margin-top: -40px">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{ message }}
+    </div>
+    {% endfor %}
 
     <div class="modal-dialog modal-sm">
       <!-- Modal content-->
-      <div class="modal-content" >
+      <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px; background-color: #BD3518;">
           <h1 style="color:#0C4B33;"><span class="glyphicon glyphicon-lock"></span> Login</h1>
         </div>
@@ -72,27 +89,26 @@
           <form class="form-horizontal" role="form" method="post">
             {{ form.hidden_tag() }}
             <div class="form-group">
-              <input type="text" name="username" value="{{ request.form.username }}" class="form-control" id="name" placeholder="UserName" style="margin-top: -40px;">
-                <p style="color: #000000;font-size: 12px;text-align: left;">
-                    {% for error in form.username.errors %}
-                        {{ error }}
-                    {% endfor %}
-                </p>
+              <input type="text" name="username" value="{{ request.form.username }}" class="form-control" id="name" placeholder="UserName"
+                style="margin-top: -40px;">
+              <p style="color: #000000;font-size: 12px;text-align: left;">
+                {% for error in form.username.errors %} {{ error }} {% endfor %}
+              </p>
             </div>
             <div class="form-group">
               <input type="password" name="password" id="pass" class="form-control" id="psw" placeholder="Enter password" style="margin-top: -20px;">
-                <p style="color: #000000;font-size: 12px;text-align: left;">
-                    {% for error in form.password.errors %}
-                        {{ error }}
-                    {% endfor %}
-                </p>
+              <p style="color: #000000;font-size: 12px;text-align: left;">
+                {% for error in form.password.errors %} {{ error }} {% endfor %}
+              </p>
             </div>
             <div class="checkbox" style="margin-top: -20px;">
               <h5><input type="checkbox" name="remember" value="1">Remember me</h5>
             </div>
-              <button type="submit" class="btn btn-default" style="color: #ffffff;background-color:#00853E; font-weight: bolder;">Login</button>
-              <center><h5>Forgot <a href="#">Password?</a></h5>
-          <h5>Not a member? <a href="/register">Sign Up</a></h5></center>
+            <button type="submit" class="btn btn-default" style="color: #ffffff;background-color:#00853E; font-weight: bolder;">Login</button>
+            <center>
+              <h5>Forgot <a href="#">Password?</a></h5>
+              <h5>Not a member? <a href="/register">Sign Up</a></h5>
+            </center>
           </form>
 
 
@@ -103,16 +119,15 @@
     </div>
   </div>
 
-{% endblock %}
+  {% endblock %}
 
-</div>
+  </div>
 
-<!-- Footer -->
-<footer class="container-fluid bg-4 text-center" style="margin-top: -90px;">
-  <p>Powered By <a href="http://www.greenlife.herokuapp.com">greenie.com</a></p>
-</footer>
+  <!-- Footer -->
+  <footer class="container-fluid bg-4 text-center" style="margin-top: -90px;">
+    <p>Powered By <a href="http://www.greenlife.herokuapp.com">greenie.com</a></p>
+  </footer>
 
 </body>
+
 </html>
-
-

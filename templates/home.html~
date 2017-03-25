@@ -1,7 +1,0 @@
-{% extends 'template.html' %}
-{% block content %}
-<h1>Home</h1>
-<p>welcome to home</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis tempus nunc. Donec tincidunt elit blandit diam molestie sodales. Aliquam in tellus vel est pellentesque interdum vel id elit. Nulla facilisi. Integer a elementum odio. Nunc enim enim, varius sed diam et, molestie pellentesque dolor. Nulla in erat et urna eleifend maximus. Phasellus quam ante, sollicitudin at leo in, condimentum iaculis orci. 
-</p>
-{% endblock %}

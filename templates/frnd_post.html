@@ -1,310 +1,299 @@
-{% extends 'template.html' %}
-{% block content %}
+{% extends 'template.html' %} {% block content %}
 <style>
-#avatar:hover{background-color: #b3b3b3;}
-            @media only screen and (max-width : 540px)
-            {
-                .chat-sidebar
-                {
-                    display: none !important;
-                }
-
-                .chat-popup
-                {
-                    display: none !important;
-                }
-            }
-
-
-            .chat-sidebar
-            {
-                width: 200px;
-                position: fixed;
-                height: 93%;
-                right: 0;
-                bottom: 0;
-                padding-top: 10px;
-                padding-bottom: 10px;
-                border: 1px solid rgba(29, 49, 91, .3);
-            }
-
-            .sidebar-name
-            {
-                padding-left: 10px;
-                padding-right: 10px;
-                margin-bottom: 4px;
-                font-size: 12px;
-            }
-
-            .sidebar-name span
-            {
-                padding-left: 5px;
-            }
-
-            .sidebar-name a
-            {
-                display: block;
-                text-decoration: none;
-                color: inherit;
-            }
-
-            .sidebar-name:hover
-            {
-                background-color:#e1e2e5;
-            }
-
-            .sidebar-name img
-            {
-                width: 32px;
-                height: 32px;
-                vertical-align:middle;
-            }
-
-            .popup-box
-            {
-                display: none;
-                position: fixed;
-                bottom: 0px;
-                right: 220px;
-                height: 285px;
-                background-color: rgb(237, 239, 244);
-                width: 300px;
-                border: 1px solid rgba(29, 49, 91, .3);
-            }
-
-            .popup-box .popup-head
-            {
-                background-color: #0C4B33;
-                padding: 5px;
-                color: white;
-                font-weight: bold;
-                font-size: 14px;
-                clear: both;
-            }
-
-            .popup-box .popup-head .popup-head-left
-            {
-                float: left;
-            }
-            .popup-box .popup-head .popup-head-left a
-            {
-                color: #ffffff;
-            }
-
-            .popup-box .popup-head .popup-head-right
-            {
-                float: right;
-                opacity: 0.5;
-            }
-
-            .popup-box .popup-head .popup-head-right a
-            {
-                text-decoration: none;
-                color: inherit;
-            }
-
-            .popup-box .popup-messages
-            {
-                height: 80%;
-                overflow-y: scroll;
-            }
-            .popup-box .type_here
-            {
-                bottom: 0;
-                position: fixed;
-                width: 100%;
-            }
-            .popup-box .type_here .type_here_field{
-                width:298px;
-                font-size: 13px;
-                font-weight: bold;
-            }
-
+    #avatar:hover {
+        background-color: #b3b3b3;
+    }
+    
+    @media only screen and (max-width: 540px) {
+        .chat-sidebar {
+            display: none !important;
+        }
+        .chat-popup {
+            display: none !important;
+        }
+    }
+    
+    .chat-sidebar {
+        width: 200px;
+        position: fixed;
+        height: 93%;
+        right: 0;
+        bottom: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border: 1px solid rgba(29, 49, 91, .3);
+    }
+    
+    .sidebar-name {
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 4px;
+        font-size: 12px;
+    }
+    
+    .sidebar-name span {
+        padding-left: 5px;
+    }
+    
+    .sidebar-name a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .sidebar-name:hover {
+        background-color: #e1e2e5;
+    }
+    
+    .sidebar-name img {
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+    }
+    
+    .popup-box {
+        display: none;
+        position: fixed;
+        bottom: 0px;
+        right: 220px;
+        height: 285px;
+        background-color: rgb(237, 239, 244);
+        width: 300px;
+        border: 1px solid rgba(29, 49, 91, .3);
+    }
+    
+    .popup-box .popup-head {
+        background-color: #0C4B33;
+        padding: 5px;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        clear: both;
+    }
+    
+    .popup-box .popup-head .popup-head-left {
+        float: left;
+    }
+    
+    .popup-box .popup-head .popup-head-left a {
+        color: #ffffff;
+    }
+    
+    .popup-box .popup-head .popup-head-right {
+        float: right;
+        opacity: 0.5;
+    }
+    
+    .popup-box .popup-head .popup-head-right a {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .popup-box .popup-messages {
+        height: 80%;
+        overflow-y: scroll;
+    }
+    
+    .popup-box .type_here {
+        bottom: 0;
+        position: fixed;
+        width: 100%;
+    }
+    
+    .popup-box .type_here .type_here_field {
+        width: 298px;
+        font-size: 13px;
+        font-weight: bold;
+    }
 </style>
 <script>
-document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie';
+    document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}' + ' | Greenie';
+
 </script>
 
 <div class="row" style="margin-top: 18px;">
-     <div class="col-xs-10 col-sm-10 col-lg-9 col-md-9">
-         {% for message in get_flashed_messages() %}
-           <div class="alert alert-success fade in">
+    <div class="col-xs-10 col-sm-10 col-lg-9 col-md-9">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-success fade in">
             {{ message }}
-          </div>
-         {% endfor %}
-     {% if pid == 'Anonymous' %}
-       <div class="cover" style="margin-top: -10px; position: relative;">
+        </div>
+        {% endfor %} {% if pid == 'Anonymous' %}
+        <div class="cover" style="margin-top: -10px; position: relative;">
             <div id="background">
-                <a href="#"><img src="/static/image/jayden.jpg" style="width: 100%;max-height: 300px;min-height: 100px;position: relative;"/></a>
+                <a href="#"><img src="/static/image/jayden.jpg" style="width: 100%;max-height: 300px;min-height: 100px;position: relative;"
+                    /></a>
             </div>
             <div class="intro" style="bottom: 0;left:0;margin-left: 10px;margin-bottom:0px;position: absolute;width:97%">
-               <div id="avatar class=img-responsive" style="width: 120px;height: 120px;float: left; border-radius: 5px;border: 2px solid #b3b3b3;">
-                <a style="color:#ffffff;" href="#"><i style="font-size:120px;text-align: center;" class="glyphicon glyphicon-user"></i></a>
+                <div id="avatar class=img-responsive" style="width: 120px;height: 120px;float: left; border-radius: 5px;border: 2px solid #b3b3b3;">
+                    <a style="color:#ffffff;" href="#"><i style="font-size:120px;text-align: center;" class="glyphicon glyphicon-user"></i></a>
 
-               </div>
-               <div id="name" style="color: #000000;float: left; margin-left: 10px;margin-top: 80px; ">
-                <p style="font-size:1.7em; font-weight: bolder;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;">
-                    {{ fr_id }}
-                </p>
-               </div>
+                </div>
+                <div id="name" style="color: #000000;float: left; margin-left: 10px;margin-top: 80px; ">
+                    <p style="font-size:1.7em; font-weight: bolder;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;">
+                        {{ fr_id }}
+                    </p>
+                </div>
                 <div class="frnd_status" style="background-color:#ffffff;float: right;margin-top:80px;border-radius: 5px;border: 2px solid #b3b3b3;">
-                    {% if request_status == "not_friend"  %}
-                      <a href="{{ url_for('friend_add_req',f_id=fid) }}" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
+                    {% if request_status == "not_friend" %}
+                    <a href="{{ url_for('friend_add_req',f_id=fid) }}" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
                         <span class="glyphicon glyphicon-user"></span> add friend
-                      </a>
-                    {% endif %}
-                    {% if request_status == "request_sent"  %}
-                      <div class="dropdown">
-                          <a href="#" data-toggle="dropdown" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
-                          <span class="glyphicon glyphicon-user"></span> friend request sent</a>
-                               <ul  class="dropdown-menu dropdown-menu-bottom">
-                                  <li><a href="{{ url_for('unfriend',f_id=fid,cancel='cancel') }}"> cancel request</a></li>
-                               </ul>
-                       </div>
-                    {% endif %}
-                    {% if request_status == "accept"  %}
-                       <div class="dropdown">
-                          <a href="#" data-toggle="dropdown" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
-                          <span class="glyphicon glyphicon-ok"></span> accept request</a>
-                               <ul  class="dropdown-menu dropdown-menu-bottom">
-                                   <li><a href="{{ url_for('accept_req',f_id=fid) }}"><span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    {% endif %} {% if request_status == "request_sent" %}
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
+                            <span class="glyphicon glyphicon-user"></span> friend request sent</a>
+                        <ul class="dropdown-menu dropdown-menu-bottom">
+                            <li><a href="{{ url_for('unfriend',f_id=fid,cancel='cancel') }}"> cancel request</a></li>
+                        </ul>
+                    </div>
+                    {% endif %} {% if request_status == "accept" %}
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
+                            <span class="glyphicon glyphicon-ok"></span> accept request</a>
+                        <ul class="dropdown-menu dropdown-menu-bottom">
+                            <li><a href="{{ url_for('accept_req',f_id=fid) }}"><span class="glyphicon glyphicon-ok"></span>
                                        confirm</a>
-                                   </li>
-                                   <li class="divider"></li>
-                                  <li><a href="{{ url_for('unfriend',f_id=fid,cancel='reject') }}"> reject</a></li>
-                               </ul>
-                       </div>
-                    {% endif %}
-                    {% if request_status == "friend"  %}
-                      <div class="dropdown">
-                         <a href="#" data-toggle="dropdown" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;" >
-                             <span class="glyphicon glyphicon-ok"></span> friends</a>
-                               <ul class="dropdown-menu dropdown-menu-bottom">
-                                  <li><a href="#"> get notification</a></li>
-                                  <li><a href="#"><span class="glyphicon glyphicon-user"></span>close friend</a> </li>
-                                   <li class="divider"></li>
-                                  <li><a href="{{ url_for('unfriend',f_id=fid) }}"> Unfriend</a></li>
-                               </ul >
-                      </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="{{ url_for('unfriend',f_id=fid,cancel='reject') }}"> reject</a></li>
+                        </ul>
+                    </div>
+                    {% endif %} {% if request_status == "friend" %}
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown" style="font-weight:bold;padding:5px;color:#000000;text-decoration: none;">
+                            <span class="glyphicon glyphicon-ok"></span> friends</a>
+                        <ul class="dropdown-menu dropdown-menu-bottom">
+                            <li><a href="#"> get notification</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span>close friend</a> </li>
+                            <li class="divider"></li>
+                            <li><a href="{{ url_for('unfriend',f_id=fid) }}"> Unfriend</a></li>
+                        </ul>
+                    </div>
                     {% endif %}
                 </div>
 
             </div>
 
         </div>
-     {% endif %}
-<div class="row">
-     <div class="clearfix visible-xs"></div><br>
+        {% endif %}
+        <div class="row">
+            <div class="clearfix visible-xs"></div><br>
 
-     <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
-        <h4>Dashboard</h4>
-         <h5>comming soon....</h5>
-     </div>
+            <div class="col-xs-4 col-sm-4 col-lg-4 col-md-4">
+                <h4>Dashboard</h4>
+                <h5>comming soon....</h5>
+            </div>
 
 
-     <div class="col-xs-12 col-sm-12 col-lg-8 col-md-8">
-          {% set var = '' %}
-          {% for item in posts %}
-           {% if item.description !="" %}
-           <div class="panel panel-default">
-                <div class="panel-body" style="background-color: #ffffff; border-radius: 10px;">
-                <div class="alert-block" style="background-color: #ffffff; width: 100%;">
+            <div class="col-xs-12 col-sm-12 col-lg-8 col-md-8">
+                {% set var = '' %} {% for item in posts %} {% if item.description !="" %}
+                <div class="panel panel-default">
+                    <div class="panel-body" style="background-color: #ffffff; border-radius: 10px;">
+                        <div class="alert-block" style="background-color: #ffffff; width: 100%;">
 
-                  <div id="user" style="width:95%;float: left; margin-top: -10px; margin-left: -5px;">
-                        <a href=""><h1 style="margin-top: 0px;float: left;"><span class="glyphicon glyphicon-user"></span></h1></a>
-                        <div id="post_info" style="float: left;width: 90%; line-height: 5px; margin-left: 6px;">
-                            <div id ="name" style="float: left; width:90%;">
-                               <h4 style="float:left;font-weight: bolder;">
-                                  <a href="#" style="color:#60A839;">{{ fr_id }}</a>
-                               </h4>
-                                <h5 style="float: left;margin-left: 10px; color: #808080;"> update his status</h5>
+                            <div id="user" style="width:95%;float: left; margin-top: -10px; margin-left: -5px;">
+                                <a href="">
+                                    <h1 style="margin-top: 0px;float: left;"><span class="glyphicon glyphicon-user"></span></h1>
+                                </a>
+                                <div id="post_info" style="float: left;width: 90%; line-height: 5px; margin-left: 6px;">
+                                    <div id="name" style="float: left; width:90%;">
+                                        <h4 style="float:left;font-weight: bolder;">
+                                            <a href="#" style="color:#60A839;">{{ fr_id }}</a>
+                                        </h4>
+                                        <h5 style="float: left;margin-left: 10px; color: #808080;"> update his status</h5>
+                                    </div>
+                                    <div id='with' style="float:left;width:100%">
+                                        <h5 style="margin-top: -7px;">
+                                            with <a href="#">jayden</a>,
+                                            <a href="#">greenhirok</a>fjvh mdfndk dmfndk fdmdfnd dmdkf mcdnmcd cxmcn kc and
+                                            2 others
+                                        </h5>
+                                    </div>
+
+
+                                    <br>
+                                    <h6 style="float:left;color: #808080; margin-top: -6px;">{{ interval(time,item.date_time) }}</h6>
+                                </div>
                             </div>
-                            <div id ='with' style="float:left;width:100%">
-                                <h5 style="margin-top: -7px;">
-                                   with <a href="#">jayden</a>,
-                                     <a href="#">greenhirok</a>fjvh mdfndk dmfndk fdmdfnd dmdkf mcdnmcd cxmcn kc
-                                  and 2 others
-                                </h5>
-                            </div>
-
-
-                            <br>
-                            <h6 style="float:left;color: #808080; margin-top: -6px;">{{ interval(time,item.date_time) }}</h6>
                         </div>
-                   </div>
-               </div>
-                <textarea style="background-color: #ffffff; display: none;" id="body{{ item.id }}" hidden class="foo form-control input-default" readonly="readonly" name="body" style="width: 100%;">{{ url(item.description) }}</textarea>
-                <script>$("#body{{ item.id }}").autosize()</script>
+                        <textarea style="background-color: #ffffff; display: none;" id="body{{ item.id }}" hidden class="foo form-control input-default"
+                            readonly="readonly" name="body" style="width: 100%;">{{ url(item.description) }}</textarea>
+                        <script>
+                            $("#body{{ item.id }}").autosize()
+                        </script>
 
-                 <div class="alert-block"  id="post{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
+                        <div class="alert-block" id="post{{ item.id }}" style="background-color: #ffffff; float: left; width: 100%;height:auto;"></div>
 
-                    <div id="line" style="width: 100%;margin-top:15px; height: 1px; float:left;margin-left:-5px;background-color: #d9d9d9;"></div>
-                <iframe style=" margin-left:-5px;width: 100%;height: 55px;" frameborder="0" src="{{ url_for('like',post_id = fid+'_'+ item.id|string ) }}"></iframe>
+                        <div id="line" style="width: 100%;margin-top:15px; height: 1px; float:left;margin-left:-5px;background-color: #d9d9d9;"></div>
+                        <iframe style=" margin-left:-5px;width: 100%;height: 55px;" frameborder="0" src="{{ url_for('like',post_id = fid+'_'+ item.id|string ) }}"></iframe>
 
-                     <iframe onload="resizeIframe(this)" style="width: 100%;height: auto;" frameborder="0" src="{{ url_for('comment',post_id = fid+'_'+ item.id|string) }}"></iframe>
+                        <iframe onload="resizeIframe(this)" style="width: 100%;height: auto;" frameborder="0" src="{{ url_for('comment',post_id = fid+'_'+ item.id|string) }}"></iframe>
+                    </div>
+                    <script language="javascript" type="text/javascript">
+                                        function resizeIframe(obj) {
+                                            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+                                        }
+                    </script>
+                    <script>
+                        $(window).load(function () {
+                            setTimeout(function () {
+                                var text = $('#body{{ item.id }}').val();
+                                var t = text.replace(/\r?\n/g, '<br/>');
+                                $('#post{{ item.id }}').html(t);
+                                $('#post{{ item.id }}').linkify({
+                                    tagName: 'a',
+                                    target: '_blank',
+                                    newLine: '\n'
+
+                                });
+                            }, 100);
+                            $('#post').css('padding', '10px');
+                        });
+                    </script>
                 </div>
-               <script language="javascript" type="text/javascript">
-                    function resizeIframe(obj) {
-                         obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-                      }
-                </script>
-                <script>
-                    $(window).load(function(){
-                        setTimeout(function () {
-                            var text =$('#body{{ item.id }}').val();
-                            var t=text.replace(/\r?\n/g,'<br/>');
-                            $('#post{{ item.id }}').html(t);
-                            $('#post{{ item.id }}').linkify({
-                                tagName: 'a',
-                                target: '_blank',
-                                newLine: '\n'
+                {% endif %} {% else %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>
+                            <center><b>Sorry, this page isn't available !!</b></center>
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <center><img class="img-responsive" src="/static/image/sorry.png" /></center>
+                    </div>
+                    <center>
+                        <h6><a href="" onclick="goBack()">Go back to the previous page</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{{ url_for('hello') }}">Go to News Feed </a>
+                        </h6>
+                    </center>
+                    <script>
+                                                function goBack() {
+                                                    window.history.back();
+                                                }
+                    </script>
 
-                            });
-                        }, 100);
-                        $('#post').css('padding', '10px');
-                    });
-                </script>
-           </div>
-           {% endif %}
-           {% else %}
-               <div class="panel panel-default">
-                   <div class="panel-heading"><h4><center><b>Sorry, this page isn't available !!</b></center></h4></div>
-                       <div class="panel-body"><center><img class="img-responsive" src="/static/image/sorry.png"/></center></div>
-                       <center><h6><a href="" onclick="goBack()">Go back to the previous page</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                   <a href="{{ url_for('hello') }}" >Go to News Feed </a>
-                       </h6></center>
-                         <script>
-                         function goBack() {
-                             window.history.back();
-                         }
-                         </script>
-
-               </div>
-        {% endfor %}
-     </div>
-     </div>
-     </div>
-     <div class="col-xs-1 col-sm-1 col-lg-2 col-md-2">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-1 col-sm-1 col-lg-2 col-md-2">
         <h4>advertisement</h4>
-         <h5>comming soon....</h5>
-     </div>
+        <h5>comming soon....</h5>
+    </div>
 
-   <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
-    <div class="chat-sidebar" id="chatbox">
-        {% for u in status(chat,'on') %}
-            {% if u.id|string!=getid()|string and clearance(u.id)=='true' %}
+    <div class="col-xs-1 col-sm-1 col-lg-1 col-md-1">
+        <div class="chat-sidebar" id="chatbox">
+            {% for u in status(chat,'on') %} {% if u.id|string!=getid()|string and clearance(u.id)=='true' %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
                     <span>{{ u.uname }}</span>
-                    <img src="/static/image/online.png"style="width:7px;height:7px;margin-top:10px;float: right;">
+                    <img src="/static/image/online.png" style="width:7px;height:7px;margin-top:10px;float: right;">
                 </a>
             </div>
-             {% endif %}
-         {% endfor %}
-
-         {% for u in status(chat,'off') %}
-            {% if u.id|string!=getid()|string and clearance(u.id)=='true' %}
+            {% endif %} {% endfor %} {% for u in status(chat,'off') %} {% if u.id|string!=getid()|string and clearance(u.id)=='true'
+            %}
             <div class="sidebar-name">
                 <a href="javascript:register_popup('chat{{ u.id }}', '{{ u.uname }}','{{ session['auth'] }}', '{{ u.id }}');">
                     <img width="30" height="30" src="/static/image/sorry.png" />
@@ -314,190 +303,181 @@ document.getElementsByTagName('title')[0].innerHTML = '{{ fr_id }}'+' | Greenie'
                     </h6>
                 </a>
             </div>
-             {% endif %}
-         {% endfor %}
+            {% endif %} {% endfor %}
+        </div>
+        <!-- Add clearfix for only the required viewport -->
+
     </div>
-    <!-- Add clearfix for only the required viewport -->
-
-</div>
 
 
-<script>
-                //this function can remove a array element.
-            Array.remove = function(array, from, to) {
-                var rest = array.slice((to || from) + 1 || array.length);
-                array.length = from < 0 ? array.length + from : from;
-                return array.push.apply(array, rest);
-            };
-            //this variable represents the total number of popups can be displayed according to the viewport width
-            var total_popups = 0;
-            //arrays of popups ids
-            var popups = [];
-            //this is used to close a popup
-            function close_popup(id)
-            {
-                for(var iii = 0; iii < popups.length; iii++)
-                {
-                    if(id == popups[iii])
-                    {
-                        Array.remove(popups, iii);
-                        document.getElementById(id).style.display = "none";
-                        calculate_popups();
-                        return;
-                    }
-                }
-            }
-            //displays the popups. Displays based on the maximum number of popups that can be displayed on the current viewport width
-            function display_popups()
-            {
-                var right = 220;
-                var iii = 0;
-                for(iii; iii < total_popups; iii++)
-                {
-                    if(popups[iii] != undefined)
-                    {
-                        var element = document.getElementById(popups[iii]);
-                        element.style.right = right + "px";
-                        right = right + 320;
-                        element.style.display = "block";
-                    }
-                }
-                for(var jjj = iii; jjj < popups.length; jjj++)
-                {
-                    var element = document.getElementById(popups[jjj]);
-                    element.style.display = "none";
-                }
-            }
-            //creates markup for a new popup. Adds the id to popups array.\
-                function register_popup(id, name, myself, frn_id)
-                {
-                    var frnd = 'green'+frn_id;
-                    var table  = myself+'_'+frnd;
-                    var table2 = frnd+'_'+myself;
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
-                    xmlhttp.send();
-                    xmlhttp.onreadystatechange = function() {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            var myArr = JSON.parse(xmlhttp.responseText);
-                            idd = 'frndchat'+frn_id;
-                            //alert(idd);
-                            chatFunction(myArr,idd);
-                        }};
-                for(var iii = 0; iii < popups.length; iii++)
-                {
-                    //already registered. Bring it to front.
-                    if(id == popups[iii])
-                    {
-                        Array.remove(popups, iii);
-                        popups.unshift(id);
-                        calculate_popups();
-                        return;
-                    }
-                }
-                var element = '<div class="popup-box chat-popup" id="'+ id +'">';
-                element = element + '<div class="popup-head">';
-                element = element + '<div class="popup-head-left"><a href="#">'+ name +'</a></div>';
-                element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
-                element = element + '<div style="clear: both"></div></div>' +
-                        '<div class="popup-messages" id="frnd'+id+'"></div>' +
-                        '<div class="type_here">' +
-                        '<textarea rows="1" onkeyup="chat(event,this.value,name)" value="hirok" name="frnd'+id+'" id="input_chatfrnd'+id+'" placeholder="Type here..." class="type_here_field"></textarea>' +
-                        '<input type="hidden" value="'+table+'" name="table">' +
-                        '<input type="hidden" value="'+table2+'" name="table2"></iframe>' +
-                        '</div>';
-                $(document).ready(function(e){
-                    $.ajaxSetup({cache:false});
-                    setInterval(function(){$("#frnd"+id).html(autoload(table,table2,frn_id));},2000);
-                   });
-                document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
-                popups.unshift(id);
-                calculate_popups();
-            }
-            function autoload(table,table2,frn_id){
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open("POST", "/chat/"+table+"/"+table2, true);
-                    xmlhttp.send();
-                    xmlhttp.onreadystatechange = function() {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            var myArr = JSON.parse(xmlhttp.responseText);
-                            idd = 'frndchat'+frn_id;
-                            //alert(idd);
-                            chatFunction(myArr,idd);
-                        }};
+    <script>
+                        //this function can remove a array element.
+                        Array.remove = function (array, from, to) {
+                            var rest = array.slice((to || from) + 1 || array.length);
+                            array.length = from < 0 ? array.length + from : from;
+                            return array.push.apply(array, rest);
+                        };
+                        //this variable represents the total number of popups can be displayed according to the viewport width
+                        var total_popups = 0;
+                        //arrays of popups ids
+                        var popups = [];
+                        //this is used to close a popup
+                        function close_popup(id) {
+                            for (var iii = 0; iii < popups.length; iii++) {
+                                if (id == popups[iii]) {
+                                    Array.remove(popups, iii);
+                                    document.getElementById(id).style.display = "none";
+                                    calculate_popups();
+                                    return;
+                                }
+                            }
+                        }
+                        //displays the popups. Displays based on the maximum number of popups that can be displayed on the current viewport width
+                        function display_popups() {
+                            var right = 220;
+                            var iii = 0;
+                            for (iii; iii < total_popups; iii++) {
+                                if (popups[iii] != undefined) {
+                                    var element = document.getElementById(popups[iii]);
+                                    element.style.right = right + "px";
+                                    right = right + 320;
+                                    element.style.display = "block";
+                                }
+                            }
+                            for (var jjj = iii; jjj < popups.length; jjj++) {
+                                var element = document.getElementById(popups[jjj]);
+                                element.style.display = "none";
+                            }
+                        }
+                        //creates markup for a new popup. Adds the id to popups array.\
+                        function register_popup(id, name, myself, frn_id) {
+                            var frnd = 'green' + frn_id;
+                            var table = myself + '_' + frnd;
+                            var table2 = frnd + '_' + myself;
+                            var xmlhttp = new XMLHttpRequest();
+                            xmlhttp.open("POST", "/chat/" + table + "/" + table2, true);
+                            xmlhttp.send();
+                            xmlhttp.onreadystatechange = function () {
+                                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                    var myArr = JSON.parse(xmlhttp.responseText);
+                                    idd = 'frndchat' + frn_id;
+                                    //alert(idd);
+                                    chatFunction(myArr, idd);
+                                }                            
+};
+                            for (var iii = 0; iii < popups.length; iii++) {
+                                //already registered. Bring it to front.
+                                if (id == popups[iii]) {
+                                    Array.remove(popups, iii);
+                                    popups.unshift(id);
+                                    calculate_popups();
+                                    return;
+                                }
+                            }
+                            var element = '<div class="popup-box chat-popup" id="' + id + '">';
+                            element = element + '<div class="popup-head">';
+                            element = element + '<div class="popup-head-left"><a href="#">' + name + '</a></div>';
+                            element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\'' + id + '\');">&#10005;</a></div>';
+                            element = element + '<div style="clear: both"></div></div>' +
+                                '<div class="popup-messages" id="frnd' + id + '"></div>' +
+                                '<div class="type_here">' +
+                                '<textarea rows="1" onkeyup="chat(event,this.value,name)" value="hirok" name="frnd' + id + '" id="input_chatfrnd' + id + '" placeholder="Type here..." class="type_here_field"></textarea>' +
+                                '<input type="hidden" value="' + table + '" name="table">' +
+                                '<input type="hidden" value="' + table2 + '" name="table2"></iframe>' +
+                                '</div>';
+                            $(document).ready(function (e) {
+                                $.ajaxSetup({ cache: false });
+                                setInterval(function () { $("#frnd" + id).html(autoload(table, table2, frn_id)); }, 2000);
+                            });
+                            document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
+                            popups.unshift(id);
+                            calculate_popups();
+                        }
+                        function autoload(table, table2, frn_id) {
+                            var xmlhttp = new XMLHttpRequest();
+                            xmlhttp.open("POST", "/chat/" + table + "/" + table2, true);
+                            xmlhttp.send();
+                            xmlhttp.onreadystatechange = function () {
+                                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                    var myArr = JSON.parse(xmlhttp.responseText);
+                                    idd = 'frndchat' + frn_id;
+                                    //alert(idd);
+                                    chatFunction(myArr, idd);
+                                }
+                            };
 
-            }
-            function chat(e,val,idd){
-                if (e.keyCode == 13 && val.charCodeAt(0)!=10) {
-                   var v = encodeURIComponent(val);
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.open("POST", "/chat_add/"+v+"/"+idd, true);
-                    xmlhttp.send();
-                    xmlhttp.onreadystatechange = function() {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            var myArr = JSON.parse(xmlhttp.responseText);
-                            chatFunction(myArr,idd);
-                        }};
-                    document.getElementById('input_chat'+idd).value ='';
-                }
-                return;
-            }
+                        }
+                        function chat(e, val, idd) {
+                            if (e.keyCode == 13 && val.charCodeAt(0) != 10) {
+                                var v = encodeURIComponent(val);
+                                var xmlhttp = new XMLHttpRequest();
+                                xmlhttp.open("POST", "/chat_add/" + v + "/" + idd, true);
+                                xmlhttp.send();
+                                xmlhttp.onreadystatechange = function () {
+                                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                        var myArr = JSON.parse(xmlhttp.responseText);
+                                        chatFunction(myArr, idd);
+                                    }
+                                };
+                                document.getElementById('input_chat' + idd).value = '';
+                            }
+                            return;
+                        }
 
-                function chatFunction(arr,idd) {
-                var out = "";
-                for(i = 1; i < arr.length; i++) {
-                    if (arr[i].frnd=='n/a'){
-                        out +='<div class="Area">';
-                        out +='<div class="text_r R textR">'+ arr[i].self + '</div>';
-                        out+='</div>'
+                        function chatFunction(arr, idd) {
+                            var out = "";
+                            for (i = 1; i < arr.length; i++) {
+                                if (arr[i].frnd == 'n/a') {
+                                    out += '<div class="Area">';
+                                    out += '<div class="text_r R textR">' + arr[i].self + '</div>';
+                                    out += '</div>'
 
-                    }
-                   else if (arr[i].self=='n/a'){
-                        out +='<div class="Area"><div class="L">' +
-                                '<img class="chat_img" src="/static/image/sorry.png"/></div>';
-                        out +='<div class="text_l L textR">'+ arr[i].frnd + '</div>';
-                        out+='</div>'
+                                }
+                                else if (arr[i].self == 'n/a') {
+                                    out += '<div class="Area"><div class="L">' +
+                                        '<img class="chat_img" src="/static/image/sorry.png"/></div>';
+                                    out += '<div class="text_l L textR">' + arr[i].frnd + '</div>';
+                                    out += '</div>'
 
-                    }
+                                }
 
 
-                }
-                    document.getElementById(idd).innerHTML = out;
-                    var elem = document.getElementById(idd);
-                    elem.scrollTop = elem.scrollHeight;
+                            }
+                            document.getElementById(idd).innerHTML = out;
+                            var elem = document.getElementById(idd);
+                            elem.scrollTop = elem.scrollHeight;
 
 
-             }
+                        }
 
-            //calculate the total number of popups suitable and then populate the toatal_popups variable.
-            function calculate_popups()
-            {
-                var width = window.innerWidth;
-                if(width < 540)
-                {
-                    total_popups = 0;
-                }
-                else
-                {
-                    width = width - 200;
-                    //320 is width of a single popup box
-                    total_popups = parseInt(width/320);
-                }
-                display_popups();
-            }
-            //recalculate when window is loaded and also when window is resized.
-            window.addEventListener("resize", calculate_popups);
-            window.addEventListener("load", calculate_popups);
-</script>
-<script>
-    $(document).ready(function(e){
-        $.ajaxSetup({cache:false});
-        setInterval(function(){$("#chatbox").load(location.href + ' #chatbox');},3000);
-    });
-    $(document).ready(function(e){
-                    $.ajaxSetup({cache:false});
-                    setInterval(function(){load('{{ online(session['auth']) }}');},2000);
-                   });
-</script>
+                        //calculate the total number of popups suitable and then populate the toatal_popups variable.
+                        function calculate_popups() {
+                            var width = window.innerWidth;
+                            if (width < 540) {
+                                total_popups = 0;
+                            }
+                            else {
+                                width = width - 200;
+                                //320 is width of a single popup box
+                                total_popups = parseInt(width / 320);
+                            }
+                            display_popups();
+                        }
+                        //recalculate when window is loaded and also when window is resized.
+                        window.addEventListener("resize", calculate_popups);
+                        window.addEventListener("load", calculate_popups);
 
-{% endblock %}
+    </script>
+    <script>
+            $(document).ready(function (e) {
+                $.ajaxSetup({ cache: false });
+                setInterval(function () { $("#chatbox").load(location.href + ' #chatbox'); }, 3000);
+            });
+            $(document).ready(function (e) {
+                $.ajaxSetup({ cache: false });
+                setInterval(function () { load('{{ online(session['auth']) }}'); }, 2000);
+            });
+
+    </script>
+
+    {% endblock %}

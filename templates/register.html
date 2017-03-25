@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
   <title>Greenie | be social</title>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="/static/image/rel.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="/static/image/rel.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
   <style>
-  body {
+    body {
       font: 20px Montserrat, sans-serif;
       line-height: 1.8;
       color: #f5f6f7;
-  }
-  p {font-size: 16px;}
-  .bg-1 {
-      background-color: #0C4B33; /* Green */
+    }
+    
+    p {
+      font-size: 16px;
+    }
+    
+    .bg-1 {
+      background-color: #0C4B33;
+      /* Green */
       color: #ffffff;
-  }
-  .bg-4 {
-      background-color: #2f2f2f; /* Black Gray */
+    }
+    
+    .bg-4 {
+      background-color: #2f2f2f;
+      /* Black Gray */
       color: #fff;
-  }
-  .container-fluid {
+    }
+    
+    .container-fluid {
       padding-top: 70px;
       padding-bottom: 70px;
-  }
-  .navbar {
+    }
+    
+    .navbar {
       padding-top: 1px;
       padding-bottom: 1px;
       border: 0;
@@ -38,185 +48,179 @@
       margin-bottom: 0;
       font-size: 12px;
       letter-spacing: 5px;
-  }
-  a{color:#0C4B33;text-decoration: none;}
-  a:hover {
-      color: #1abc9c; !important;
-  }
+    }
+    
+    a {
+      color: #0C4B33;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      color: #1abc9c;
+      !important;
+    }
   </style>
 </head>
-<body>
-{% block content %}
-<!-- Navbar -->
-<nav class="navbar navbar-default" style="background-color:#0C4B33;">
-   <div class="container">
 
-     <a class="navbar-brand" href="/"><img style="height:57px; width: 280px;" src="/static/image/logo.png"><h6 style="color:#d9d9d9;margin-left: 180px; margin-top: -3px;">be social</h6></a>
+<body>
+  {% block content %}
+  <!-- Navbar -->
+  <nav class="navbar navbar-default" style="background-color:#0C4B33;">
+    <div class="container">
+
+      <a class="navbar-brand" href="/"><img style="height:57px; width: 280px;" src="/static/image/logo.png">
+        <h6 style="color:#d9d9d9;margin-left: 180px; margin-top: -3px;">be social</h6>
+      </a>
     </div>
-   </nav>
-<!-- First Container -->
-<div class="container-fluid bg-1 text-center" style="margin-top: -40px">
-          {% for message in get_flashed_messages() %}
-            <div class="alert alert-danger">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	      {{ message }}
-            </div>
-          {% endfor %}
+  </nav>
+  <!-- First Container -->
+  <div class="container-fluid bg-1 text-center" style="margin-top: -40px">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{ message }}
+    </div>
+    {% endfor %}
 
     <div class="modal-dialog">
       <!-- Modal content-->
-      <div class="modal-content" >
+      <div class="modal-content">
         <div class="modal-header" style="padding:35px 50px; background-color: #BD3518;">
           <h1 style="color:#0C4B33;"><span class="glyphicon glyphicon-lock"></span> Sign up</h1>
         </div>
         <div class="modal-body" style="padding:40px 50px; background-color: #BD3518; margin-top: -20px;">
-<form class="form-horizontal" role="form" method="post">
-    {{ form.hidden_tag() }}
-    <div class="form-group">
-      <label class="control-label col-sm-4" style="margin-top: -10px;" for="fname">First name:</label>
-        <div class="col-sm-6">
-          <input type="text" name="fname" class="form-control input-sm" id="fname" placeholder="" value="{{ request.form.fname }}">
+          <form class="form-horizontal" role="form" method="post">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              <label class="control-label col-sm-4" style="margin-top: -10px;" for="fname">First name:</label>
+              <div class="col-sm-6">
+                <input type="text" name="fname" class="form-control input-sm" id="fname" placeholder="" value="{{ request.form.fname }}">
 
-             <p style="font-size:12px;color: #000000;">
-                {% for error in form.fname.errors %}
-                  {{ error }}
-                {% endfor %}
-            </p>
-        </div>
+                <p style="font-size:12px;color: #000000;">
+                  {% for error in form.fname.errors %} {{ error }} {% endfor %}
+                </p>
+              </div>
 
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4" style="margin-top: -10px;" for="lname">Last name:</label>
-        <div class="col-sm-6">
-          <input type="text" name="lname" class="form-control input-sm" id="lname" placeholder="" value="{{ request.form.lname }}">
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" style="margin-top: -10px;" for="lname">Last name:</label>
+              <div class="col-sm-6">
+                <input type="text" name="lname" class="form-control input-sm" id="lname" placeholder="" value="{{ request.form.lname }}">
 
-            <p style="font-size:12px;color: #000000;">
-                {% for error in form.lname.errors %}
-                  {{ error }}
-                {% endfor %}
-            </p>
-        </div>
+                <p style="font-size:12px;color: #000000;">
+                  {% for error in form.lname.errors %} {{ error }} {% endfor %}
+                </p>
+              </div>
 
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4" style="margin-top: -10px;" for="username">Username:</label>
-        <div class="col-sm-6">
-        <input type="text" name="uname" class="form-control input-sm" id="uname" placeholder="username" value="{{ request.form.uname }}">
-            <p style="font-size:12px;color: #000000;">
-                {% for error in form.uname.errors %}
-                  {{ error }}
-                {% endfor %}
-            </p>
-        </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" style="margin-top: -10px;" for="username">Username:</label>
+              <div class="col-sm-6">
+                <input type="text" name="uname" class="form-control input-sm" id="uname" placeholder="username" value="{{ request.form.uname }}">
+                <p style="font-size:12px;color: #000000;">
+                  {% for error in form.uname.errors %} {{ error }} {% endfor %}
+                </p>
+              </div>
 
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4" style="margin-top: -10px;" for="email">Email:</label>
-        <div class="col-sm-6">
-          <input type="email" name="email" class="form-control input-sm" id="name" placeholder="email address" value="{{ request.form.email }}">
-           <p style="font-size:12px;color: #000000;">
-                {% for error in form.email.errors %}
-                  {{ error }}
-                {% endfor %}
-            </p>
-        </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" style="margin-top: -10px;" for="email">Email:</label>
+              <div class="col-sm-6">
+                <input type="email" name="email" class="form-control input-sm" id="name" placeholder="email address" value="{{ request.form.email }}">
+                <p style="font-size:12px;color: #000000;">
+                  {% for error in form.email.errors %} {{ error }} {% endfor %}
+                </p>
+              </div>
 
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4" style="margin-top: -10px;" for="password">Password:</label>
-        <div class="col-sm-6">
-          <input type="password" name="password" class="form-control input-sm" id="password" placeholder="Enter password">
-            <p style="font-size:12px;color: #000000;">
-                {% for error in form.password.errors %}
-                  {{ error }}
-                {% endfor %}
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-4" style="margin-top: -10px;" for="repassword">Re-password</label>
-        <div class="col-sm-6">
-          <input type="password" name="repassword" class="form-control input-sm" id="repassword" placeholder="re-type password">
-            <p style="font-size:12px;color: #000000;">
-                {% for error in form.repassword.errors %}
-                  {{ error }}
-                {% endfor %}
-            </p>
-        </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" style="margin-top: -10px;" for="password">Password:</label>
+              <div class="col-sm-6">
+                <input type="password" name="password" class="form-control input-sm" id="password" placeholder="Enter password">
+                <p style="font-size:12px;color: #000000;">
+                  {% for error in form.password.errors %} {{ error }} {% endfor %}
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" style="margin-top: -10px;" for="repassword">Re-password</label>
+              <div class="col-sm-6">
+                <input type="password" name="repassword" class="form-control input-sm" id="repassword" placeholder="re-type password">
+                <p style="font-size:12px;color: #000000;">
+                  {% for error in form.repassword.errors %} {{ error }} {% endfor %}
+                </p>
+              </div>
 
-    </div>
+            </div>
 
-    <div class="form-group">
-      <label class="control-label col-sm-4" for="address">Address:</label>
-        <div class="col-sm-8">
-             <textarea class="form-control input-sm" rows="3" id="address" name="address"></textarea>
-            <p style="font-size:12px;color: #000000;">
-                {% for error in form.address.errors %}
-                   {{ error }}
-                {% endfor %}
-            </p>
-        </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="address">Address:</label>
+              <div class="col-sm-8">
+                <textarea class="form-control input-sm" rows="3" id="address" name="address"></textarea>
+                <p style="font-size:12px;color: #000000;">
+                  {% for error in form.address.errors %} {{ error }} {% endfor %}
+                </p>
+              </div>
 
 
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-4" style="margin-top: 0px;" for="sex">sex:</label>
-        <div class="col-sm-5">
-           <label class="radio-inline"><input type="radio"  name="gender" value="male" checked>male</label>
-           <label class="radio-inline"><input type="radio" name="gender" value="female">female</label>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-4" style="margin-top: -10px;" for="dob">Date of Birth:</label>
-        <div class="col-sm-5" style="color: #499249;font-size: 14px;">
-            <select class="control-label" name='day'>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" style="margin-top: 0px;" for="sex">sex:</label>
+              <div class="col-sm-5">
+                <label class="radio-inline"><input type="radio"  name="gender" value="male" checked>male</label>
+                <label class="radio-inline"><input type="radio" name="gender" value="female">female</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" style="margin-top: -10px;" for="dob">Date of Birth:</label>
+              <div class="col-sm-5" style="color: #499249;font-size: 14px;">
+                <select class="control-label" name='day'>
         <option>Day</option>
            <script>
-            var i=1;
-            while(i<=31){
-            document.write("<option>"+i+"</option>"); i++;
-              }
-           </script>
+            var i = 1;
+            while (i <= 31) {
+              document.write("<option>" + i + "</option>"); i++;
+            }
+          </script>
        </select>
-       <select class="control-label" name='mon'>
+                <select class="control-label" name='mon'>
         <option>Mon</option>
            <script>
-            var i=1;
-            while(i<=12){
-            document.write("<option>"+i+"</option>"); i++;
-              }
-           </script>
+            var i = 1;
+            while (i <= 12) {
+              document.write("<option>" + i + "</option>"); i++;
+            }
+          </script>
 
 
        </select>
-       <select class="control-label" name='year'>
+                <select class="control-label" name='year'>
         <option>Year</option>
            <script>
-            var i=2007;
-            while(i>=1970){
-            document.write("<option>"+i+"</option>"); i--;
-              }
-           </script>
+            var i = 2007;
+            while (i >= 1970) {
+              document.write("<option>" + i + "</option>"); i--;
+            }
+          </script>
 
 
        </select>
-        </div>
+              </div>
 
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-6" style="text-align: right;">
-          <div class="g-recaptcha" data-sitekey="6Ld90hMTAAAAAHMuWMHuxFV6OQJp224JtCgoXoyB"></div>
-        </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset- col-sm-">
-         <button type="submit" class="btn btn-default" style="color: #ffffff;background-color:#00853E; font-weight: bolder;">Register</button>
-      </div>
-    </div>
-<div class="col-sm-offset-1 col-sm-10">
-        <p>Already have an Account? <a style="color: #0e90d2" href="/"> log in</a></p>
-</div>
-</form>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-6" style="text-align: right;">
+                <div class="g-recaptcha" data-sitekey="6Ld90hMTAAAAAHMuWMHuxFV6OQJp224JtCgoXoyB"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset- col-sm-">
+                <button type="submit" class="btn btn-default" style="color: #ffffff;background-color:#00853E; font-weight: bolder;">Register</button>
+              </div>
+            </div>
+            <div class="col-sm-offset-1 col-sm-10">
+              <p>Already have an Account? <a style="color: #0e90d2" href="/"> log in</a></p>
+            </div>
+          </form>
 
 
         </div>
@@ -226,20 +230,15 @@
     </div>
   </div>
 
-{% endblock %}
+  {% endblock %}
 
-</div>
+  </div>
 
-<!-- Footer -->
-<footer class="container-fluid bg-4 text-center" style="margin-top: -90px;">
-  <p>Powered By <a href="http://www.greenlife.herokuapp.com">greenie.com</a></p>
-</footer>
+  <!-- Footer -->
+  <footer class="container-fluid bg-4 text-center" style="margin-top: -90px;">
+    <p>Powered By <a href="http://www.greenlife.herokuapp.com">greenie.com</a></p>
+  </footer>
 
 </body>
+
 </html>
-
-
-
-
-
-

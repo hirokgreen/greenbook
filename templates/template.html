@@ -1,6 +1,7 @@
 <html>
+
 <head>
-<title>Greenie | be social</title>
+    <title>Greenie | be social</title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,211 +16,233 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="/static/js/autosize.js" type="TEXT/JAVASCRIPT"></script>
 
-<script>
-function showHint(str) {
-    if (str.length == 0) {
-        document.getElementById("txtHint").innerHTML = "";
-        return;
-    } else {
+    <script>
+        function showHint(str) {
+            if (str.length == 0) {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            } else {
 
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "/search/"+str, true);
-        xmlhttp.send();
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var myArr = JSON.parse(xmlhttp.responseText);
-                myFunction(myArr);
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("POST", "/search/" + str, true);
+                xmlhttp.send();
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        var myArr = JSON.parse(xmlhttp.responseText);
+                        myFunction(myArr);
+
+                    }
+                };
+
+
 
             }
-        };
-
-
-
-    }
-}
-function myFunction(arr) {
-    var out = "";
-    var i;
-    if (arr.length==0)
-    {
-        return;
-    }
-    out += '<ul>';
-    for(i = 1; i < arr.length; i++) {
-        if(arr[i].display=='see more')
-        {
-            out += '<li><a href="' + arr[i].url + '">' +'<span class="glyphicon glyphicon-search"></span>'+' '+
-                    arr[i].display + '</a></li>';
         }
-        else
-        {
-            out += '<li><a href="' + arr[i].url + '">' +'<span class="glyphicon glyphicon-user"></span>'+' '+
-                    arr[i].display + '</a></li>';
+        function myFunction(arr) {
+            var out = "";
+            var i;
+            if (arr.length == 0) {
+                return;
+            }
+            out += '<ul>';
+            for (i = 1; i < arr.length; i++) {
+                if (arr[i].display == 'see more') {
+                    out += '<li><a href="' + arr[i].url + '">' + '<span class="glyphicon glyphicon-search"></span>' + ' ' +
+                        arr[i].display + '</a></li>';
+                }
+                else {
+                    out += '<li><a href="' + arr[i].url + '">' + '<span class="glyphicon glyphicon-user"></span>' + ' ' +
+                        arr[i].display + '</a></li>';
+                }
+            }
+            out += '</ul';
+
+
+            document.getElementById("txtHint").innerHTML = out;
         }
-    }
-    out+= '</ul';
+        function tagHint(str, pstr) {
+            if (str.length == 0) {
+                document.getElementById("gettagHint").innerHTML = "";
+                return;
+            } else {
+
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("POST", "/tagsearch/" + pstr + "/" + str, true);
+                xmlhttp.send();
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        var myArr = JSON.parse(xmlhttp.responseText);
+                        mytagFunction(myArr, pstr);
+
+                    }
+                };
 
 
-    document.getElementById("txtHint").innerHTML = out;
-}
-function tagHint(str, pstr) {
-    if (str.length == 0) {
-        document.getElementById("gettagHint").innerHTML = "";
-        return;
-    } else {
-
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "/tagsearch/"+pstr+"/"+str, true);
-        xmlhttp.send();
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var myArr = JSON.parse(xmlhttp.responseText);
-                mytagFunction(myArr,pstr);
 
             }
-        };
-
-
-
-    }
-}
-
-function addtag(pstr, str) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", "/tag_add/"+pstr+"/"+str, true);
-        xmlhttp.send();
-}
-
-
-function mytagFunction(arr,pstr) {
-    var out = "";
-    var i;
-    if (arr.length==0)
-    {
-        return;
-    }
-    out += '<ul style="list-style: none;margin-left: -20px;">';
-    for(i = 1; i < arr.length; i++) {
-        if(arr[i].display=='see more')
-        {
-           
         }
-        else
-        {   
-            out += '<li style="float:none;background-color: #ffffff;text-align: left;"><button style="background:none!important;border:none;padding:2!important;color:#60A839;text-decoration:none;" onclick="addtag(\'' + arr[i].post + '\',\'' + arr[i].friend + '\')">' +'<span class="glyphicon glyphicon-user"></span>'+' '+
-                    arr[i].display + '</button></li>';
-        }
-    }
-    out+= '</ul';
 
-    var pstr = "gettagHint"+pstr; 
-    document.getElementById(pstr).innerHTML = out;
-    
-}
-</script>
+        function addtag(pstr, str) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/tag_add/" + pstr + "/" + str, true);
+            xmlhttp.send();
+        }
+
+
+        function mytagFunction(arr, pstr) {
+            var out = "";
+            var i;
+            if (arr.length == 0) {
+                return;
+            }
+            out += '<ul style="list-style: none;margin-left: -20px;">';
+            for (i = 1; i < arr.length; i++) {
+                if (arr[i].display == 'see more') {
+
+                }
+                else {
+                    out += '<li style="float:none;background-color: #ffffff;text-align: left;"><button style="background:none!important;border:none;padding:2!important;color:#60A839;text-decoration:none;" onclick="addtag(\'' + arr[i].post + '\',\'' + arr[i].friend + '\')">' + '<span class="glyphicon glyphicon-user"></span>' + ' ' +
+                        arr[i].display + '</button></li>';
+                }
+            }
+            out += '</ul';
+
+            var pstr = "gettagHint" + pstr;
+            document.getElementById(pstr).innerHTML = out;
+
+        }
+
+    </script>
     <style>
-        #txtHint ul li a{color: #60A839;
+        #txtHint ul li a {
+            color: #60A839;
             text-decoration: none;
             height: 50px;
-            display:block;
+            display: block;
             font-size: 13pt;
-            padding:5px;
-            }
-        #txtHint ul li{float:none;background-color: #ffffff;text-align: left;}
-        #txtHint ul li a:hover{background-color:#F2F2F2;}
-        #txtHint ul{list-style: none; margin-left: -20px; }
+            padding: 5px;
+        }
+        
+        #txtHint ul li {
+            float: none;
+            background-color: #ffffff;
+            text-align: left;
+        }
+        
+        #txtHint ul li a:hover {
+            background-color: #F2F2F2;
+        }
+        
+        #txtHint ul {
+            list-style: none;
+            margin-left: -20px;
+        }
+        
         #gettagHint ul li button {
-            background:none!important;
-            border:none; 
-            padding:2!important;
-    
-           /*optional*/
-            color:#60A839;
-            text-decoration:none;}
-        #gettagHint ul li{float:none;background-color: #ffffff;text-align: left;}
-        #gettagHint ul li button:hover{color:green;}
-        #gettagHint ul{list-style: none; margin-left: -20px; }
+            background: none!important;
+            border: none;
+            padding: 2!important;
+            /*optional*/
+            color: #60A839;
+            text-decoration: none;
+        }
+        
+        #gettagHint ul li {
+            float: none;
+            background-color: #ffffff;
+            text-align: left;
+        }
+        
+        #gettagHint ul li button:hover {
+            color: green;
+        }
+        
+        #gettagHint ul {
+            list-style: none;
+            margin-left: -20px;
+        }
     </style>
 </head>
-<body style = "background-color: #F2F2F2;">
-<header>
- <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#0C4B33; border-color:#0C4B33;">
 
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle"  style="float:left; border: 1px;" data-toggle="collapse" data-target="#myNavbar">
+<body style="background-color: #F2F2F2;">
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#0C4B33; border-color:#0C4B33;">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" style="float:left; border: 1px;" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
 
 
-     <a class="navbar-brand" href="/"><img style="margin-top: -7px; height:30px; width: 150px;" src="/static/image/logo.png"></a>
+                <a class="navbar-brand" href="/"><img style="margin-top: -7px; height:30px; width: 150px;" src="/static/image/logo.png"></a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a style="color: #ffffff;" href="#" data-toggle="tooltip" data-placement="bottom" title="greenhirok">Home</a></li>
+                    <li><a style="color: #ffffff;" href="/hello">Profile</a></li>
+                </ul>
+
+                {% if session['logged_in'] != True %}
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 5px;">
+                    <li>
+                        <a style="color: #ffffff;" href="/register" data-toggle="tooltip" data-placement="bottom" title="register as a new user"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                    </li>
+                    <li><a style="color: #ffffff;" href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+                {% endif %} {% if session['logged_in'] == True %}
+                <ul class="nav navbar-nav navbar-right" id="drop-nav" style="margin-right: 5px;">
+                    <li class="dropdown"><a style="color: #ffffff;" href="#" class="dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip"
+                            data-placement="bottom" title="logout"><span class="glyphicon glyphicon-user"></span> {{ session['name'] }}</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Profile</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {% endif %}
+                <ul class="navbar-right social-network social-circle">
+                    <li><a href="#" class="icoVimeo" title="Notification"><i class="fa fa-bell"></i></a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <form class="form-inline">
+                            <div class="input-group">
+                                <input type="text" onkeyup="showHint(this.value)" class="form-control input-sm" placeholder="Search Here" style="margin-top: 8px;margin-left:15px;border-radius: 7px;border: 1px solid #73AD21;font-size:14px;padding: 5px;max-width:100%;min-width:150%;height: 30px; ">
+                            </div>
+                        </form>
+                        <div style="margin-top:-15px;  position: absolute;width: 320px;" id="txtHint">
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+
+        </nav>
+    </header>
+    <div class="container" style="margin-top:45px">
+
+        {% block content %} {% endblock %}
     </div>
-    <div class="collapse navbar-collapse navbar-ex1-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li><a style="color: #ffffff;" href="#" data-toggle="tooltip" data-placement="bottom" title="greenhirok">Home</a></li>
-        <li><a style="color: #ffffff;" href="/hello">Profile</a></li>
-      </ul>
 
-      {% if session['logged_in'] != True %}
-      <ul class="nav navbar-nav navbar-right" style="margin-right: 5px;">
-        <li><a style="color: #ffffff;" href="/register" data-toggle="tooltip" data-placement="bottom" title="register as a new user"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a style="color: #ffffff;" href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-        {% endif %}
 
-        {% if session['logged_in'] == True %}
-            <ul class="nav navbar-nav navbar-right" id="drop-nav" style="margin-right: 5px;">
-              <li class="dropdown"><a style="color: #ffffff;" href="#" class="dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" data-placement="bottom" title="logout"><span class="glyphicon glyphicon-user"></span> {{ session['name'] }}</a>
-               <ul class="dropdown-menu">
-                   <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Profile</a></li>
-                   <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-                   <li class="divider"></li>
-                   <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-               </ul>
-              </li>
-            </ul>
-       {% endif %}
-          <ul class="navbar-right social-network social-circle">
-              <li><a href="#" class="icoVimeo" title="Notification"><i class="fa fa-bell"></i></a></li>
-          </ul>
+    <div class="navbar-static-bottom row-fluid">
 
-          <ul class="nav navbar-nav navbar-left">
-           <li>
-               <form class="form-inline">
-                     <div class="input-group">
-                       <input type="text" onkeyup="showHint(this.value)" class="form-control input-sm" placeholder="Search Here" style="margin-top: 8px;margin-left:15px;border-radius: 7px;border: 1px solid #73AD21;font-size:14px;padding: 5px;max-width:100%;min-width:150%;height: 30px; ">
-                     </div>
-               </form>
-               <div style="margin-top:-15px;  position: absolute;width: 320px;" id="txtHint">
-               </div>
-           </li>
-          </ul>
 
     </div>
 
+    <script>
+                                                            $(document).ready(function () {
+                                                                $('[data-toggle="tooltip"]').tooltip();
+                                                            });
 
-</nav>
-</header>
-<div class="container" style="margin-top:45px">
-
-{% block content %}
-
-{% endblock %}
-</div>
-
-
-<div class="navbar-static-bottom row-fluid">
-
-
-</div>
-
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
-</script>
+    </script>
 
 </body>
+
 </html>
