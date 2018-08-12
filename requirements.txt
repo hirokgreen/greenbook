@@ -4,7 +4,7 @@ Flask-Bcrypt==0.7.1
 Flask-Login==0.3.2
 Flask-SQLAlchemy==2.1
 Flask-WTF==0.12
-gunicorn==19.4.5
+gunicorn==19.5.0
 itsdangerous==0.24
 Jinja2==2.8
 livereload==2.4.1
